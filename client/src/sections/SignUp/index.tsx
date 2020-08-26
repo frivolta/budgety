@@ -1,3 +1,3 @@
 import React from "react";
 
-export const SignUp = () => <p>Not Found</p>;
+export const SignUp = () => <p>signup</p>;
