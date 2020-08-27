@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 // Router
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
@@ -9,8 +9,22 @@ import { createGlobalStyle } from "styled-components";
 import { theme } from "./styles/Theme";
 //SW
 import * as serviceWorker from "./serviceWorker";
+// Firebase
+import { auth } from "./lib/api/firebase";
+// Toastify__toast-container
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // Sections
 import { NotFound, SignUp, LogIn } from "./sections";
+import { User } from "firebase";
+
+// Toaster configuration
+toast.configure({
+  className: "Toastify__toast-container",
+  draggable: true,
+  draggablePercent: 60,
+  autoClose: 2000,
+});
 
 // Global Style Definition
 const GlobalStyles = createGlobalStyle`
@@ -20,6 +34,20 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const App: FC = () => {
+  // This must be a custom hook / context provider
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    console.log("Logged user: ", currentUser);
+    const unsubscribe = auth.onAuthStateChanged(
+      (userAuth: User | null): void => {
+        setCurrentUser(userAuth);
+      }
+    );
+    return unsubscribe;
+  }, [currentUser]);
+  // ./ This must be a custom hook / context provider
+
   return (
     <Router>
       <Switch>
@@ -35,6 +63,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
+      <ToastContainer />
       <App />
     </ThemeProvider>
   </React.StrictMode>,

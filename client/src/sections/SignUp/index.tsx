@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { SignupCard, SignupCardContent } from "./styled";
 import { useFormik } from "formik";
 import { SignupSchema } from "../../lib/validation/signUpValidation";
@@ -13,6 +13,10 @@ import { H1, Span } from "../../styles/Theme/typography";
 import { theme } from "../../styles/Theme";
 import { formatNetworkErrorMessages } from "../../lib/utils/format";
 import { Link } from "react-router-dom";
+import { FirebaseError } from "firebase";
+import { auth } from "../../lib/api/firebase";
+import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
+import { SIGNUP_SUCCESS, SIGNUP_ERRORS } from "../../lib/messages/index";
 
 const initialFormValues: SignupFormData = {
   email: "",
@@ -21,29 +25,34 @@ const initialFormValues: SignupFormData = {
 };
 
 export const SignUp: FC = () => {
-  // Mocking api state
-  const error = false;
-  const errMessage = "message";
-  const loading = false;
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<FirebaseError | undefined>(undefined);
 
   const formik = useFormik<SignupFormData>({
     initialValues: { ...initialFormValues },
     validationSchema: SignupSchema,
-    onSubmit: async (values) => {
+    onSubmit: async ({ email, password }) => {
+      setIsLoading(true);
       try {
-        console.log("Submitting", values);
+        await auth.createUserWithEmailAndPassword(email, password);
+        setIsLoading(false);
+        toasterSuccess(SIGNUP_SUCCESS.success);
         formik.resetForm();
-      } catch {
-        console.log("catching");
+      } catch (error) {
+        setError(error);
+        setIsLoading(false);
+        toasterError(SIGNUP_ERRORS.genericError);
+        console.error("[err]:>> Signup error: ", error);
       }
     },
   });
 
-  const errorElement = error ? (
-    <CustomLabel type="error">
-      {formatNetworkErrorMessages(errMessage)}
-    </CustomLabel>
-  ) : null;
+  const errorElement =
+    error && error.message ? (
+      <CustomLabel type="error">
+        {formatNetworkErrorMessages(error.message)}
+      </CustomLabel>
+    ) : null;
 
   return (
     <FullPageLayout>
@@ -98,9 +107,9 @@ export const SignUp: FC = () => {
             {errorElement}
             <CustomButton
               text="Sign up"
-              disabled={!formik.isValid || !formik.dirty || loading}
+              disabled={!formik.isValid || !formik.dirty || isLoading}
               margin="32px 0 16px 0"
-              isLoading={loading}
+              isLoading={isLoading}
               data-testid="SubmitButton"
             />
             <CustomLabel>
