@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC } from "react";
 import ReactDOM from "react-dom";
 // Router
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
@@ -9,14 +9,12 @@ import { createGlobalStyle } from "styled-components";
 import { theme } from "./styles/Theme";
 //SW
 import * as serviceWorker from "./serviceWorker";
-// Firebase
-import { auth } from "./lib/api/firebase";
 // Toastify__toast-container
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // Sections
 import { NotFound, SignUp, LogIn } from "./sections";
-import { User } from "firebase";
+import { AuthProvider, useAuthContext } from "./lib/auth/useAuthContext";
 
 // Toaster configuration
 toast.configure({
@@ -34,19 +32,11 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const App: FC = () => {
-  // This must be a custom hook / context provider
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser] = useAuthContext();
 
-  useEffect(() => {
-    console.log("Logged user: ", currentUser);
-    const unsubscribe = auth.onAuthStateChanged(
-      (userAuth: User | null): void => {
-        setCurrentUser(userAuth);
-      }
-    );
-    return unsubscribe;
-  }, [currentUser]);
-  // ./ This must be a custom hook / context provider
+  if (currentUser) {
+    console.log("User is auth", currentUser.uid);
+  }
 
   return (
     <Router>
@@ -64,7 +54,9 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <ToastContainer />
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
