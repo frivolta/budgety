@@ -1,8 +1,7 @@
 import React, { FC } from "react";
-import { SignupCard, SignupCardContent } from "./styled";
+import { LogInCard, LogInCardContent } from "./styled";
 import { useFormik } from "formik";
-import { SignupSchema } from "../../lib/validation/signUpValidation";
-import { SignupFormData } from "./types";
+import { LogInSchema } from "../../lib/validation/logInValidation";
 import {
   FullPageLayout,
   Input,
@@ -12,23 +11,23 @@ import {
 import { H1, Span } from "../../styles/Theme/typography";
 import { theme } from "../../styles/Theme";
 import { formatNetworkErrorMessages } from "../../lib/utils/format";
+import { LogInFormData } from "./types";
 import { Link } from "react-router-dom";
 
-const initialFormValues: SignupFormData = {
+const initialFormValues: LogInFormData = {
   email: "",
   password: "",
-  confirmPassword: "",
 };
 
-export const SignUp: FC = () => {
+export const LogIn: FC = () => {
   // Mocking api state
   const error = false;
   const errMessage = "message";
   const loading = false;
 
-  const formik = useFormik<SignupFormData>({
+  const formik = useFormik<LogInFormData>({
     initialValues: { ...initialFormValues },
-    validationSchema: SignupSchema,
+    validationSchema: LogInSchema,
     onSubmit: async (values) => {
       try {
         console.log("Submitting", values);
@@ -47,11 +46,11 @@ export const SignUp: FC = () => {
 
   return (
     <FullPageLayout>
-      <SignupCard>
-        <SignupCardContent>
+      <LogInCard>
+        <LogInCardContent>
           <H1 color={theme.colors.darkPrimary}>
             Fill out the form <br />
-            and <Span>Sign Up</Span>.
+            and <Span>Sign In</Span>.
           </H1>
           <form onSubmit={formik.handleSubmit}>
             <Input
@@ -80,35 +79,20 @@ export const SignUp: FC = () => {
               }
               errorMessage={formik.errors.password}
             />
-            <Input
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              label="Confirm Password"
-              type="password"
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              value={formik.values.confirmPassword}
-              hasErrors={
-                formik.touched.confirmPassword && formik.errors.confirmPassword
-                  ? true
-                  : false
-              }
-              errorMessage={formik.errors.confirmPassword}
-            />
             {errorElement}
             <CustomButton
-              text="Sign up"
+              text="Sign in"
               disabled={!formik.isValid || !formik.dirty || loading}
               margin="32px 0 16px 0"
               isLoading={loading}
               data-testid="SubmitButton"
             />
             <CustomLabel>
-              Already have an account? <Link to="/login"> Log in.</Link>
+              Don&apos;t have an account yet? <Link to="/signup">Sign up.</Link>
             </CustomLabel>
           </form>
-        </SignupCardContent>
-      </SignupCard>
+        </LogInCardContent>
+      </LogInCard>
     </FullPageLayout>
   );
 };

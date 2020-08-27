@@ -10,7 +10,7 @@ import { theme } from "./styles/Theme";
 //SW
 import * as serviceWorker from "./serviceWorker";
 // Sections
-import { NotFound, SignUp } from "./sections";
+import { NotFound, SignUp, LogIn } from "./sections";
 
 // Global Style Definition
 const GlobalStyles = createGlobalStyle`
@@ -24,6 +24,7 @@ const App: FC = () => {
     <Router>
       <Switch>
         <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/login" component={LogIn} />
         <Route component={NotFound} />
       </Switch>
     </Router>
