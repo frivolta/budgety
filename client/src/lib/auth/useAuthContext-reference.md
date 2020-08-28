@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { createContext, useContext } from "react";
 import { UseAuth, useAuth } from "./useAuth";
 import { createCtx } from "../utils/contextType";
 
@@ -7,10 +7,11 @@ interface Props {
 }
 
 // Create a context, using undefined! non null assertion
+//const AuthContext = createContext<UseAuth>(undefined!);
 const [useAuthContext, AuthContextProvider] = createCtx<UseAuth>();
 
 // Create a provider around context children
-export const AuthProvider: FC<Props> = ({ children }) => {
+export const AuthProvider = ({ children }: Props) => {
   const [currentUser, setCurrentUser] = useAuth();
 
   return (

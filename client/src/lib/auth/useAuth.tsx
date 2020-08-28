@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { User } from "firebase";
 import { auth } from "../api/firebase";
 
-// Defining tuple to conform to react useHook pattern
-export type UseAuth = [User | null, (value: User) => void];
+export type UseAuth = [
+  User | null,
+  React.Dispatch<React.SetStateAction<User | null>>
+];
 
 export const useAuth = (): UseAuth => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -18,5 +20,6 @@ export const useAuth = (): UseAuth => {
     return unsubscribe;
   }, [currentUser]);
 
+  // Returning a tuple
   return [currentUser, setCurrentUser];
 };

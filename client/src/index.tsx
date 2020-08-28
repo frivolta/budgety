@@ -14,7 +14,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // Sections
 import { NotFound, SignUp, LogIn } from "./sections";
-import { AuthProvider, useAuthContext } from "./lib/auth/useAuthContext";
+import useAuthContext, { AuthProvider } from "./lib/auth/useAuthContext";
 
 // Toaster configuration
 toast.configure({

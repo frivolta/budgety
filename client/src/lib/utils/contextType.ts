@@ -1,6 +1,4 @@
 import React from "react";
-
-// Generic context to avoid undefined initial state
 export function createCtx<ContextType>() {
   const ctx = React.createContext<ContextType | undefined>(undefined);
   function useCtx() {
@@ -8,6 +6,5 @@ export function createCtx<ContextType>() {
     if (!c) throw new Error("useCtx must be inside a Provider with a value");
     return c;
   }
-  // Return as const to define a tuple
   return [useCtx, ctx.Provider] as const;
 }
