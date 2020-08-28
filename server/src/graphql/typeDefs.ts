@@ -11,9 +11,9 @@ export const typeDefs = gql`
   }
 
   type Query {
-    user: String!
+    user(firebaseUid: String!): User!
   }
   type Mutation {
-    signup: String!
+    signUp(email: String!, firebaseUid: String!): User!
   }
 `;
