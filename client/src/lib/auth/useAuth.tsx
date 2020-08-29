@@ -11,7 +11,6 @@ export const useAuth = (): UseAuth => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
-    console.log("Logged user: ", currentUser);
     const unsubscribe = auth.onAuthStateChanged(
       (userAuth: User | null): void => {
         setCurrentUser(userAuth);

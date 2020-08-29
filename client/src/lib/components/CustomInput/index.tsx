@@ -1,33 +1,50 @@
 import React from "react";
-import { InputContainer, InputLabel, InputField, InputError } from "./styled";
-import { CustomInputProps } from "./types";
+import {
+  StyledInputContainer,
+  StyledInputLabel,
+  StyledInputField,
+  StyledInputError,
+} from "./styled";
 
-export const Input: React.FC<CustomInputProps> = (props) => {
+interface Props {
+  placeholder: string;
+  type: string;
+  name: string;
+  value: string;
+  label?: string;
+  hasErrors?: boolean;
+  errorMessage?: string | undefined;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  handleBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+}
+
+export const Input: React.FC<Props> = (props) => {
   const {
+    label,
     name,
     type,
     value,
-    handleBlur,
     handleChange,
-    placeholder,
+    handleBlur,
     disabled,
     hasErrors,
     errorMessage,
-    label,
+    placeholder,
   } = props;
 
   const labelElement = label ? (
-    <InputLabel htmlFor={name}>{label} </InputLabel>
+    <StyledInputLabel htmlFor={name}>{label} </StyledInputLabel>
   ) : null;
 
-  const inputErrorElement = hasErrors ? (
-    <InputError data-testid="InputError">{errorMessage}</InputError>
+  const errorElement = hasErrors ? (
+    <StyledInputError data-testid="InputError">{errorMessage}</StyledInputError>
   ) : null;
 
   return (
-    <InputContainer>
+    <StyledInputContainer>
       {labelElement}
-      <InputField
+      <StyledInputField
         id={name}
         name={name}
         type={type}
@@ -37,9 +54,9 @@ export const Input: React.FC<CustomInputProps> = (props) => {
         placeholder={placeholder}
         disabled={disabled ? disabled : false}
         data-testid="Input"
-        hasErrors={hasErrors}
+        hasErrors={hasErrors ? hasErrors : false}
       />
-      {inputErrorElement}
-    </InputContainer>
+      {errorElement}
+    </StyledInputContainer>
   );
 };

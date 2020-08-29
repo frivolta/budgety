@@ -14,7 +14,7 @@ import { theme } from "../../styles/Theme";
 import { formatNetworkErrorMessages } from "../../lib/utils/format";
 import { Link } from "react-router-dom";
 import { FirebaseError } from "firebase";
-import { auth } from "../../lib/api/firebase";
+import { auth, firestore } from "../../lib/api/firebase";
 import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
 import { SIGNUP_SUCCESS, SIGNUP_ERRORS } from "../../lib/messages/index";
 
@@ -34,7 +34,14 @@ export const SignUp: FC = () => {
     onSubmit: async ({ email, password }) => {
       setIsLoading(true);
       try {
-        await auth.createUserWithEmailAndPassword(email, password);
+        const { user } = await auth.createUserWithEmailAndPassword(
+          email,
+          password
+        );
+        await firestore
+          .collection("users")
+          .doc(user?.uid)
+          .set({ name: "pippo" });
         setIsLoading(false);
         toasterSuccess(SIGNUP_SUCCESS.success);
         formik.resetForm();

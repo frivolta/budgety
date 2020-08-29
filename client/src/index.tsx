@@ -13,7 +13,7 @@ import * as serviceWorker from "./serviceWorker";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // Sections
-import { NotFound, SignUp, LogIn } from "./sections";
+import { NotFound, SignUp, LogIn, Dashboard } from "./sections";
 import useAuthContext, { AuthProvider } from "./lib/auth/useAuthContext";
 
 // Toaster configuration
@@ -43,6 +43,7 @@ const App: FC = () => {
       <Switch>
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={LogIn} />
+        <Route exact path="/dashboard" component={Dashboard} />
         <Route component={NotFound} />
       </Switch>
     </Router>

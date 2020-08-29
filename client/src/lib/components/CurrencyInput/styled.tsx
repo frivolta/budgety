@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export interface StyledInputFieldProps {
+export interface StyledCurrencyInputFieldProps {
   hasErrors: boolean;
 }
 
-export const StyledInputContainer = styled.div`
+export const StyledCurrencyInputContainer = styled.div`
   display: flex;
   margin: 16px 0;
   justify-content: center;
@@ -14,7 +14,9 @@ export const StyledInputContainer = styled.div`
   color: ${(props) => props.theme.colors.darkPrimary};
 `;
 
-export const StyledInputField = styled.input<StyledInputFieldProps>`
+export const StyledCurrencyInputField = styled.input<
+  StyledCurrencyInputFieldProps
+>`
   padding: 14px;
   border-radius: ${(props) => props.theme.misc.borderRadius};
   box-shadow: none;
@@ -32,14 +34,14 @@ export const StyledInputField = styled.input<StyledInputFieldProps>`
   }
 `;
 
-export const StyledInputError = styled.span`
+export const StyledCurrencyInputError = styled.span`
   color: red;
   padding-top: 8px;
   font-size: ${(props) => props.theme.fontSizes.small};
   font-weight: 500;
 `;
 
-export const StyledInputLabel = styled.label`
+export const StyledCurrencyInputLabel = styled.label`
   font-family: ${(props) => props.theme.fonts[0]};
   font-size: ${(props) => props.theme.fontSizes.base};
   font-weight: 300;
