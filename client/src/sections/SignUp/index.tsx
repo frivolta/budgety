@@ -5,7 +5,7 @@ import { SignupSchema } from "../../lib/validation/signUpValidation";
 import { SignupFormData } from "./types";
 import {
   FullPageLayout,
-  Input,
+  CustomInput,
   CustomButton,
   CustomLabel,
 } from "../../lib/components";
@@ -17,11 +17,19 @@ import { FirebaseError } from "firebase";
 import { auth, firestore } from "../../lib/api/firebase";
 import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
 import { SIGNUP_SUCCESS, SIGNUP_ERRORS } from "../../lib/messages/index";
+import { User } from "../../types";
 
 const initialFormValues: SignupFormData = {
   email: "",
   password: "",
   confirmPassword: "",
+};
+
+const defaultUser: User = {
+  isActive: false,
+  accountName: "No balance",
+  startingBalance: 0.0,
+  monthlyBudget: 0.0,
 };
 
 export const SignUp: FC = () => {
@@ -34,14 +42,12 @@ export const SignUp: FC = () => {
     onSubmit: async ({ email, password }) => {
       setIsLoading(true);
       try {
-        const { user } = await auth.createUserWithEmailAndPassword(
-          email,
-          password
-        );
-        await firestore
-          .collection("users")
-          .doc(user?.uid)
-          .set({ name: "pippo" });
+        const {
+          user,
+        }: {
+          user: firebase.User | null;
+        } = await auth.createUserWithEmailAndPassword(email, password);
+        await firestore.collection("users").doc(user?.uid).set(defaultUser);
         setIsLoading(false);
         toasterSuccess(SIGNUP_SUCCESS.success);
         formik.resetForm();
@@ -70,7 +76,7 @@ export const SignUp: FC = () => {
             and <Span>Sign Up</Span>.
           </H1>
           <form onSubmit={formik.handleSubmit}>
-            <Input
+            <CustomInput
               name="email"
               placeholder="yourname@company.com"
               type="text"
@@ -83,7 +89,7 @@ export const SignUp: FC = () => {
               }
               errorMessage={formik.errors.email}
             />
-            <Input
+            <CustomInput
               name="password"
               placeholder="password"
               type="password"
@@ -96,7 +102,7 @@ export const SignUp: FC = () => {
               }
               errorMessage={formik.errors.password}
             />
-            <Input
+            <CustomInput
               name="confirmPassword"
               placeholder="Confirm Password"
               label="Confirm Password"

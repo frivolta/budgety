@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { LogInSchema } from "../../lib/validation/logInValidation";
 import {
   FullPageLayout,
-  Input,
+  CustomInput,
   CustomButton,
   CustomLabel,
 } from "../../lib/components";
@@ -67,7 +67,7 @@ export const LogIn: FC = () => {
             and <Span>Sign In</Span>.
           </H1>
           <form onSubmit={formik.handleSubmit}>
-            <Input
+            <CustomInput
               name="email"
               placeholder="yourname@company.com"
               type="text"
@@ -80,7 +80,7 @@ export const LogIn: FC = () => {
               }
               errorMessage={formik.errors.email}
             />
-            <Input
+            <CustomInput
               name="password"
               placeholder="password"
               type="password"

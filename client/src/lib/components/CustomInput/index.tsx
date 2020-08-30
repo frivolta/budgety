@@ -19,7 +19,7 @@ interface Props {
   handleBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-export const Input: React.FC<Props> = (props) => {
+export const CustomInput: React.FC<Props> = (props) => {
   const {
     label,
     name,
