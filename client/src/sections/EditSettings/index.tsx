@@ -1,9 +1,6 @@
 import React, { FC, useState } from "react";
 import { FormikForm } from "./styled";
-import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-import { useAuth } from "../../lib/auth/useAuth";
-import { useDocument } from "../../lib/api/useDocument";
 import { toasterError, toasterSuccess } from "../../lib/utils/toaster";
 import { EditSettingsSchema } from "../../lib/validation/settingsValidation";
 import { User } from "../../types";

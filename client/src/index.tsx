@@ -20,6 +20,7 @@ import {
   Dashboard,
   Settings,
   EditSettings,
+  Categories,
 } from "./sections";
 import useAuthContext, { AuthProvider } from "./lib/auth/useAuthContext";
 
@@ -53,6 +54,7 @@ const App: FC = () => {
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/settings" component={Settings} />
         <Route exact path="/settings/edit" component={EditSettings} />
+        <Route exact path="/categories" component={Categories} />
         <Route component={NotFound} />
       </Switch>
     </Router>

@@ -4,3 +4,4 @@ export * from "./LogIn";
 export * from "./Dashboard";
 export * from "./Settings";
 export * from "./EditSettings";
+export * from "./Categories";

@@ -18,6 +18,8 @@ import { auth, firestore } from "../../lib/api/firebase";
 import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
 import { SIGNUP_SUCCESS, SIGNUP_ERRORS } from "../../lib/messages/index";
 import { User } from "../../types";
+import { defaultCategories } from "../../lib/initialData/categories";
+import { seedInitialDatas } from "../../lib/utils/seedInitialData";
 
 const initialFormValues: SignupFormData = {
   email: "",
@@ -47,10 +49,13 @@ export const SignUp: FC = () => {
         }: {
           user: firebase.User | null;
         } = await auth.createUserWithEmailAndPassword(email, password);
-        await firestore.collection("users").doc(user?.uid).set(defaultUser);
-        setIsLoading(false);
-        toasterSuccess(SIGNUP_SUCCESS.success);
-        formik.resetForm();
+        if (user && user.uid) {
+          await firestore.collection("users").doc(user.uid).set(defaultUser);
+          await seedInitialDatas(user.uid, "categories", defaultCategories);
+          setIsLoading(false);
+          toasterSuccess(SIGNUP_SUCCESS.success);
+          formik.resetForm();
+        }
       } catch (error) {
         setError(error);
         setIsLoading(false);
