@@ -1,8 +1,13 @@
 import React, { FC } from "react";
-import { ActionCard } from "../../../../lib/components/ActionCard/index";
+import { ActionCard } from "../../../../lib/components/ActionCard";
 import { firestore } from "../../../../lib/api/firebase";
 import { expenseTypes } from "../../../../lib/costants/expenseTypes";
 import { categoryTypes } from "../../../../lib/costants";
+import { updateCategory } from "../../../../lib/api/queries";
+import { changeCategoryType } from "../../../../lib/utils/categories";
+import { Category } from "../../../../types";
+import { toasterSuccess } from "../../../../lib/utils/toaster";
+import { EDIT_CATEGORIES_SUCCESS } from "../../../../lib/messages";
 
 interface Props {
   userUid: string;
@@ -31,21 +36,11 @@ export const CategoriesList: FC<Props> = ({ userUid }) => {
   const handleChangeCategoryType = async (
     category: firebase.firestore.DocumentData
   ) => {
-    console.log(category);
     const documentId = category.docId;
-    // define the opposite but without incomes
-    const updatedCategory = {
-      ...category,
-      budgetType: category.budgetType === 1 ? 2 : 1,
-    };
     delete category.docId;
-    console.log(updatedCategory);
-    await firestore
-      .collection("users")
-      .doc(userUid)
-      .collection("categories")
-      .doc(documentId)
-      .update(updatedCategory);
+    const updatedCategory = changeCategoryType(category as Category);
+    await updateCategory(userUid, documentId, updatedCategory);
+    toasterSuccess(EDIT_CATEGORIES_SUCCESS.settingsUpdated);
   };
 
   const categoriesListElement = categories ? (

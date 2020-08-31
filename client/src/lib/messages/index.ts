@@ -39,3 +39,7 @@ export enum EDIT_SETTINGS_ERROR {
 export enum EDIT_SETTINGS_SUCCESS {
   settingsUpdated = "Your profile has been updated!",
 }
+
+export enum EDIT_CATEGORIES_SUCCESS {
+  settingsUpdated = "Category updated",
+}
