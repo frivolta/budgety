@@ -13,7 +13,14 @@ import * as serviceWorker from "./serviceWorker";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // Sections
-import { NotFound, SignUp, LogIn, Dashboard } from "./sections";
+import {
+  NotFound,
+  SignUp,
+  LogIn,
+  Dashboard,
+  Settings,
+  EditSettings,
+} from "./sections";
 import useAuthContext, { AuthProvider } from "./lib/auth/useAuthContext";
 
 // Toaster configuration
@@ -32,10 +39,10 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const App: FC = () => {
-  const [currentUser] = useAuthContext();
+  const [currentUser, isLoading] = useAuthContext();
 
-  if (currentUser) {
-    console.log("User is auth", currentUser.uid);
+  if (isLoading) {
+    return <p>is loading</p>;
   }
 
   return (
@@ -44,6 +51,8 @@ const App: FC = () => {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={LogIn} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/settings" component={Settings} />
+        <Route exact path="/settings/edit" component={EditSettings} />
         <Route component={NotFound} />
       </Switch>
     </Router>

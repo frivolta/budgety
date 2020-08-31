@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState } from "react";
 import { LogInCard, LogInCardContent } from "./styled";
 import { useFormik } from "formik";
 import { LogInSchema } from "../../lib/validation/logInValidation";
@@ -26,10 +26,6 @@ const initialFormValues: LogInFormData = {
 export const LogIn: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<FirebaseError | undefined>(undefined);
-
-  useEffect(() => {
-    auth.signOut();
-  }, []);
 
   const formik = useFormik<LogInFormData>({
     initialValues: { ...initialFormValues },

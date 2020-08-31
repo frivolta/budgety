@@ -17,28 +17,27 @@ export const useDocument = ({
   document,
 }: Props): useDocumentData => {
   const [error, setError] = useState<Error | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<firebase.firestore.DocumentData | null>(
     null
   );
 
   useEffect(() => {
     setIsLoading(true);
-
     const unsubscribe = firestore
       .collection(collection)
       .doc(document)
       .onSnapshot(
         (doc) => {
-          setIsLoading(false);
           setData(doc);
+          setIsLoading(false);
         },
         (err) => {
           setError(err);
         }
       );
     return unsubscribe;
-  }, [document]);
+  }, [document, collection]);
 
   return [isLoading, error, data];
 };

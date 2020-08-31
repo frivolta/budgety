@@ -10,7 +10,7 @@ interface Props {
   placeholder: string;
   type: string;
   name: string;
-  value: string;
+  value: string | number;
   label?: string;
   hasErrors?: boolean;
   errorMessage?: string | undefined;

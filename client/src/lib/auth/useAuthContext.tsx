@@ -11,10 +11,10 @@ const [useAuthContext, AuthContextProvider] = createCtx<UseAuth>();
 
 // Create a provider around context children
 export const AuthProvider: FC<Props> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useAuth();
+  const [currentUser, isLoading] = useAuth();
 
   return (
-    <AuthContextProvider value={[currentUser, setCurrentUser]}>
+    <AuthContextProvider value={[currentUser, isLoading]}>
       {children}
     </AuthContextProvider>
   );
