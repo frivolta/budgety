@@ -5,3 +5,4 @@ export * from "./Dashboard";
 export * from "./Settings";
 export * from "./EditSettings";
 export * from "./Categories";
+export * from "./AddExpense";

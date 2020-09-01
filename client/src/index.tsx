@@ -25,6 +25,7 @@ import {
 import { LoadingScreen } from "./lib/components";
 import useAuthContext, { AuthProvider } from "./lib/auth/useAuthContext";
 import { PrivateRoute } from "./lib/components/PrivateRoute/index";
+import { AddExpense } from "./sections/AddExpense/index";
 
 // Toaster configuration
 toast.configure({
@@ -57,6 +58,7 @@ const App: FC = () => {
         <PrivateRoute exact path="/settings" component={Settings} />
         <PrivateRoute exact path="/settings/edit" component={EditSettings} />
         <PrivateRoute exact path="/categories" component={Categories} />
+        <PrivateRoute exact path="/add-expense" component={AddExpense} />
         <Route component={NotFound} />
       </Switch>
     </Router>

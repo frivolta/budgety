@@ -13,12 +13,11 @@ export interface ExpenseType {
 }
 
 export type Expense = {
-  id: string;
-  description: string;
   amount: number;
-  category: string;
-  type: string;
-  date: string;
+  date: number;
+  description: string;
+  expenseType: number;
+  categoryType: number;
 };
 
 // Category
