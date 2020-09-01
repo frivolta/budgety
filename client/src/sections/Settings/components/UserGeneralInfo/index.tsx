@@ -4,6 +4,7 @@ import { StyledAvatarContainer } from "./styled";
 import Avatar from "react-avatar";
 import { H4 } from "../../../../styles/Theme/typography";
 import { theme } from "../../../../styles/Theme/index";
+import { LoadingScreen } from "../../../../lib/components/LoadingScreen/index";
 
 interface Props {
   isLoading: boolean;
@@ -18,7 +19,7 @@ export const UserGeneralInfo: FC<Props> = ({
 }) => {
   const userGeneralInfoElement = () => {
     return isLoading ? (
-      <p>Loading avatar</p>
+      <LoadingScreen loadingText="Loading avatar..." />
     ) : (
       <>
         <StyledAvatarContainer>

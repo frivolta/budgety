@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory, Redirect } from "react-router-dom";
 import { auth } from "../../lib/api/firebase";
 import { useAuth } from "../../lib/auth/useAuth";
-import { GridLayout } from "../../lib/components";
+import { GridLayout, LoadingScreen } from "../../lib/components";
 import { UserGeneralInfo } from "./components/UserGeneralInfo";
 import { toasterInfo, toasterError } from "../../lib/utils/toaster";
 import { LOGOUT_SUCCESS, LOGOUT_ERRORS } from "../../lib/messages/index";
@@ -45,7 +45,7 @@ export const Settings: React.FC = () => {
     if (!isLoading && !currentUser) {
       return <Redirect to="/signup" />;
     }
-    return <p>is loading</p>;
+    return <LoadingScreen loadingText="Loading settings..." />;
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ActionCard } from "../../../../lib/components";
+import { ActionCard, LoadingScreen } from "../../../../lib/components";
 import { useHistory } from "react-router-dom";
 import { useDocument } from "../../../../lib/api/useDocument";
 import { toasterError } from "../../../../lib/utils/toaster";
@@ -26,7 +26,7 @@ export const UserSettingsCard: FC<Props> = ({ userUid }) => {
   }
 
   if (isLoading && !data) {
-    return <p>Loading...</p>;
+    return <LoadingScreen loadingText="Loading settings.." />;
   }
 
   if (data) {

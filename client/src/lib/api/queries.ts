@@ -1,5 +1,4 @@
 import { firestore } from "./firebase";
-import { Category } from "../../types";
 
 // Category update
 export const updateCategory = async <T>(

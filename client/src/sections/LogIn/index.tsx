@@ -12,11 +12,12 @@ import { H1, Span } from "../../styles/Theme/typography";
 import { theme } from "../../styles/Theme";
 import { formatNetworkErrorMessages } from "../../lib/utils/format";
 import { LogInFormData } from "./types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FirebaseError } from "firebase";
 import { auth } from "../../lib/api/firebase";
 import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
 import { LOGIN_SUCCESS, LOGIN_ERRORS } from "../../lib/messages/index";
+import useAuthContext from "../../lib/auth/useAuthContext";
 
 const initialFormValues: LogInFormData = {
   email: "",
@@ -24,8 +25,14 @@ const initialFormValues: LogInFormData = {
 };
 
 export const LogIn: FC = () => {
+  const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<FirebaseError | undefined>(undefined);
+  const history = useHistory();
+
+  const redirectToDashboardPage = () => {
+    history.push("/dashboard");
+  };
 
   const formik = useFormik<LogInFormData>({
     initialValues: { ...initialFormValues },
@@ -38,6 +45,7 @@ export const LogIn: FC = () => {
         setIsLoading(false);
         formik.resetForm();
         toasterSuccess(LOGIN_SUCCESS.success);
+        redirectToDashboardPage();
       } catch (error) {
         setError(error);
         setIsLoading(false);
@@ -46,6 +54,10 @@ export const LogIn: FC = () => {
       }
     },
   });
+
+  if (currentUser?.uid && !isLoadingCurrentUser) {
+    redirectToDashboardPage();
+  }
 
   const errorElement =
     error && error.message ? (

@@ -22,7 +22,9 @@ import {
   EditSettings,
   Categories,
 } from "./sections";
+import { LoadingScreen } from "./lib/components";
 import useAuthContext, { AuthProvider } from "./lib/auth/useAuthContext";
+import { PrivateRoute } from "./lib/components/PrivateRoute/index";
 
 // Toaster configuration
 toast.configure({
@@ -42,8 +44,8 @@ const GlobalStyles = createGlobalStyle`
 const App: FC = () => {
   const [currentUser, isLoading] = useAuthContext();
 
-  if (isLoading) {
-    return <p>is loading</p>;
+  if (isLoading && !currentUser) {
+    return <LoadingScreen loadingText="Loading user..." />;
   }
 
   return (
@@ -51,10 +53,10 @@ const App: FC = () => {
       <Switch>
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={LogIn} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/settings" component={Settings} />
-        <Route exact path="/settings/edit" component={EditSettings} />
-        <Route exact path="/categories" component={Categories} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/settings" component={Settings} />
+        <PrivateRoute exact path="/settings/edit" component={EditSettings} />
+        <PrivateRoute exact path="/categories" component={Categories} />
         <Route component={NotFound} />
       </Switch>
     </Router>

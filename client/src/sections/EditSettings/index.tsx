@@ -13,10 +13,13 @@ import {
   CustomButton,
 } from "../../lib/components";
 import useAuthContext from "../../lib/auth/useAuthContext";
+import { LoadingScreen } from "../../lib/components/LoadingScreen/index";
+import { FirebaseError } from "firebase";
 import {
   EDIT_SETTINGS_ERROR,
   EDIT_SETTINGS_SUCCESS,
 } from "../../lib/messages/index";
+
 interface Props {
   userUid: string;
 }
@@ -31,16 +34,14 @@ interface Props {
 
 export const EditSettings: FC<Props> = ({ userUid }) => {
   const [currentUser, userIsLoading] = useAuthContext();
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<FirebaseError | undefined>(undefined);
   const [data, setData] = useState<any>({
     isActive: false,
     accountName: "",
     startingBalance: undefined,
     monthlyBudget: undefined,
   });
-
-  const [error, setError] = useState(false);
 
   React.useEffect(() => {
     getInitialValues();
@@ -67,6 +68,7 @@ export const EditSettings: FC<Props> = ({ userUid }) => {
     enableReinitialize: true,
     validationSchema: EditSettingsSchema,
     onSubmit: async (values) => {
+      setIsLoading(true);
       try {
         const editedUserData: User = {
           isActive: true,
@@ -79,9 +81,12 @@ export const EditSettings: FC<Props> = ({ userUid }) => {
           .doc(currentUser?.uid)
           .set(editedUserData);
         toasterSuccess(EDIT_SETTINGS_SUCCESS.settingsUpdated);
+        setIsLoading(false);
       } catch (error) {
         toasterError(EDIT_SETTINGS_ERROR.genericError);
         console.error(error);
+        setError(error);
+        setIsLoading(false);
       }
     },
   });
@@ -89,12 +94,15 @@ export const EditSettings: FC<Props> = ({ userUid }) => {
   if (error) {
     toasterError("We couldn't fetch your data");
     console.error(error);
-    return null;
   }
 
-  if (isLoading && !data) {
-    return <p>Loading...</p>;
+  if ((isLoading && !data) || userIsLoading) {
+    return <LoadingScreen loadingText="Loading balance..." />;
   }
+
+  const errorElement = error ? (
+    <CustomLabel type="error">{error && error.message}</CustomLabel>
+  ) : null;
 
   return (
     <GridLayout title="Edit Settings">
@@ -145,7 +153,7 @@ export const EditSettings: FC<Props> = ({ userUid }) => {
             }
             errorMessage={formik.errors.monthlyBudget?.toString()}
           />
-          {/*error && <CustomLabel type="error">{error.message}</CustomLabel>*/}
+          {errorElement}
           <CustomButton
             text="Confirm"
             disabled={!formik.isValid || !formik.dirty || isLoading}

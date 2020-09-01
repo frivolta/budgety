@@ -8,6 +8,9 @@ import { changeCategoryType } from "../../../../lib/utils/categories";
 import { Category } from "../../../../types";
 import { toasterSuccess } from "../../../../lib/utils/toaster";
 import { EDIT_CATEGORIES_SUCCESS } from "../../../../lib/messages";
+import { LoadingScreen, Card } from "../../../../lib/components";
+import { H4 } from "../../../../styles/Theme/typography";
+import { theme } from "../../../../styles/Theme/index";
 
 interface Props {
   userUid: string;
@@ -17,9 +20,10 @@ export const CategoriesList: FC<Props> = ({ userUid }) => {
   const [categories, setCategories] = React.useState<
     firebase.firestore.DocumentData[] | null
   >(null);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
-  // Move it down a step to pass currentuser id
   React.useEffect(() => {
+    setIsLoading(true);
     const unsubscribe = firestore
       .collection("users")
       .doc(userUid)
@@ -29,9 +33,10 @@ export const CategoriesList: FC<Props> = ({ userUid }) => {
           return { ...doc.data(), docId: doc.id };
         });
         setCategories(collectionData);
+        setIsLoading(false);
       });
     return () => unsubscribe();
-  }, []);
+  }, [userUid]);
 
   const handleChangeCategoryType = async (
     category: firebase.firestore.DocumentData
@@ -42,6 +47,10 @@ export const CategoriesList: FC<Props> = ({ userUid }) => {
     await updateCategory(userUid, documentId, updatedCategory);
     toasterSuccess(EDIT_CATEGORIES_SUCCESS.settingsUpdated);
   };
+
+  if (isLoading) {
+    return <LoadingScreen loadingText="Loading categories..." />;
+  }
 
   const categoriesListElement = categories ? (
     categories.map((category) => (
@@ -55,7 +64,9 @@ export const CategoriesList: FC<Props> = ({ userUid }) => {
       />
     ))
   ) : (
-    <p>You have no categories</p>
+    <Card>
+      <H4 color={theme.colors.darkPrimary}>You have no categories</H4>
+    </Card>
   );
 
   return <>{categoriesListElement}</>;
