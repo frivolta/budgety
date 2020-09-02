@@ -7,7 +7,7 @@ import {
   DashboardMobileNavigation,
   DashboardSidenavContainer,
 } from "./styled";
-import { Icon } from "../Icon";
+import { Icon } from "../CustomIcon";
 import Header from "../Header";
 
 import addIcon from "./assets/icons/add.svg";

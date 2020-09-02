@@ -2,7 +2,7 @@ import React from "react";
 import { H4, H6 } from "../../../styles/Theme/typography";
 import editIcon from "./assets/images/edit.svg";
 import { ActionCardAction, ActionCardText, ActionCardWrapper } from "./styled";
-import { Icon } from "../Icon";
+import { Icon } from "../CustomIcon";
 import { theme } from "../../../styles/Theme/index";
 
 // @Test ( Unit )

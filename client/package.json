@@ -12,15 +12,20 @@
     "@types/react-dom": "^16.9.0",
     "firebase": "^7.19.0",
     "formik": "^2.1.5",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-avatar": "^3.9.7",
+    "react-calendar": "^3.1.0",
     "react-dom": "^16.13.1",
+    "react-functional-select": "^2.7.1",
     "react-loading": "^2.0.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-select": "^3.1.0",
     "react-svg-spinner": "^1.0.4",
     "react-toastify": "^6.0.8",
+    "react-window": "^1.8.5",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
     "yup": "^0.29.3"
@@ -47,7 +52,10 @@
     ]
   },
   "devDependencies": {
+    "@types/moment": "^2.13.0",
+    "@types/react-calendar": "^3.1.1",
     "@types/react-router-dom": "^5.1.5",
+    "@types/react-select": "^3.0.19",
     "@types/react-toastify": "^4.1.0",
     "@types/styled-components": "^5.1.2",
     "@types/yup": "^0.29.6"

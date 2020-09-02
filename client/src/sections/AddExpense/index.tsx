@@ -23,6 +23,7 @@ import {
   EDIT_SETTINGS_SUCCESS,
 } from "../../lib/messages/index";
 import { start } from "repl";
+import { CustomSelect } from "../../lib/components/CustomSelect";
 
 interface Props {
   userUid: string;
@@ -96,6 +97,7 @@ export const AddExpense: FC<Props> = ({ userUid }) => {
             allowDecimals={true}
             onChange={formik.handleChange}
           />
+          <CustomSelect />
           <Calendar
             onChange={(date: any) => setStartDate(date)}
             value={startDate}
