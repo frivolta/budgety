@@ -1,16 +1,13 @@
 import React, { FC, useState } from "react";
-import { FormikForm } from "./styled";
-import { useFormik } from "formik";
 import { toasterError, toasterSuccess } from "../../lib/utils/toaster";
 import moment from "moment";
+import { Formik, Form, FormikProps, Field } from "formik";
 import {
   GridLayout,
   Card,
-  CustomInput,
   CustomLabel,
   CustomButton,
 } from "../../lib/components";
-import Calendar from "react-calendar";
 import useAuthContext from "../../lib/auth/useAuthContext";
 import { LoadingScreen } from "../../lib/components";
 import { FirebaseError } from "firebase";
@@ -18,13 +15,9 @@ import { expenseTypes } from "../../lib/costants/expenseTypes";
 import { categoryTypes } from "../../lib/costants/categoryTypes";
 import { Expense } from "../../types";
 import CurrencyInput from "../../lib/components/CurrencyInput/index";
-import {
-  EDIT_SETTINGS_ERROR,
-  EDIT_SETTINGS_SUCCESS,
-} from "../../lib/messages/index";
-import { start } from "repl";
+import { defaultCategories } from "../../lib/initialData";
 import { CustomSelect } from "../../lib/components/CustomSelect";
-
+import { FormikForm } from "./styled";
 interface Props {
   userUid: string;
 }
@@ -35,7 +28,14 @@ const defaultExpense: Expense = {
   description: "",
   expenseType: expenseTypes[0].id,
   categoryType: categoryTypes[0].id,
+  category: defaultCategories[0].value,
 };
+
+const optionss = [
+  { value: "1", label: "text" },
+  { value: "2", label: "text 2" },
+  { value: "1", label: "text 3" },
+];
 
 export const AddExpense: FC<Props> = ({ userUid }) => {
   const [currentUser, userIsLoading] = useAuthContext();
@@ -43,36 +43,8 @@ export const AddExpense: FC<Props> = ({ userUid }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<FirebaseError | undefined>(undefined);
 
-  React.useEffect(() => {
-    console.log(startDate);
-  }, [startDate]);
-
-  const formik = useFormik({
-    initialValues: {
-      amount: defaultExpense.amount,
-      date: defaultExpense.date,
-      description: defaultExpense.description,
-      expenseType: defaultExpense.expenseType,
-      categoryType: defaultExpense.categoryType,
-    },
-    enableReinitialize: false,
-    onSubmit: async (values) => {
-      setIsLoading(true);
-      try {
-        console.log(values);
-        toasterSuccess(EDIT_SETTINGS_SUCCESS.settingsUpdated);
-        setIsLoading(false);
-      } catch (error) {
-        toasterError(EDIT_SETTINGS_ERROR.genericError);
-        console.error(error);
-        setError(error);
-        setIsLoading(false);
-      }
-    },
-  });
-
   if (error) {
-    toasterError("We couldn't fetch your data");
+    toasterError("We couldn't submit your expense");
     console.error(error);
   }
 
@@ -87,30 +59,38 @@ export const AddExpense: FC<Props> = ({ userUid }) => {
   return (
     <GridLayout title="Edit Settings">
       <Card customWidth={100}>
-        <FormikForm onSubmit={formik.handleSubmit}>
-          <CurrencyInput
-            name="amount"
-            label="Amount"
-            value={formik.values.amount}
-            prefix="€ "
-            decimalsLimit={2}
-            allowDecimals={true}
-            onChange={formik.handleChange}
-          />
-          <CustomSelect />
-          <Calendar
-            onChange={(date: any) => setStartDate(date)}
-            value={startDate}
-          />
-          {errorElement}
-          <CustomButton
-            text="Confirm"
-            disabled={!formik.isValid || !formik.dirty || isLoading}
-            margin="32px 0 16px 0"
-            isLoading={isLoading}
-            data-testid="SubmitButton"
-          />
-        </FormikForm>
+        <Formik
+          initialValues={{
+            email: "",
+            firstName: "red",
+            lastName: "",
+            category: "",
+          }}
+          onSubmit={(values, actions) => {
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              actions.setSubmitting(false);
+            }, 1000);
+          }}
+        >
+          {(props: FormikProps<any>) => (
+            <FormikForm>
+              <Field
+                component={CustomSelect}
+                name="category"
+                options={optionss}
+              />
+              <CustomButton
+                text="Confirm"
+                disabled={!props.isValid || !props.dirty || isLoading}
+                margin="32px 0 16px 0"
+                isLoading={isLoading}
+                data-testid="SubmitButton"
+              />
+            </FormikForm>
+          )}
+        </Formik>
+        {errorElement}
       </Card>
     </GridLayout>
   );

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
-export const FormikForm = styled.form`
+import { Form } from "formik";
+export const FormikForm = styled(Form)`
   width: 100%;
 `;

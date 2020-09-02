@@ -18,6 +18,7 @@ export type Expense = {
   description: string;
   expenseType: number;
   categoryType: number;
+  category: string;
 };
 
 // Category

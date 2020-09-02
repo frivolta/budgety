@@ -11,4 +11,3 @@ export * from "./CurrencyInput";
 export * from "./PrivateRoute";
 export * from "./ActionCard";
 export * from "./LoadingScreen";
-export * from "./CustomSelect";
