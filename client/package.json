@@ -18,6 +18,7 @@
     "react-calendar": "^3.1.0",
     "react-dom": "^16.13.1",
     "react-functional-select": "^2.7.1",
+    "react-hook-form": "^6.7.0",
     "react-loading": "^2.0.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",

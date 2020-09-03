@@ -10585,6 +10585,11 @@ react-functional-select@^2.7.1:
   resolved "https://registry.yarnpkg.com/react-functional-select/-/react-functional-select-2.7.1.tgz#d9621bab436d05bf9f1920771b52c1ce5eb45cf3"
   integrity sha512-PGgrfY6vhA5Sa2MN6adcJhahzriGnJ5mpS5rCUUSD7bu4sWVglG2S2APEsBy6GxVOvz9TOGqhzZMT53eRwLGUA==
 
+react-hook-form@^6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.7.0.tgz#84702b6a56c6c81d7c43cbfbd343e4884dd1e6be"
+  integrity sha512-2ySZ/lyp8xinKUMv/yoSo3NcNknfrHGlJ1pIV2U80H0WlFSGaGZ0wvAHmgfl1L5ZhoQND6mawcv09wuM8OGVPw==
+
 react-input-autosize@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.2.2.tgz#fcaa7020568ec206bc04be36f4eb68e647c4d8c2"

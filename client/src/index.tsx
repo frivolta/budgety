@@ -21,11 +21,11 @@ import {
   Settings,
   EditSettings,
   Categories,
+  AddExpense,
 } from "./sections";
 import { LoadingScreen } from "./lib/components";
 import useAuthContext, { AuthProvider } from "./lib/auth/useAuthContext";
 import { PrivateRoute } from "./lib/components/PrivateRoute/index";
-import { AddExpense } from "./sections/AddExpense/index";
 
 // Toaster configuration
 toast.configure({

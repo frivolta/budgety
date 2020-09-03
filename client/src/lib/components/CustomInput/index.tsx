@@ -5,16 +5,18 @@ import {
   StyledInputField,
   StyledInputError,
 } from "./styled";
+import { register } from "../../../serviceWorker";
 
 interface Props {
+  register?: any;
   placeholder: string;
   type: string;
   name: string;
-  value: string | number;
+  value?: string | number;
   label?: string;
   hasErrors?: boolean;
   errorMessage?: string | undefined;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   handleBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
@@ -31,6 +33,7 @@ export const CustomInput: React.FC<Props> = (props) => {
     hasErrors,
     errorMessage,
     placeholder,
+    register,
   } = props;
 
   const labelElement = label ? (
@@ -55,6 +58,7 @@ export const CustomInput: React.FC<Props> = (props) => {
         disabled={disabled ? disabled : false}
         data-testid="Input"
         hasErrors={hasErrors ? hasErrors : false}
+        ref={register}
       />
       {errorElement}
     </StyledInputContainer>

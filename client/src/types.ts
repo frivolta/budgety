@@ -36,3 +36,8 @@ export interface CategoryType {
   value: string;
   caption: string;
 }
+
+export interface Option {
+  value: string;
+  label: string;
+}
