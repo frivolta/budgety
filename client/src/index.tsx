@@ -26,6 +26,10 @@ import {
 import { LoadingScreen } from "./lib/components";
 import useAuthContext, { AuthProvider } from "./lib/auth/useAuthContext";
 import { PrivateRoute } from "./lib/components/PrivateRoute/index";
+import {
+  SidebarProvider,
+  useSidebarContext,
+} from "./lib/auth/useSidebarContext";
 
 // Toaster configuration
 toast.configure({
@@ -44,7 +48,10 @@ const GlobalStyles = createGlobalStyle`
 
 const App: FC = () => {
   const [currentUser, isLoading] = useAuthContext();
+  const [isOpen, setIsOpen] = useSidebarContext();
 
+  console.log(isOpen);
+  setIsOpen(false);
   if (isLoading && !currentUser) {
     return <LoadingScreen loadingText="Loading user..." />;
   }
@@ -71,7 +78,9 @@ ReactDOM.render(
       <GlobalStyles />
       <ToastContainer />
       <AuthProvider>
-        <App />
+        <SidebarProvider>
+          <App />
+        </SidebarProvider>
       </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,

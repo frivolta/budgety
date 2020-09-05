@@ -1,4 +1,5 @@
 import React from "react";
+
 export function createCtx<ContextType>() {
   const ctx = React.createContext<ContextType | undefined>(undefined);
   function useCtx() {

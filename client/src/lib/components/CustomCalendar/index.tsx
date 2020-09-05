@@ -1,5 +1,4 @@
-import React, { FC } from "react";
-import { useField } from "formik";
+import React from "react";
 import Calendar from "react-calendar";
 import moment, { utc } from "moment";
 
@@ -9,18 +8,23 @@ interface Props {
 
 export const CustomCalendar = ({ name }: Props) => {
   // can pass 'props' into useField also, if 'props' contains a name attribute
-  const [field, meta, helpers] = useField((name = name));
-  const { setValue, setTouched, setError } = helpers;
+
+  const defaultValue = new Date();
 
   const setFieldProps = (selectedOption: Date | Date[]) => {
     if (selectedOption instanceof Date) {
       const utcDate = moment.utc(selectedOption).format();
       //console.log(moment(utcDate).toDate());
-      setValue(utcDate);
-      setTouched(true);
-      setError(undefined);
+      //setValue(utcDate);
+      //setTouched(true);
+      //setError(undefined);
     }
   };
 
-  return <Calendar onChange={(option) => setFieldProps(option)} />;
+  return (
+    <Calendar
+      onChange={(option) => setFieldProps(option)}
+      defaultValue={defaultValue}
+    />
+  );
 };

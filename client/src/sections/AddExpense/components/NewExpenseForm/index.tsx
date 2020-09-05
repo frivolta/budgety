@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Category } from "../../../../types";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { expenseTypes } from "../../../../lib/costants";
 import { Expense, Option } from "../../../../types";
 import { defineSelectableCategoriesByExpenseValue } from "../../../../lib/utils/categories";
 import { ExpenseFormElement } from "./styled";
-import { CustomInput } from "../../../../lib/components";
-import { CustomSelect } from "../../../../lib/components/CustomSelect";
+import {
+  CustomInput,
+  CustomSelect,
+  CustomButton,
+  CustomCalendar,
+} from "../../../../lib/components";
 import { arrayToOption } from "../../../../lib/utils/form";
 
 interface Props {
@@ -14,7 +18,7 @@ interface Props {
 }
 
 export const NewExpenseForm = ({ categories }: Props) => {
-  const { register, handleSubmit } = useForm<Expense>();
+  const { register, handleSubmit, control } = useForm<Expense>();
   const [selectableCategories, setSelectableCategories] = useState<
     Option[] | undefined
   >(undefined);
@@ -54,27 +58,25 @@ export const NewExpenseForm = ({ categories }: Props) => {
           options={selectableCategories}
         />
       ) : null}
-
       {selectableCategories ? (
         <CustomSelect
           name="expenseType"
           register={register}
           options={arrayToOption(expenseTypes)}
+          onChange={(event) => handleExpenseTypeChange(event.target.value)}
         />
       ) : null}
-
-      <select
-        name="expenseType"
-        ref={register}
-        onChange={(event) => handleExpenseTypeChange(event.target.value)}
-      >
-        {expenseTypes.map((expenseType, index) => (
-          <option value={expenseType.value} key={index}>
-            {expenseType.caption}
-          </option>
-        ))}
-      </select>
-      <button type="submit">Submit</button>
+      <Controller
+        render={() => <CustomCalendar name="date" />}
+        defaultValue={new Date()}
+        name="date"
+        control={control}
+      />
+      <CustomButton
+        text="Add new expense"
+        margin="32px 0 16px 0"
+        data-testid="SubmitButton"
+      />
     </ExpenseFormElement>
   );
 };

@@ -12,3 +12,4 @@ export * from "./PrivateRoute";
 export * from "./ActionCard";
 export * from "./LoadingScreen";
 export * from "./CustomCalendar";
+export * from "./CustomSelect";

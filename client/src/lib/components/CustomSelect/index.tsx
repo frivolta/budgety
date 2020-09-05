@@ -5,6 +5,7 @@ interface Props {
   name: string;
   options: Option[];
   register?: any;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 interface Option {
@@ -12,9 +13,14 @@ interface Option {
   label: string;
 }
 
-export const CustomSelect = ({ name, options, register }: Props) => {
+export const CustomSelect = ({ name, options, register, onChange }: Props) => {
   return (
-    <SelectField defaultValue={options[0].value} name={name} ref={register}>
+    <SelectField
+      defaultValue={options[0].value}
+      name={name}
+      ref={register}
+      onChange={onChange}
+    >
       {options.map((option, index) => (
         <option key={index} value={option.value}>
           {option.label}
