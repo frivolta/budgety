@@ -15,15 +15,6 @@ interface Props {
   userUid: string;
 }
 
-const defaultExpense: Expense = {
-  amount: 0,
-  date: moment.now(),
-  description: "No Description",
-  expenseType: expenseTypes[0].id,
-  categoryType: categoryTypes[0].id,
-  category: defaultCategories[0].value,
-};
-
 export const AddExpense: FC<Props> = ({ userUid }) => {
   const [currentUser, userIsLoading] = useAuthContext();
   const [categories, setCategories] = useState<Category[] | undefined>(

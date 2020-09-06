@@ -31,6 +31,7 @@ export type CurrencyInputProps = {
   label: string;
   errorMessage?: string;
   handleBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  register?: any;
 };
 
 export const CurrencyInput: FC<CurrencyInputProps> = ({
@@ -49,6 +50,7 @@ export const CurrencyInput: FC<CurrencyInputProps> = ({
   prefix,
   maxLength,
   handleBlur,
+  register,
   ...props
 }: CurrencyInputProps) => {
   const _defaultValue = defaultValue
@@ -120,7 +122,7 @@ export const CurrencyInput: FC<CurrencyInputProps> = ({
         placeholder={placeholder}
         disabled={disabled}
         value={formattedPropsValue || stateValue}
-        ref={inputRef}
+        ref={register}
         maxLength={maxLength}
         hasErrors={hasErrors ? true : false}
         {...props}

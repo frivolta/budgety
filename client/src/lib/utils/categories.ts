@@ -1,6 +1,7 @@
 import { Category, CategoryType } from "../../types";
 import { categoryTypes } from "../costants/categoryTypes";
 import { expenseTypes } from "../costants";
+import { defaultCategories } from "../initialData";
 
 export const getBudgetTypeById = (id: number): CategoryType | undefined => {
   return categoryTypes.find((category) => category.id === id);
@@ -10,6 +11,16 @@ export const getIdByBudgetTypeValue = (
   value: string
 ): CategoryType | undefined => {
   return categoryTypes.find((category) => category.value === value);
+};
+
+export const getCategoryByCategoryValue = (
+  categories: Category[],
+  value: string
+): Category => {
+  return (
+    categories.find((category) => category.value === value) ||
+    defaultCategories[0]
+  );
 };
 
 export const changeCategoryType = (category: Category) => {

@@ -13,8 +13,8 @@ export interface ExpenseType {
 }
 
 export type Expense = {
-  amount: number;
-  date: number;
+  amount: string;
+  date: Date;
   description: string;
   expenseType: number;
   categoryType: number;
