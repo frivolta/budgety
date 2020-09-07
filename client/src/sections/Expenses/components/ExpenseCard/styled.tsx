@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { theme } from "../../../../styles/Theme";
 
+interface StyledCategoryTextProps {
+  categoryColor: string;
+}
+
 export const StyledExpenseCardContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,10 +41,23 @@ export const StyledExpenseCardHeaderCategories = styled.div`
   justify-content: center;
   alignitems: center;
 `;
-export const StyledExpenseCardHeaderDate = styled.div`
+
+export const StyledCategoryText = styled.h6<StyledCategoryTextProps>`
+  color: ${({ categoryColor }) => categoryColor};
+  background-color: ${({ categoryColor }) => categoryColor + "7f"};
+  padding: 4px 8px;
+  border-radius: ${(props) => props.theme.misc.borderRadius};
+`;
+
+export const StyledBudgetText = styled.h6`
+  padding: 4px 8px;
+`;
+
+export const StyledExpenseCardHeaderDate = styled.h6`
   display: flex;
   justify-content: center;
   alignitems: center;
+  color: ${(props) => props.theme.colors.primaryColor};
 `;
 export const StyledExpenseCardBodyDescription = styled.div`
   display: block;

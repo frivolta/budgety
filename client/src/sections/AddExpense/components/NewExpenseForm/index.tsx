@@ -69,6 +69,10 @@ export const NewExpenseForm = ({
         categories,
         selectableCategoriesUpdated[0].value
       ).budgetType,
+      expenseType: getCategoryByCategoryValue(
+        categories,
+        selectableCategoriesUpdated[0].value
+      ).expenseType,
     });
   };
 
@@ -78,6 +82,8 @@ export const NewExpenseForm = ({
       category: categoryValue,
       categoryType: getCategoryByCategoryValue(categories, categoryValue)
         .budgetType,
+      expenseType: getCategoryByCategoryValue(categories, categoryValue)
+        .expenseType,
     });
   };
 
@@ -106,6 +112,7 @@ export const NewExpenseForm = ({
   const validateAndSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (expenseValidation()) {
+      console.log(expenseValues);
       handleSubmit(expenseValues);
     }
   };

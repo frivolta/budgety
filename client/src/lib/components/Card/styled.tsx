@@ -5,6 +5,7 @@ interface CardProps {
   customWidth?: number;
   customHeight?: number;
   hoverable?: boolean;
+  onClick?: () => void;
 }
 
 export const StyledCard = styled.div<CardProps>`

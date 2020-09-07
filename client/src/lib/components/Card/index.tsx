@@ -6,6 +6,7 @@ interface Props {
   customHeight?: number;
   hoverable?: boolean;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
 export const Card: FC<Props> = ({

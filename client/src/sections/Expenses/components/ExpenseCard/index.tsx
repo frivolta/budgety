@@ -9,16 +9,18 @@ import {
   StyledExpenseCardHeaderCategories,
   StyledExpenseCardHeader,
   StyledExpenseCardContainer,
+  StyledCategoryText,
+  StyledBudgetText,
 } from "./styled";
 
-import { H6 } from "../../../../styles/Theme/typography";
-import { theme } from "../../../../styles/Theme";
-import { Card } from "../../../../lib/components";
+import { H4 } from "../../../../styles/Theme/typography";
+import { Card, CustomSmallButton } from "../../../../lib/components";
 import {
   getCategoryByCategoryValue,
   getBudgetTypeById,
 } from "../../../../lib/utils/categories";
 import { formatPrice } from "../../../../lib/utils/format";
+
 interface Props {
   expense: Expense;
   categories: Category[];
@@ -26,6 +28,7 @@ interface Props {
 const MAX_DESCRIPTION_CHAR = 40;
 
 export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
+  const [isCardActive, setIsCardActive] = React.useState<boolean>(false);
   const trimLongString = (string: string) => {
     if (string.length > MAX_DESCRIPTION_CHAR) {
       return string.substring(0, MAX_DESCRIPTION_CHAR) + "...";
@@ -40,17 +43,41 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
 
   const budgetType = getBudgetTypeById(expenseCategory.budgetType);
 
-  return (
-    <Card customWidth={100} hoverable>
+  const getStyledPrice = (expense: Expense) => {
+    const formattedPrice = formatPrice(expense.amount);
+    console.log(expense.expenseType);
+    const isIncome = expense.expenseType === 2 ? true : false;
+    return `${isIncome ? "+" : "-"}${formattedPrice}`;
+  };
+
+  const triggerCardActivation = () => setIsCardActive(!isCardActive);
+
+  const cardElement = isCardActive ? (
+    <Card customWidth={100} hoverable onClick={triggerCardActivation}>
+      <StyledExpenseCardContainer>
+        <StyledExpenseCardHeader>
+          <H4>DO YOU WANT TO DELETE THIS EXPENSE?</H4>
+        </StyledExpenseCardHeader>
+        <StyledExpenseCardBody>
+          <CustomSmallButton
+            text="DELETE"
+            handleClick={() => console.log("delete")}
+          />
+        </StyledExpenseCardBody>
+      </StyledExpenseCardContainer>
+    </Card>
+  ) : (
+    <Card customWidth={100} hoverable onClick={triggerCardActivation}>
       <StyledExpenseCardContainer>
         <StyledExpenseCardHeader>
           <StyledExpenseCardHeaderCategories>
-            <H6>
-              {expenseCategory.caption} {budgetType?.caption}
-            </H6>
+            <StyledCategoryText categoryColor={expenseCategory.color}>
+              {expenseCategory.caption}
+            </StyledCategoryText>
+            <StyledBudgetText>{budgetType?.caption}</StyledBudgetText>
           </StyledExpenseCardHeaderCategories>
           <StyledExpenseCardHeaderDate>
-            <H6 color={theme.colors.darkPrimary}>{moment().format("ll")}</H6>
+            {moment().format("ll")}
           </StyledExpenseCardHeaderDate>
         </StyledExpenseCardHeader>
         <StyledExpenseCardBody>
@@ -58,10 +85,12 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
             {trimLongString(expense.description)}
           </StyledExpenseCardBodyDescription>
           <StyledExpenseCardBodyAmount>
-            {formatPrice(expense.amount)}
+            {getStyledPrice(expense)}
           </StyledExpenseCardBodyAmount>
         </StyledExpenseCardBody>
       </StyledExpenseCardContainer>
     </Card>
   );
+
+  return <div onClick={triggerCardActivation}>{cardElement}</div>;
 };
