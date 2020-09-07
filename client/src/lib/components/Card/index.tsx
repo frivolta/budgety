@@ -4,12 +4,18 @@ import { StyledCard } from "./styled";
 interface Props {
   customWidth?: number;
   customHeight?: number;
+  hoverable?: boolean;
   children: React.ReactNode;
 }
 
-export const Card: FC<Props> = ({ customWidth, customHeight, children }) => {
+export const Card: FC<Props> = ({
+  customWidth,
+  customHeight,
+  children,
+  hoverable,
+}) => {
   return (
-    <StyledCard customHeight={customHeight} customWidth={customWidth}>
+    <StyledCard hoverable customHeight={customHeight} customWidth={customWidth}>
       {children}
     </StyledCard>
   );

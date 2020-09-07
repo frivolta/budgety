@@ -4,6 +4,7 @@ import { device } from "../../../styles/Theme/costants";
 interface CardProps {
   customWidth?: number;
   customHeight?: number;
+  hoverable?: boolean;
 }
 
 export const StyledCard = styled.div<CardProps>`
@@ -14,6 +15,7 @@ export const StyledCard = styled.div<CardProps>`
   align-items: center;
   margin: auto;
   background-color: ${(props) => props.theme.colors.lightPrimary};
+
   box-shadow: 2px 0px 15px rgba(0, 0, 0, 0.05);
   border-radius: ${(props) => props.theme.misc.borderRadius};
   width: 100%;
@@ -26,7 +28,13 @@ export const StyledCard = styled.div<CardProps>`
   margin-top: 36px;
   margin-bottom: 36px;
   font-family: ${(props) => props.theme.fonts[1]};
-
+  transition: all 0.3s;
+  :hover {
+    transition: all 0.3s;
+    cursor: ${(props) => props.hoverable && "pointer"};
+    box-shadow: ${(props) =>
+      props.hoverable && "2px 0px 15px rgba(0, 0, 0, 0.2)"};
+  }
   @media ${device.laptop} {
     width: ${(props) =>
       props.customWidth ? `${props.customWidth}%` : "512px"};
