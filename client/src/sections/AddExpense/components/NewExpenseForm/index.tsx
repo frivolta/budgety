@@ -17,9 +17,12 @@ import { arrayToOption } from "../../../../lib/utils/form";
 import { defaultCategories } from "../../../../lib/initialData";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { addExpense } from "../../../../lib/api/queries";
 
 interface Props {
   categories: Category[];
+  isLoading: boolean;
+  handleSubmit: (expense: Expense) => void;
 }
 
 const initialExpense: Expense = {
@@ -31,7 +34,11 @@ const initialExpense: Expense = {
   category: defaultCategories[0].value,
 };
 
-export const NewExpenseForm = ({ categories }: Props) => {
+export const NewExpenseForm = ({
+  categories,
+  isLoading,
+  handleSubmit,
+}: Props) => {
   const [selectableCategories, setSelectableCategories] = useState<
     Option[] | undefined
   >(undefined);
@@ -96,10 +103,10 @@ export const NewExpenseForm = ({ categories }: Props) => {
     return isValid;
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const validateAndSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (expenseValidation()) {
-      console.log("submitting");
+      handleSubmit(expenseValues);
     }
   };
 
@@ -166,7 +173,7 @@ export const NewExpenseForm = ({ categories }: Props) => {
   );
 
   return (
-    <ExpenseFormElement onSubmit={(event) => handleSubmit(event)}>
+    <ExpenseFormElement onSubmit={(event) => validateAndSend(event)}>
       {selectFieldElements}
       {calendarFieldElement()}
       {amountFieldElement()}
@@ -175,7 +182,7 @@ export const NewExpenseForm = ({ categories }: Props) => {
         text="Sign in"
         disabled={false}
         margin="32px 0 16px 0"
-        isLoading={false}
+        isLoading={isLoading}
         data-testid="SubmitButton"
       />
     </ExpenseFormElement>

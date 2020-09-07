@@ -43,3 +43,11 @@ export enum EDIT_SETTINGS_SUCCESS {
 export enum EDIT_CATEGORIES_SUCCESS {
   settingsUpdated = "Category updated",
 }
+
+export enum ADD_EXPENSE_ERRORS {
+  genericError = "We couldn't add your expense, try again later...",
+}
+
+export enum ADD_EXPENSE_SUCCESS {
+  expenseAdded = "Expense saved!",
+}

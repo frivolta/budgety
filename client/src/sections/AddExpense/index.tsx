@@ -7,9 +7,11 @@ import { expenseTypes } from "../../lib/costants/expenseTypes";
 import { categoryTypes } from "../../lib/costants/categoryTypes";
 import { Expense, Category } from "../../types";
 import { defaultCategories } from "../../lib/initialData";
-import { getCategories } from "../../lib/api/queries";
+import { getCategories, addExpense } from "../../lib/api/queries";
 import { Option } from "react-select/src/filters";
 import { NewExpenseForm } from "./components/NewExpenseForm";
+import { toasterError, toasterSuccess } from "../../lib/utils/toaster";
+import { ADD_EXPENSE_ERRORS, ADD_EXPENSE_SUCCESS } from "../../lib/messages";
 
 interface Props {
   userUid: string;
@@ -20,9 +22,7 @@ export const AddExpense: FC<Props> = ({ userUid }) => {
   const [categories, setCategories] = useState<Category[] | undefined>(
     undefined
   );
-  const [selectableCategories, setSelectableCategories] = useState<
-    Option[] | undefined
-  >(undefined);
+  const [isExpenseLoading, setIsExpenseLoading] = useState<boolean>(false);
 
   React.useEffect(() => {
     // Get categories if user is available
@@ -60,8 +60,20 @@ export const AddExpense: FC<Props> = ({ userUid }) => {
         });
       }
     });
+  };
 
-    setSelectableCategories(selectableCategories);
+  //Handle Expense to DB
+  const handleExpenseSubmit = (expense: Expense) => {
+    setIsExpenseLoading(true);
+    try {
+      currentUser?.uid && addExpense(currentUser.uid, expense);
+      setIsExpenseLoading(false);
+      toasterSuccess(ADD_EXPENSE_SUCCESS.expenseAdded);
+    } catch (error) {
+      setIsExpenseLoading(false);
+      console.error("[err]: Error adding expense: ", error);
+      toasterError(ADD_EXPENSE_ERRORS.genericError);
+    }
   };
 
   if (userIsLoading) {
@@ -69,7 +81,11 @@ export const AddExpense: FC<Props> = ({ userUid }) => {
   }
 
   const formElement = categories ? (
-    <NewExpenseForm categories={categories} />
+    <NewExpenseForm
+      categories={categories}
+      isLoading={isExpenseLoading}
+      handleSubmit={handleExpenseSubmit}
+    />
   ) : null;
 
   return (

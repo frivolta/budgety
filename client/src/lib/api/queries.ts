@@ -1,6 +1,7 @@
 import { firestore } from "./firebase";
+import { Expense } from "../../types";
 
-// Category update
+// Categories
 export const updateCategory = async <T>(
   userUid: string,
   documentId: string,
@@ -30,4 +31,14 @@ export const getCategories = async (userUid: string) => {
   } catch (error) {
     console.error("[err]: Error getting categories: ", error);
   }
+};
+
+// Expenses
+export const addExpense = async (userUid: string, expense: Expense) => {
+  console.log(userUid, expense);
+  await firestore
+    .collection("users")
+    .doc(userUid)
+    .collection("expenses")
+    .add(expense);
 };
