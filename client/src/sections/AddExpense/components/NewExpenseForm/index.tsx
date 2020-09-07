@@ -179,7 +179,7 @@ export const NewExpenseForm = ({
       {amountFieldElement()}
       {inputFieldElements()}
       <CustomButton
-        text="Sign in"
+        text="Add expense"
         disabled={false}
         margin="32px 0 16px 0"
         isLoading={isLoading}

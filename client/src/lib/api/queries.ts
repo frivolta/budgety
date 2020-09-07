@@ -42,3 +42,13 @@ export const addExpense = async (userUid: string, expense: Expense) => {
     .collection("expenses")
     .add(expense);
 };
+
+export const getExpenses = async (userUid: string) => {
+  const snapshot = await firestore
+    .collection("users")
+    .doc(userUid)
+    .collection("expenses")
+    .get();
+  const expenses = snapshot.docs.map((doc) => doc.data());
+  return expenses;
+};

@@ -22,6 +22,7 @@ import {
   EditSettings,
   Categories,
   AddExpense,
+  Expenses,
 } from "./sections";
 import { LoadingScreen } from "./lib/components";
 import useAuthContext, { AuthProvider } from "./lib/auth/useAuthContext";
@@ -66,6 +67,7 @@ const App: FC = () => {
         <PrivateRoute exact path="/settings/edit" component={EditSettings} />
         <PrivateRoute exact path="/categories" component={Categories} />
         <PrivateRoute exact path="/add-expense" component={AddExpense} />
+        <PrivateRoute exact path="/expenses" component={Expenses} />
         <Route component={NotFound} />
       </Switch>
     </Router>

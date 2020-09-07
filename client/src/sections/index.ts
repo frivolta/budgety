@@ -6,3 +6,4 @@ export * from "./Settings";
 export * from "./EditSettings";
 export * from "./Categories";
 export * from "./AddExpense";
+export * from "./Expenses";
