@@ -3,6 +3,10 @@ export const blue = {
   300: "#007AFF",
 };
 
+export const darkPurple = {
+  100: "#11263C",
+};
+
 export const purple = {
   200: "#6F52ED",
 };

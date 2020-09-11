@@ -41,7 +41,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "cypress:open": "yarn run cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -75,6 +76,8 @@
     "@types/yup": "^0.29.6",
     "babel-loader": "^8.1.0",
     "cypress": "^5.1.0",
+    "cypress-skip-and-only-ui": "^1.2.7",
+    "cypress-watch-and-reload": "^1.2.18",
     "react-is": "^16.13.1"
   }
 }
