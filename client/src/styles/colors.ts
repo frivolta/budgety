@@ -1,5 +1,6 @@
 export const blue = {
   200: "#007AFF",
+  300: "#007AFF",
 };
 
 export const purple = {

@@ -2,6 +2,8 @@ import React, { FC } from "react";
 import ReactDOM from "react-dom";
 // Router
 // Styles
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle, defaultTheme } from "./styles";
 //SW
 import * as serviceWorker from "./serviceWorker";
 // Toastify__toast-container
@@ -16,7 +18,10 @@ const App: FC = () => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={defaultTheme}>
+      <GlobalStyle />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
