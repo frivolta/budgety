@@ -15,6 +15,7 @@ html {
 body {
   margin: 0;
   font-family: ${primaryFont};
+  line-height: 22px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

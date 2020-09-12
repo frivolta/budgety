@@ -1,4 +1,4 @@
-import { blue, neutral, darkPurple } from "./colors";
+import { blue, neutral, darkPurple, purple, red } from "./colors";
 import { primaryFont, typeScale } from "./typography";
 
 export const defaultTheme = {
@@ -9,16 +9,28 @@ export const defaultTheme = {
     primaryHoverColor: blue[300],
     primaryActiveColor: blue[200],
     textColorOnPrimary: neutral[100],
+    secondaryColor: purple[200],
     textColor: neutral[500],
     textColorInverted: neutral[100],
     pageBackground: neutral[200],
     componentBackground: neutral[100],
     borderColor: neutral[300],
+    error: red[200],
+    placeholder: neutral[400],
   },
   fonts: {
     header: {
       size: typeScale.paragraph,
       weight: "600",
+    },
+    default: {
+      size: typeScale.paragraph,
+      weight: "500",
+      secondaryWeight: "300",
+    },
+    small: {
+      size: typeScale.helperText,
+      weight: 500,
     },
   },
   space: {
@@ -27,5 +39,11 @@ export const defaultTheme = {
     l: "0.75rem" /* 12px */,
     xl: "1rem" /* 16px */,
     xxl: "1.5rem" /* 24px */,
+  },
+  borderRadius: {
+    base: "5px",
+  },
+  shadows: {
+    default: "2px 0px 15px rgba(0, 0, 0, 0.05)",
   },
 };

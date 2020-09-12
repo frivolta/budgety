@@ -23,3 +23,6 @@ export const neutral = {
   500: "#484848",
   600: "#000000",
 };
+export const red = {
+  200: "#FF4C61",
+};

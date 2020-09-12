@@ -12,4 +12,8 @@ describe("Signup", function () {
   it("doesn't show navigation for not auth users", () => {
     cy.contains("Dashboard").should("not.be.visible");
   });
+
+  it("shows title for signup form", () => {
+    cy.contains("Sign up").should("be.visible");
+  });
 });

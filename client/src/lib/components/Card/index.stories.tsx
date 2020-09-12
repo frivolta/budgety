@@ -2,13 +2,19 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme, GlobalStyle } from "../../../styles";
-import { Header } from ".";
+import { Card } from ".";
+import { H1 } from "../../../styles/typography";
 
-const stories = storiesOf("Header", module);
+const stories = storiesOf("Card", module);
 // eslint-disable-next-line react/prop-types
 const Container = ({ children }: { children: React.ReactNode }) => (
   <div style={{ margin: `36px 0` }}>{children}</div>
 );
+
+const placeHolderText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat.`;
 
 stories.addDecorator((story) => {
   return (
@@ -19,13 +25,9 @@ stories.addDecorator((story) => {
   );
 });
 
-stories.add("Not logged user", () => (
+stories.add("default", () => (
   <>
-    <Header isAuthorized={false} />
-  </>
-));
-stories.add("Fixed top", () => (
-  <>
-    <Header isAuthorized={false} fixedTop />
+    <H1>Card</H1>
+    <Card>{placeHolderText}</Card>
   </>
 ));
