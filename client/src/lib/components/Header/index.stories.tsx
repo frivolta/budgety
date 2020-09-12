@@ -20,3 +20,4 @@ stories.addDecorator((story) => {
 });
 
 stories.add("Not logged user", () => <Header isAuthorized={false} />);
+stories.add("Fixed top", () => <Header isAuthorized={false} fixedTop />);

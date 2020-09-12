@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import ReactDOM from "react-dom";
 // Router
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 // Styles
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, defaultTheme } from "./styles";
@@ -9,11 +10,18 @@ import * as serviceWorker from "./serviceWorker";
 // Toastify__toast-container
 import "react-toastify/dist/ReactToastify.css";
 // Sections
+import { SignUp } from "./sections";
 // Toaster configuration
 // Global Style Definition
 
 const App: FC = () => {
-  return <p>Dashboard</p>;
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/signup" component={SignUp} />
+      </Switch>
+    </Router>
+  );
 };
 
 ReactDOM.render(

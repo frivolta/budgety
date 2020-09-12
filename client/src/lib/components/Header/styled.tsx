@@ -1,6 +1,19 @@
 import styled from "styled-components";
 
-export const HeaderWrapper = styled.div`
+interface HeaderWrapperProps {
+  fixedTop?: boolean;
+}
+
+const HEADER_MODIFIERS = {
+  fixedTop: () => `
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  `,
+};
+
+export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   font-size: ${(props) => props.theme.fonts.header.size};
   font-weight: ${(props) => props.theme.fonts.header.weight};
   background-color: ${(props) => props.theme.colors.componentBackground};
@@ -22,6 +35,7 @@ export const HeaderWrapper = styled.div`
       transition: opacity 0.3s;
     }
   }
+  ${(props) => (props.fixedTop ? HEADER_MODIFIERS.fixedTop : null)};
 `;
 
 export const HeaderContainer = styled.div`
