@@ -3,7 +3,7 @@ import { StyledButton, ButtonIcon, ButtonLabel } from "./styled";
 import Spinner from "react-svg-spinner";
 
 export interface Props {
-  handleClick: (
+  handleClick?: (
     e: React.BaseSyntheticEvent<object, any, any>
   ) => Promise<void> | void;
   text: string;
