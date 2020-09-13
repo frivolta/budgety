@@ -38,7 +38,7 @@ const defaultUser: User = {
 };
 
 export const SignUp: FC = () => {
-  const [currentUser, isLoadingCurrentUser] = useAuthContext();
+  //const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<FirebaseError | undefined>(undefined);
   const history = useHistory();
@@ -63,8 +63,8 @@ export const SignUp: FC = () => {
           user: firebase.User | null;
         } = await auth.createUserWithEmailAndPassword(email, password);
         if (user && user.uid) {
-          await firestore.collection("users").doc(user.uid).set(defaultUser);
-          await seedInitialDatas(user.uid, "categories", defaultCategories);
+          /*  await firestore.collection("users").doc(user.uid).set(defaultUser);
+          await seedInitialDatas(user.uid, "categories", defaultCategories); */
           setIsLoading(false);
           toasterSuccess(SIGNUP_SUCCESS.success);
           formik.resetForm();
@@ -79,10 +79,10 @@ export const SignUp: FC = () => {
     },
   });
 
-  if (currentUser?.uid && !isLoadingCurrentUser) {
+  /*   if (currentUser?.uid && !isLoadingCurrentUser) {
     redirectToDashboardPage();
   }
-
+ */
   const errorElement =
     error && error.message ? (
       <Label color={defaultTheme.colors.error}>
@@ -99,7 +99,7 @@ export const SignUp: FC = () => {
           Fill out the form <br />
           and <SignupCardSpan>Sign up</SignupCardSpan>.
         </H1>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} data-testid="SignupForm">
           <Input
             name="email"
             placeholder="yourname@company.com"
@@ -115,7 +115,7 @@ export const SignUp: FC = () => {
           />
           <Input
             name="password"
-            placeholder="password"
+            placeholder="Password"
             type="password"
             label="Password"
             handleChange={formik.handleChange}
