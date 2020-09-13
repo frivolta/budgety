@@ -8,7 +8,7 @@ export const defaultTheme = {
     primaryDarkColor: darkPurple[100],
     primaryHoverColor: blue[300],
     primaryActiveColor: blue[200],
-    textColorOnPrimary: neutral[100],
+    textColorPrimary: neutral[100],
     secondaryColor: purple[200],
     textColor: neutral[500],
     textColorInverted: neutral[100],
@@ -45,5 +45,6 @@ export const defaultTheme = {
   },
   shadows: {
     default: "2px 0px 15px rgba(0, 0, 0, 0.05)",
+    small: "0px 2px 10px rgba(0, 0, 0, 0.25)",
   },
 };

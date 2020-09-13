@@ -10,5 +10,6 @@ module.exports = {
     "@storybook/addon-docs",
     "@storybook/addon-backgrounds",
     "@storybook/addon-contexts/register",
+    "@storybook/addon-actions",
   ],
 };

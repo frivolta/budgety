@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Label/> renders with a different color: <span  color="#000000" data-testid="Label">Children</span> 1`] = `
+<span
+  class="sc-bdnylx eoVEFh"
+  color="#000000"
+  data-testid="Label"
+>
+  Children
+</span>
+`;
