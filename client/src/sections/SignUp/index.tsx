@@ -63,8 +63,8 @@ export const SignUp: FC = () => {
           user: firebase.User | null;
         } = await auth.createUserWithEmailAndPassword(email, password);
         if (user && user.uid) {
-          /*  await firestore.collection("users").doc(user.uid).set(defaultUser);
-          await seedInitialDatas(user.uid, "categories", defaultCategories); */
+          await firestore.collection("users").doc(user.uid).set(defaultUser);
+          await seedInitialDatas(user.uid, "categories", defaultCategories);
           setIsLoading(false);
           toasterSuccess(SIGNUP_SUCCESS.success);
           formik.resetForm();
