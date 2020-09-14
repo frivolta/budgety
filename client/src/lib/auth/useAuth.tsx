@@ -18,7 +18,6 @@ export const useAuth = (): UseAuth => {
     );
     return unsubscribe;
   }, [currentUser]);
-
   // Returning a tuple
   return [currentUser, isLoading];
 };

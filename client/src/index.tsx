@@ -14,6 +14,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // Sections
 import { SignUp } from "./sections";
+import { LogIn } from "./sections/LogIn";
 
 // Toaster configuration
 toast.configure({
@@ -23,13 +24,14 @@ toast.configure({
   autoClose: 2000,
 });
 
-const App: FC = () => {
+export const App: FC = () => {
   const [currentUser, isLoading] = useAuthContext();
 
   return (
     <Router>
       <Switch>
         <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/login" component={LogIn} />
       </Switch>
     </Router>
   );

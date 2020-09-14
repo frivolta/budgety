@@ -7,6 +7,7 @@ import { render, fireEvent, wait } from "@testing-library/react";
 import { SignUp } from "../../sections";
 import { auth } from "../../lib/api/firebase";
 import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "../../lib/auth/useAuthContext";
 
 jest.mock("../../lib/api/firebase", () => {
   return {
@@ -15,9 +16,11 @@ jest.mock("../../lib/api/firebase", () => {
         return {
           user: {
             uid: "fakeuid",
+            email: "test@test.com",
           },
         };
       }),
+      onAuthStateChanged: jest.fn(),
       signOut: jest.fn(),
     },
     firestore: {
@@ -41,7 +44,9 @@ const renderWithRouter = () =>
         <ToastContainer />
         <Switch>
           <Route exact path="/signup">
-            <SignUp />
+            <AuthProvider>
+              <SignUp />
+            </AuthProvider>
           </Route>
           <Route exact path="/">
             <div data-testid="GenericComponent"></div>

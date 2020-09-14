@@ -38,7 +38,7 @@ const defaultUser: User = {
 };
 
 export const SignUp: FC = () => {
-  //const [currentUser, isLoadingCurrentUser] = useAuthContext();
+  const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<FirebaseError | undefined>(undefined);
   const history = useHistory();
@@ -79,10 +79,10 @@ export const SignUp: FC = () => {
     },
   });
 
-  /*   if (currentUser?.uid && !isLoadingCurrentUser) {
+  if (currentUser?.uid && !isLoadingCurrentUser) {
     redirectToDashboardPage();
   }
- */
+
   const errorElement =
     error && error.message ? (
       <Label color={defaultTheme.colors.error}>
@@ -90,10 +90,9 @@ export const SignUp: FC = () => {
       </Label>
     ) : null;
 
-  const isAuth = false;
   return (
     <FullPageLayout>
-      <Header isAuthorized={isAuth} fixedTop />
+      <Header isAuthorized={!!currentUser} fixedTop />
       <Card>
         <H1>
           Fill out the form <br />
