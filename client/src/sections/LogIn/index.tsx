@@ -60,7 +60,6 @@ export const LogIn: FC = () => {
   if (currentUser?.uid && !isLoadingCurrentUser) {
     redirectToDashboardPage();
   }
-
   const errorElement =
     error && error.message ? (
       <Label color={defaultTheme.colors.error}>
@@ -76,7 +75,7 @@ export const LogIn: FC = () => {
           Fill out the form <br />
           and <LogInCardSpan>Sign In</LogInCardSpan>.
         </H1>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} data-testid="LogInForm">
           <Input
             name="email"
             placeholder="yourname@company.com"
@@ -92,7 +91,7 @@ export const LogIn: FC = () => {
           />
           <Input
             name="password"
-            placeholder="password"
+            placeholder="Password"
             type="password"
             label="Password"
             handleChange={formik.handleChange}
