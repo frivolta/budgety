@@ -20,6 +20,8 @@ import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
 import { LOGIN_SUCCESS, LOGIN_ERRORS } from "../../lib/messages/index";
 import useAuthContext from "../../lib/auth/useAuthContext";
 import { defaultTheme } from "react-select";
+import { Auth } from "aws-amplify";
+import { red } from "../../styles";
 
 const initialFormValues: LogInFormData = {
   email: "",
@@ -27,7 +29,6 @@ const initialFormValues: LogInFormData = {
 };
 
 export const LogIn: FC = () => {
-  const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<FirebaseError | undefined>(undefined);
   const history = useHistory();
@@ -42,7 +43,7 @@ export const LogIn: FC = () => {
     onSubmit: async ({ email, password }) => {
       setIsLoading(true);
       try {
-        await auth.signInWithEmailAndPassword(email, password);
+        await Auth.signIn(email, password);
         setError(undefined);
         setIsLoading(false);
         formik.resetForm();
@@ -57,19 +58,16 @@ export const LogIn: FC = () => {
     },
   });
 
-  if (currentUser?.uid && !isLoadingCurrentUser) {
-    redirectToDashboardPage();
-  }
   const errorElement =
     error && error.message ? (
-      <Label color={defaultTheme.colors.error}>
+      <Label color={red[200]}>
         {formatNetworkErrorMessages(error.message)}
       </Label>
     ) : null;
 
   return (
     <FullPageLayout>
-      <Header isAuthorized={!!currentUser} fixedTop />
+      <Header isAuthorized={false} fixedTop />
       <Card>
         <H1>
           Fill out the form <br />
