@@ -5,7 +5,9 @@ export enum SIGNUP_ERRORS {
   passwordRequired = "Please enter your password",
   confirmPasswordRequired = "Please confirm your password",
   passwordMatch = "Passwords must match",
+  signupErrorFromCognito = "Email already registered",
   genericError = "Oops, something went wrong...",
+  confirmationCodeError = "Oops, we can't validate your code...",
 }
 
 export enum LOGIN_ERRORS {
@@ -15,6 +17,7 @@ export enum LOGIN_ERRORS {
 
 export enum SIGNUP_SUCCESS {
   success = "You succesfully signed up!",
+  confirmSucces = "Your email is confirmed!",
 }
 
 export enum LOGIN_SUCCESS {

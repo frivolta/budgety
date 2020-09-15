@@ -1,5 +1,8 @@
 import React, { FC } from "react";
 import ReactDOM from "react-dom";
+//AWS
+import awsconfig from "./aws-exports";
+import Amplify from "aws-amplify";
 // Router
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 // Auth
@@ -15,6 +18,9 @@ import "react-toastify/dist/ReactToastify.css";
 // Sections
 import { SignUp } from "./sections";
 import { LogIn } from "./sections/LogIn";
+
+// Amplify config
+Amplify.configure(awsconfig);
 
 // Toaster configuration
 toast.configure({
