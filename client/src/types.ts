@@ -1,9 +1,18 @@
+// User
 export interface User {
   isActive: boolean;
   accountName: string;
   startingBalance: number;
   monthlyBudget: number;
 }
+
+// Cognito User
+export type UserAuth = {
+  userId: string | number;
+  idToken: string;
+  timestamp?: string | number;
+  authenticated: boolean;
+};
 
 // Expense
 export interface ExpenseType {
