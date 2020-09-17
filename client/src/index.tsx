@@ -30,6 +30,8 @@ toast.configure({
   autoClose: 2000,
 });
 
+//@ToDo: Header logged in, User header menu, card mobile, Log in page logo
+
 export const App: FC = () => {
   return (
     <Router>

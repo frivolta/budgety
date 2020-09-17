@@ -1,7 +1,8 @@
 import React, { FC, useState } from "react";
-
-import { Header, Card, FullPageLayout } from "../../lib/components";
+import { BrandLogo } from "./styled";
+import { Card, FullPageLayout } from "../../lib/components";
 import { SignUpForm, ConfirmCodeForm } from "./components";
+import brandLogo from "./assets/images/brand.svg";
 
 interface Props {
   renderConfirmationView?: boolean;
@@ -35,8 +36,10 @@ export const SignUp: FC<Props> = ({ renderConfirmationView }) => {
 
   return (
     <FullPageLayout>
-      <Header isAuthorized={isAuthorized} fixedTop />
-      <Card>{formElement}</Card>
+      <Card>
+        <BrandLogo src={brandLogo} />
+        {formElement}
+      </Card>
     </FullPageLayout>
   );
 };

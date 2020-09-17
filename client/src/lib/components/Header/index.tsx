@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import brandLogo from "./assets/images/brand.svg";
 import {
   HeaderWrapper,
@@ -14,10 +15,10 @@ interface Props {
 export const Header: React.FC<Props> = ({ isAuthorized, fixedTop }) => {
   const appMenuElement = isAuthorized ? (
     <HeaderMenu data-testid="HeaderMenu">
-      <a href="/">Dashboard</a>
-      <a href="/">Expenses</a>
-      <a href="/">Budget Settings</a>
-      <a href="/">Categories</a>
+      <Link to="/dashboard">Dashboard</Link>
+      <Link to="/expenses">Expenses</Link>
+      <Link to="/budget-settings">Budget Settings</Link>
+      <Link to="/categories">Categories</Link>
     </HeaderMenu>
   ) : null;
 
@@ -30,7 +31,9 @@ export const Header: React.FC<Props> = ({ isAuthorized, fixedTop }) => {
   return (
     <HeaderWrapper fixedTop={fixedTop}>
       <HeaderContainer>
-        <HeaderLogo src={brandLogo} alt="Budgety" data-testid="HeaderLogo" />
+        <Link to="/">
+          <HeaderLogo src={brandLogo} alt="Budgety" data-testid="HeaderLogo" />
+        </Link>
         {appMenuElement}
       </HeaderContainer>
       {userMenuElement}

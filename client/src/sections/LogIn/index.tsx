@@ -9,7 +9,7 @@ import {
   Card,
   Header,
 } from "../../lib/components";
-import { LogInCardSpan } from "./styled";
+import { LogInCardSpan, BrandLogo } from "./styled";
 import { H1 } from "../../styles/typography";
 import { formatNetworkErrorMessages } from "../../lib/utils/format";
 import { LogInFormData } from "./types";
@@ -19,6 +19,7 @@ import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
 import { LOGIN_SUCCESS, LOGIN_ERRORS } from "../../lib/messages/index";
 import { Auth } from "aws-amplify";
 import { red } from "../../styles";
+import brandLogo from "./assets/images/brand.svg";
 
 const initialFormValues: LogInFormData = {
   email: "",
@@ -64,8 +65,8 @@ export const LogIn: FC = () => {
 
   return (
     <FullPageLayout>
-      <Header isAuthorized={false} fixedTop />
       <Card>
+        <BrandLogo src={brandLogo} />
         <H1>
           Fill out the form <br />
           and <LogInCardSpan>Sign In</LogInCardSpan>.
