@@ -4,50 +4,18 @@ import { defaultTheme } from "../../styles";
 import { createMemoryHistory } from "history";
 import { Router, Switch, Route } from "react-router-dom";
 import { render, fireEvent, wait } from "@testing-library/react";
-import { LogIn } from "../../sections";
-import { auth } from "../../lib/api/firebase";
-import { ToastContainer } from "react-toastify";
-import { AuthProvider } from "../../lib/auth/useAuthContext";
+import { LogIn } from "..";
+import { Auth } from "aws-amplify";
 
-jest.mock("../../lib/api/firebase", () => {
-  return {
-    auth: {
-      createUserWithEmailAndPassword: jest.fn(() => {
-        return {
-          user: {
-            uid: "fakeuid",
-            email: "test@test.com",
-          },
-        };
-      }),
-      onAuthStateChanged: jest.fn(),
-      signOut: jest.fn(),
-      signInWithEmailAndPassword: jest.fn(),
-    },
-    firestore: {
-      collection: jest.fn(() => ({
-        doc: jest.fn(() => ({
-          collection: jest.fn(() => ({
-            add: jest.fn(),
-          })),
-          set: jest.fn(),
-        })),
-      })),
-    },
-  };
-});
-
+Auth.signIn = jest.fn();
 const history = createMemoryHistory({ initialEntries: ["/login"] });
 const renderWithRouter = () =>
   render(
     <ThemeProvider theme={defaultTheme}>
       <Router history={history}>
-        <ToastContainer />
         <Switch>
           <Route exact path="/login">
-            <AuthProvider>
-              <LogIn />
-            </AuthProvider>
+            <LogIn />
           </Route>
         </Switch>
       </Router>
@@ -61,24 +29,20 @@ describe("<LogIn/>", () => {
     expect(form).toBeInTheDocument();
   });
 
-  it("let user to log in with correct credentials", async () => {
+  it("calls signing function", async () => {
     const { getByPlaceholderText, getByTestId, getByText } = renderWithRouter();
     const emailField = getByPlaceholderText("yourname@company.com");
     const passwordField = getByPlaceholderText("Password");
     const submitButton = getByTestId("Button");
+
     fireEvent.change(emailField, {
       target: { value: "test@test.com" },
     });
-
     fireEvent.change(passwordField, { target: { value: "Lampone01!" } });
-
     fireEvent.click(submitButton);
 
-    expect(submitButton).not.toBeDisabled();
     await wait(() => {
-      expect(auth.signInWithEmailAndPassword).toHaveBeenCalled();
-      expect(history.location.pathname).toBe("/dashboard");
-      expect(getByText("You succesfully signed in!")).toBeInTheDocument();
+      expect(Auth.signIn).toHaveBeenCalled();
     });
   });
 });

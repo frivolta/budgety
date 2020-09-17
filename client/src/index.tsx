@@ -31,11 +31,6 @@ toast.configure({
 });
 
 export const App: FC = () => {
-  const [isLoading] = useAuth();
-  if (isLoading) {
-    return <p>Is loading...</p>;
-  }
-
   return (
     <Router>
       <Switch>

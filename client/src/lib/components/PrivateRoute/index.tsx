@@ -10,6 +10,7 @@ interface Props extends RouteProps {
 export const PrivateRoute = ({ component: Component, ...rest }: Props) => {
   const [isLoading, currentUser] = useAuth();
 
+  //@ToDo: This must return the loading component
   if (isLoading) {
     return <p>is loading</p>;
   }
