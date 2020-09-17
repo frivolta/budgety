@@ -81,6 +81,7 @@
     "@types/yup": "^0.29.6",
     "babel-loader": "^8.1.0",
     "cypress": "^5.2.0",
+    "cypress-localstorage-commands": "^1.2.2",
     "cypress-skip-and-only-ui": "^1.2.7",
     "cypress-watch-and-reload": "^1.2.18",
     "react-is": "^16.13.1"

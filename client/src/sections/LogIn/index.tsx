@@ -15,11 +15,8 @@ import { formatNetworkErrorMessages } from "../../lib/utils/format";
 import { LogInFormData } from "./types";
 import { Link, useHistory } from "react-router-dom";
 import { FirebaseError } from "firebase";
-import { auth } from "../../lib/api/firebase";
 import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
 import { LOGIN_SUCCESS, LOGIN_ERRORS } from "../../lib/messages/index";
-import useAuthContext from "../../lib/auth/useAuthContext";
-import { defaultTheme } from "react-select";
 import { Auth } from "aws-amplify";
 import { red } from "../../styles";
 

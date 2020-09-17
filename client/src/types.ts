@@ -8,9 +8,7 @@ export interface User {
 
 // Cognito User
 export type UserAuth = {
-  userId: string | number;
-  idToken: string;
-  timestamp?: string | number;
+  email: string;
   authenticated: boolean;
 };
 

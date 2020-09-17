@@ -3,11 +3,10 @@ import ReactDOM from "react-dom";
 //AWS
 import awsconfig from "./aws-exports";
 import Amplify from "aws-amplify";
-import { userIsAuthorized } from "./lib/cognitoAuthentication";
 // Router
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 // Auth
-//import useAuthContext, { AuthProvider } from "./lib/auth/useAuthContext";
+import { useAuth } from "./lib/cognitoAuthentication/useAuth";
 // Styles
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, defaultTheme } from "./styles";
@@ -32,13 +31,11 @@ toast.configure({
 });
 
 export const App: FC = () => {
-  React.useEffect(() => {
-    checkIfUserIsAuth();
-  }, []);
-  const checkIfUserIsAuth = async () => {
-    const isAuth = await userIsAuthorized();
-    console.log(isAuth);
-  };
+  const [isLoading] = useAuth();
+  if (isLoading) {
+    return <p>Is loading...</p>;
+  }
+
   return (
     <Router>
       <Switch>
