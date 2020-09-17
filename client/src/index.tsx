@@ -15,9 +15,9 @@ import * as serviceWorker from "./serviceWorker";
 // Toastify__toast-container
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// Sections
-import { Dashboard, SignUp } from "./sections";
-import { LogIn } from "./sections/LogIn";
+// Sections & components
+import { Dashboard, SignUp, LogIn } from "./sections";
+import { PrivateRoute } from "./lib/components";
 
 // Amplify config
 Amplify.configure(awsconfig);
@@ -41,8 +41,8 @@ export const App: FC = () => {
       <Switch>
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={LogIn} />
-        <Route exact path="/" component={Dashboard} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/" component={Dashboard} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
       </Switch>
     </Router>
   );
