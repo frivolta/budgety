@@ -60,7 +60,7 @@ describe("Cognito Authentication by API", () => {
     cy.loginByCognitoApi("rivoltafilippo@gmail.com", `Lampone01!`);
   });
 
-  it.only("display the home page after logged in", () => {
+  it("display the home page after logged in", () => {
     cy.visit(`${NETWORK.LOCAL}/dashboard`).contains("User");
   });
 });
