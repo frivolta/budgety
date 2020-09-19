@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 import { NETWORK } from "../../support/variables";
-import "cypress-localstorage-commands";
 
 /**
  *  1) User get validation visual errors
