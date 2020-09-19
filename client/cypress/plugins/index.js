@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 // cypress/plugins/index.js
 
-const awsConfig = require("../../aws-exports").default;
+const awsConfig = require("../../src/aws-exports").default;
 const AWS = require("aws-sdk");
 const Amplify = require("aws-amplify").default;
 const { default: Auth } = require("@aws-amplify/auth");

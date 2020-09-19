@@ -26,7 +26,7 @@
 //Login by cognito API
 Cypress.Commands.add("loginByCognitoApi", (username, password) =>
   cy
-    .task("loginByCognitoApi", {
+    .task("loginCognitoUserByApi", {
       username,
       password,
     })
@@ -58,8 +58,6 @@ Cypress.Commands.add("loginByCognitoApi", (username, password) =>
         "amplify-authenticator-authState",
         "signedIn"
       );
-
-      cy.visit("/");
     })
 );
 // Fill fields and click signup button

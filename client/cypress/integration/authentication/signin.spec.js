@@ -57,13 +57,10 @@ describe("Signin requests", function () {
 });
 describe("Cognito Authentication by API", () => {
   beforeEach(() => {
-    cy.fixture("cognito-users").then((users) => {
-      const user = users[0];
-      cy.loginByCognitoApi(user.username, `s3cret123$`);
-    });
+    cy.loginByCognitoApi("rivoltafilippo@gmail.com", `Lampone01!`);
   });
 
   it.only("display the home page after logged in", () => {
-    cy.getBySel("new-post-button").should("be.visible");
+    cy.visit(`${NETWORK.LOCAL}/dashboard`).contains("User");
   });
 });
