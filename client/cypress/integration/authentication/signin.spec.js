@@ -52,5 +52,6 @@ describe("Signin requests", function () {
       email: Cypress.env("TEST_USER"),
       password: Cypress.env("TEST_PASSWORD"),
     });
+    cy.location("pathname").should("include", "/dashboard");
   });
 });
