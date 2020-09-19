@@ -11,8 +11,9 @@ export const Dashboard = () => {
     Auth.signOut();
     history.push("/login");
   };
+
   return (
-    <GridPageLayout>
+    <GridPageLayout user={currentUser}>
       {!isLoading && currentUser.authenticated
         ? "User is auth"
         : "User is not auth"}

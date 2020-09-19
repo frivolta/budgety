@@ -24,17 +24,6 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   justify-content: space-between;
   align-items: center;
 
-  a {
-    color: ${(props) => props.theme.colors.primaryDarkColor};
-    text-decoration: none;
-    opacity: 0.3;
-    transition: opacity 0.3s;
-    padding: 0 ${(props) => props.theme.space.m};
-    :hover {
-      opacity: 1;
-      transition: opacity 0.3s;
-    }
-  }
   ${(props) => (props.fixedTop ? HEADER_MODIFIERS.fixedTop : null)};
 `;
 
@@ -50,4 +39,15 @@ export const HeaderLogo = styled.img`
 
 export const HeaderMenu = styled.div`
   margin-left: ${(props) => props.theme.space.xxl};
+  a {
+    color: ${(props) => props.theme.colors.primaryDarkColor};
+    text-decoration: none;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+    padding: 0 ${(props) => props.theme.space.m};
+    :hover {
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+  }
 `;

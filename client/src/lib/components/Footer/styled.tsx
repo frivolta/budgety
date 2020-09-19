@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { spaceUnit } from "../../../styles";
 
 export const FooterWrapper = styled.div`
   width: 100%;
@@ -29,4 +30,5 @@ export const FooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 ${spaceUnit}px;
 `;

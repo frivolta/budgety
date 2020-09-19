@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { UserAuth } from "../../../types";
 import brandLogo from "./assets/images/brand.svg";
+import { HeaderUser } from "./components";
 import {
   HeaderWrapper,
   HeaderContainer,
@@ -9,10 +11,15 @@ import {
 } from "./styled";
 interface Props {
   isAuthorized: boolean;
+  user?: UserAuth;
   fixedTop?: boolean;
 }
 
-export const Header: React.FC<Props> = ({ isAuthorized, fixedTop }) => {
+export const Header: React.FC<Props> = ({ isAuthorized, fixedTop, user }) => {
+  const headerUser: UserAuth = user
+    ? user
+    : { email: "", authenticated: isAuthorized };
+
   const appMenuElement = isAuthorized ? (
     <HeaderMenu data-testid="HeaderMenu">
       <Link to="/dashboard">Dashboard</Link>
@@ -23,7 +30,7 @@ export const Header: React.FC<Props> = ({ isAuthorized, fixedTop }) => {
   ) : null;
 
   const userMenuElement = isAuthorized ? (
-    <div>Auth menu</div>
+    <HeaderUser user={headerUser} />
   ) : (
     <div>Not auth menu</div>
   );

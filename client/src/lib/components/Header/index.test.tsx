@@ -6,15 +6,21 @@ import { ThemeProvider } from "styled-components";
 import { defaultTheme } from "../../../styles";
 import { Route, Router, Switch } from "react-router";
 import { createMemoryHistory } from "history";
+import { UserAuth } from "../../../types";
 
-const history = createMemoryHistory({ initialEntries: ["/login"] });
+const mockedUser: UserAuth = {
+  email: "mocked@email.com",
+  authenticated: true,
+};
+
+const history = createMemoryHistory({ initialEntries: ["/dashboard"] });
 const renderWithRouter = () =>
   render(
     <ThemeProvider theme={defaultTheme}>
       <Router history={history}>
         <Switch>
-          <Route exact path="/login">
-            <Header isAuthorized={true} />
+          <Route exact path="/dashboard">
+            <Header isAuthorized={mockedUser.authenticated} user={mockedUser} />
           </Route>
         </Switch>
       </Router>
@@ -23,8 +29,16 @@ const renderWithRouter = () =>
 
 describe("<Header/>", () => {
   it("renders without errors with children", () => {
-    renderWithRouter();
+    const { getByTestId } = renderWithRouter();
+    const element = getByTestId("HeaderLogo");
+    expect(element).toBeInTheDocument();
   });
+  it("renders without errors with children", () => {
+    const { getByText } = renderWithRouter();
+    const element = getByText(mockedUser.email);
+    expect(element).toBeInTheDocument();
+  });
+  // Restore history or leave last
   it("redirect to index page if logo is clicked ", () => {
     const { getByTestId } = renderWithRouter();
     const element = getByTestId("HeaderLogo");
