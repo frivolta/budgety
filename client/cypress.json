@@ -1,1 +1,6 @@
-{}
+{
+  "env": {
+    "TEST_USER": "rivoltafilippo@gmail.com",
+    "TEST_PASSWORD": "Lampone01!"
+  }
+}

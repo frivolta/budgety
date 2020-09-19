@@ -10,8 +10,9 @@ export const StyledCard = styled.div`
   box-shadow: ${(props) => props.theme.shadows.default};
   border-radius: ${(props) => props.theme.borderRadius.base};
   width: 100%;
+  height: 100%;
   color: ${(props) => props.theme.colors.primaryDarkColor};
-  @media ${mediaQueries.laptop} {
+  @media ${mediaQueries.tablet} {
     min-width: 512px;
     height: auto;
     max-width: 900px;

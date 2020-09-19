@@ -24,8 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+// Fill fields and click signup button
 export const signupUser = (user) => {
-  // Fill fields and click signup button
   cy.get('input[name="email"]').click().type(user.email);
   cy.get('input[name="password"]').click().type(user.password);
   cy.get('input[name="confirmPassword"]').click().type(user.password);
@@ -33,10 +33,11 @@ export const signupUser = (user) => {
 };
 Cypress.Commands.add("signupUser", signupUser);
 
+// Fill fields and click signup button
 export const signinUser = (user) => {
-  // Fill fields and click signup button
   cy.get('input[name="email"]').click().type(user.email);
   cy.get('input[name="password"]').click().type(user.password);
   cy.get("button").contains("Sign in").click();
 };
 Cypress.Commands.add("signinUser", signinUser);
+Cypress.Commands.add("getTest", (s) => cy.get(`[data-test=${s}]`));
