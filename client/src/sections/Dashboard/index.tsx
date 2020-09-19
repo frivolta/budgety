@@ -2,6 +2,8 @@ import { Auth } from "aws-amplify";
 import React from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../lib/cognitoAuthentication/useAuth";
+import { GridPageLayout } from "../../lib/components/GridPageLayout";
+
 export const Dashboard = () => {
   const [isLoading, currentUser] = useAuth();
   const history = useHistory();
@@ -10,11 +12,11 @@ export const Dashboard = () => {
     history.push("/login");
   };
   return (
-    <p>
+    <GridPageLayout>
       {!isLoading && currentUser.authenticated
         ? "User is auth"
         : "User is not auth"}
       <button onClick={handleLogOut}>Log out</button>
-    </p>
+    </GridPageLayout>
   );
 };

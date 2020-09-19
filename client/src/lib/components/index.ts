@@ -4,4 +4,6 @@ export * from "./Card";
 export * from "./Input";
 export * from "./Button";
 export * from "./Label";
+export * from "./GridPageLayout";
+export * from "./Footer";
 export * from "./PrivateRoute";
