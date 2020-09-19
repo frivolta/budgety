@@ -23,7 +23,45 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+//Login by cognito API
+Cypress.Commands.add("loginByCognitoApi", (username, password) =>
+  cy
+    .task("loginByCognitoApi", {
+      username,
+      password,
+    })
+    .as("cognitoResponse")
+    .get("@cognitoResponse")
+    .then((cognitoResponse) => {
+      const keyPrefixWithUsername = `${cognitoResponse.keyPrefix}.${cognitoResponse.username}`;
+      window.localStorage.setItem(
+        `${keyPrefixWithUsername}.idToken`,
+        cognitoResponse.signInUserSession.idToken.jwtToken
+      );
+      window.localStorage.setItem(
+        `${keyPrefixWithUsername}.accessToken`,
+        cognitoResponse.signInUserSession.accessToken.jwtToken
+      );
+      window.localStorage.setItem(
+        `${keyPrefixWithUsername}.refreshToken`,
+        cognitoResponse.signInUserSession.refreshToken.token
+      );
+      window.localStorage.setItem(
+        `${keyPrefixWithUsername}.clockDrift`,
+        cognitoResponse.signInUserSession.clockDrift
+      );
+      window.localStorage.setItem(
+        `${cognitoResponse.keyPrefix}.LastAuthUser`,
+        cognitoResponse.username
+      );
+      window.localStorage.setItem(
+        "amplify-authenticator-authState",
+        "signedIn"
+      );
 
+      cy.visit("/");
+    })
+);
 // Fill fields and click signup button
 export const signupUser = (user) => {
   cy.get('input[name="email"]').click().type(user.email);

@@ -1,21 +1,32 @@
 /// <reference types="cypress" />
-// ***********************************************************
-// This example plugins/index.js can be used to load plugins
-//
-// You can change the location of this file or turn off loading
-// the plugins file with the 'pluginsFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/plugins-guide
-// ***********************************************************
+// cypress/plugins/index.js
 
-// This function is called when a project is opened or re-opened (e.g. due to
-// the project's config changing)
+const awsConfig = require("../../aws-exports").default;
+const AWS = require("aws-sdk");
+const Amplify = require("aws-amplify").default;
+const { default: Auth } = require("@aws-amplify/auth");
 
-/**
- * @type {Cypress.PluginConfig}
- */
+const {
+  aws_project_region,
+  aws_cognito_identity_pool_id,
+  aws_cognito_region,
+  aws_user_pools_id,
+  aws_user_pools_web_client_id,
+} = awsConfig;
+
+AWS.config.update({ region: aws_project_region });
+Amplify.configure(awsConfig);
+
+const loginCognitoUserByApi = async ({ username, password }) => {
+  global.fetch = require("node-fetch");
+
+  return await Auth.signIn({ username, password });
+};
+
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  on("task", {
+    loginCognitoUserByApi,
+  });
+
+  return config;
 };
