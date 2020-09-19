@@ -48,7 +48,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "cy:open": "yarn run cypress open"
+    "cy:open": "yarn run cypress open",
+    "cy:run": "yarn run cypress run"
   },
   "eslintConfig": {
     "extends": "react-app"
