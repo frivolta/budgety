@@ -8,7 +8,7 @@ import { SignupFormData } from "../../types";
 import { Label, Input, Button } from "../../../../lib/components";
 import { H1 } from "../../../../styles/typography";
 import { SignupCardSpan } from "../.././styled";
-import { User } from "../../../../types";
+//import { User } from "../../../../types";
 import { Link } from "react-router-dom";
 import { defaultTheme } from "../../../../styles";
 import { formatNetworkErrorMessages } from "../../../../lib/utils/format";
@@ -19,19 +19,19 @@ const initialFormValues: SignupFormData = {
   confirmPassword: "",
 };
 
-const defaultUser: User = {
+/* const defaultUser: User = {
   isActive: false,
   accountName: "No balance",
   startingBalance: 0.0,
   monthlyBudget: 0.0,
 };
-
+ */
 interface Props {
   handleFormSubmit: (email: string) => void;
 }
 
 export const SignUpForm: FC<Props> = ({ handleFormSubmit }) => {
-  const [userEmail, setUserEmail] = useState<string>("");
+  const [, setUserEmail] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
 

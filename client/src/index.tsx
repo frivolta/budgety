@@ -6,7 +6,6 @@ import Amplify from "aws-amplify";
 // Router
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 // Auth
-import { useAuth } from "./lib/cognitoAuthentication/useAuth";
 // Styles
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, defaultTheme } from "./styles";

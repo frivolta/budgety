@@ -7,7 +7,6 @@ import {
   Button,
   Label,
   Card,
-  Header,
 } from "../../lib/components";
 import { Auth } from "aws-amplify";
 import { LogInCardSpan, BrandLogo } from "./styled";
@@ -33,15 +32,15 @@ export const LogIn: FC = () => {
   const [error, setError] = useState<FirebaseError | undefined>(undefined);
   const history = useHistory();
 
+  const redirectToDashboardPage = React.useCallback(() => {
+    history.push("/dashboard");
+  }, [history]);
+
   React.useEffect(() => {
     if (!isUserLoading && currentUser.authenticated) {
       redirectToDashboardPage();
     }
-  }, [isUserLoading]);
-
-  const redirectToDashboardPage = () => {
-    history.push("/dashboard");
-  };
+  }, [isUserLoading, currentUser.authenticated, redirectToDashboardPage]);
 
   const formik = useFormik<LogInFormData>({
     initialValues: { ...initialFormValues },

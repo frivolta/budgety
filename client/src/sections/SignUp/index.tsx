@@ -18,6 +18,10 @@ export const SignUp: FC<Props> = ({ renderConfirmationView }) => {
   >(false);
   const history = useHistory();
 
+  const redirectToDashboardPage = React.useCallback(() => {
+    history.push("/dashboard");
+  }, [history]);
+
   React.useEffect(() => {
     if (renderConfirmationView) {
       setRenderConfirmationEmail(true);
@@ -25,14 +29,16 @@ export const SignUp: FC<Props> = ({ renderConfirmationView }) => {
     if (!isUserLoading && currentUser.authenticated) {
       redirectToDashboardPage();
     }
-  }, [renderConfirmationView, isUserLoading]);
+  }, [
+    renderConfirmationView,
+    isUserLoading,
+    currentUser.authenticated,
+    redirectToDashboardPage,
+  ]);
 
   const handleSignupFormSubmit = (email: string) => {
     setSignupEmail(email);
     setRenderConfirmationEmail(true);
-  };
-  const redirectToDashboardPage = () => {
-    history.push("/dashboard");
   };
 
   const formElement =
