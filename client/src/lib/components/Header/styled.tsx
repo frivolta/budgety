@@ -37,13 +37,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const HeaderMobileTitle = styled.div`
-  display: flex;
-  @media ${mediaQueries.tablet} {
-    display: none;
-  }
+  width: 100%;
 `;
 
 export const HeaderLogo = styled.img`
@@ -54,6 +48,7 @@ export const HeaderLogo = styled.img`
 `;
 
 export const HeaderMenu = styled.div`
+  width: 100%;
   margin-left: ${(props) => props.theme.space.xxl};
   a {
     color: ${(props) => props.theme.colors.primaryDarkColor};
