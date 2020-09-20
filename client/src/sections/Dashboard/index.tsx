@@ -13,7 +13,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <GridPageLayout user={currentUser}>
+    <GridPageLayout user={currentUser} sectionName="Dashboard">
       {!isLoading && currentUser.authenticated
         ? "User is auth"
         : "User is not auth"}

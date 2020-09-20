@@ -1,10 +1,11 @@
 import React from "react";
 import { UserAuth } from "../../../../../types";
+import { StyledHeaderUser } from "./styled";
 
 interface Props {
   user: UserAuth;
 }
 
 export const HeaderUser = ({ user }: Props) => {
-  return <p data-testid="HeaderUserEmail">{user.email}</p>;
+  return <StyledHeaderUser>{user.email}</StyledHeaderUser>;
 };

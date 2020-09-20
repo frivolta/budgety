@@ -15,6 +15,7 @@ export const mediaQueries = {
   tablet: `(min-width: ${deviceSizes.tablet})`,
   tabletMax: `(max-width: ${deviceSizes.tablet})`,
   laptop: `(min-width: ${deviceSizes.laptop})`,
+  laptopMax: `(max-width: ${deviceSizes.laptop})`,
   laptopL: `(min-width: ${deviceSizes.laptopL})`,
   desktop: `(min-width: ${deviceSizes.desktop})`,
   desktopL: `(min-width: ${deviceSizes.desktop})`,

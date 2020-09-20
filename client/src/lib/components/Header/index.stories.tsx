@@ -21,11 +21,11 @@ stories.addDecorator((story) => {
 
 stories.add("Not logged user", () => (
   <>
-    <Header isAuthorized={false} />
+    <Header isAuthorized={false} sectionName="Generic" />
   </>
 ));
 stories.add("Fixed top", () => (
   <>
-    <Header isAuthorized={false} fixedTop />
+    <Header isAuthorized={false} fixedTop sectionName="Generic" />
   </>
 ));

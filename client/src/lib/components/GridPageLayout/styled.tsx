@@ -9,6 +9,8 @@ export const GridContainer = styled.div`
   grid-template-rows: ${headerHeight}px 1fr 50px;
   grid-template-areas: "header" "main" "footer";
   height: 100vh;
+  overflow: hidden;
+  width: 100%;
   @media ${mediaQueries.tabletMax} {
     grid-template-areas: "header" "main" "footer";
     grid-template-columns: 1fr;
@@ -19,11 +21,6 @@ export const GridContainer = styled.div`
 
 export const GridHeader = styled(Header)`
   grid-area: header;
-  @media ${mediaQueries.tabletMax} {
-    position: fixed;
-    width: 100%;
-    height: ${headerHeight}px;
-  }
 `;
 
 export const GridMain = styled.div`
