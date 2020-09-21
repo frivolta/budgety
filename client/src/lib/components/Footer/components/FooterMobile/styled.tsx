@@ -17,11 +17,12 @@ export const SyledFooterIcon = styled.div`
   cursor: pointer;
   display: flex;
   color: ${(props) => props.theme.colors.primaryColor};
+  opacity: 1;
   a {
     opacity: 1;
-    color: ${(props) => props.theme.colors.primaryColor};
-    :hover {
-      color: ${(props) => props.theme.colors.primaryColor};
-    }
+  }
+  svg {
+    fill: ${(props) => props.theme.colors.primaryColor};
+    opacity: 1;
   }
 `;

@@ -19,22 +19,22 @@ export const FooterMobile = () => {
         </Link>
       </SyledFooterIcon>
       <SyledFooterIcon>
-        <Link to="/dashboard">
+        <Link to="/expense-list">
           <ExpensesList size={ICONS_SIZE} />
         </Link>
       </SyledFooterIcon>
       <SyledFooterIcon>
-        <Link to="/dashboard">
+        <Link to="/add-expense">
           <AddExpenseIcon size={ICONS_SIZE} />
         </Link>
       </SyledFooterIcon>
       <SyledFooterIcon>
-        <Link to="/dashboard">
+        <Link to="/categories">
           <CategoriesManagement size={ICONS_SIZE} />
         </Link>
       </SyledFooterIcon>
       <SyledFooterIcon>
-        <Link to="/dashboard">
+        <Link to="/budget">
           <BudgetManagement size={ICONS_SIZE} />
         </Link>
       </SyledFooterIcon>

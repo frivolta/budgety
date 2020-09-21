@@ -16,7 +16,6 @@ export const FooterWrapper = styled.div`
   a {
     color: ${(props) => props.theme.colors.primaryDarkColor};
     text-decoration: none;
-    opacity: 0.3;
     transition: opacity 0.3s;
     padding: 0 ${(props) => props.theme.space.m};
     :hover {
