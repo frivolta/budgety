@@ -2,7 +2,12 @@ import React, { FC } from "react";
 import ReactDOM from "react-dom";
 //AWS
 import awsconfig from "./aws-exports";
-import Amplify from "aws-amplify";
+import Amplify, { Auth } from "aws-amplify";
+import config from "./aws-exports";
+import AWSAppSyncClient from "aws-appsync";
+import { Rehydrated } from "aws-appsync-react";
+// Apollo
+import { ApolloProvider } from "react-apollo";
 // Router
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 // Auth
@@ -20,6 +25,17 @@ import { PrivateRoute } from "./lib/components";
 
 // Amplify config
 Amplify.configure(awsconfig);
+
+// Apollo config
+const client = new AWSAppSyncClient({
+  url: config.aws_appsync_graphqlEndpoint,
+  region: config.aws_appsync_region,
+  auth: {
+    type: "AMAZON_COGNITO_USER_POOLS",
+    jwtToken: async () =>
+      (await Auth.currentSession()).getAccessToken().getJwtToken(),
+  },
+});
 
 // Toaster configuration
 toast.configure({
@@ -46,11 +62,15 @@ export const App: FC = () => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={defaultTheme}>
-      <GlobalStyle />
-      <ToastContainer />
-      <App />
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <Rehydrated>
+        <ThemeProvider theme={defaultTheme}>
+          <GlobalStyle />
+          <ToastContainer />
+          <App />
+        </ThemeProvider>
+      </Rehydrated>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
