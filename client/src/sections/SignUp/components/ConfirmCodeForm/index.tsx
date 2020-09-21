@@ -1,4 +1,6 @@
 import React, { FC, useState } from "react";
+import { useMutation } from "@apollo/react-hooks";
+import { createAccountInformations } from "../../../../graphql/mutations";
 import { Label, Input, Button } from "../../../../lib/components";
 import { H1 } from "../../../../styles/typography";
 import { Link } from "react-router-dom";
@@ -8,6 +10,10 @@ import { Auth } from "aws-amplify";
 import { defaultTheme } from "../../../../styles";
 import { SIGNUP_ERRORS, SIGNUP_SUCCESS } from "../../../../lib/messages";
 import { toasterSuccess } from "../../../../lib/utils/toaster";
+import {
+  CreateAccountInformationsMutation,
+  CreateAccountInformationsMutationVariables,
+} from "../../../../API";
 
 interface Props {
   userEmail: string;
@@ -22,12 +28,45 @@ export const ConfirmCodeForm: FC<Props> = ({ userEmail }) => {
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [codeHasValidLength, setCodeHasValidLength] = useState<boolean>(false);
 
+  const [
+    amplifyCreateAccountInformations,
+    {
+      data: accountInformationsData,
+      loading: accountInformationsLoading,
+      error: accountInformationsError,
+    },
+  ] = useMutation<
+    CreateAccountInformationsMutation,
+    CreateAccountInformationsMutationVariables
+  >(createAccountInformations);
+
+  React.useEffect(() => {
+    console.log(
+      accountInformationsLoading,
+      accountInformationsData,
+      accountInformationsError
+    );
+  }, [
+    accountInformationsData,
+    accountInformationsLoading,
+    accountInformationsError,
+  ]);
+
   const confirmSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
     if (confirmationCodeValue && userEmail) {
       try {
         await Auth.confirmSignUp(userEmail, confirmationCodeValue);
+        await amplifyCreateAccountInformations({
+          variables: {
+            input: {
+              accountName: "No name",
+              startingBalance: "0.00",
+              monthlyBudget: "0.00",
+            },
+          },
+        });
         setIsLoading(false);
         toasterSuccess(SIGNUP_SUCCESS.confirmSucces);
       } catch (error) {
