@@ -24,7 +24,7 @@ export const FooterMobile = () => {
         </Link>
       </SyledFooterIcon>
       <SyledFooterIcon>
-        <Link to="/add-expense">
+        <Link to="/add-expense" data-testid="AddExpenseLink">
           <AddExpenseIcon size={ICONS_SIZE} />
         </Link>
       </SyledFooterIcon>
