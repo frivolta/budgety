@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { spaceUnit } from "../../../styles";
+import { mediaQueries, spaceUnit } from "../../../styles";
 
 export const FooterWrapper = styled.div`
   width: 100%;
@@ -32,4 +32,9 @@ export const FooterContainer = styled.div`
   align-items: center;
   padding: 0 ${spaceUnit}px;
   max-width: 100%;
+  @media ${mediaQueries.tabletMax} {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
 `;

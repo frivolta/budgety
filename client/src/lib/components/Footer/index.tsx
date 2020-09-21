@@ -1,13 +1,14 @@
 import React from "react";
-import { FooterDesktop } from "./components";
-import { FooterMobile } from "./components/FooterMobile";
+import { FooterDesktop, FooterMobile } from "./components";
 import { FooterContainer, FooterWrapper } from "./styled";
 
 export const Footer = () => {
   return (
     <FooterContainer>
-      <FooterDesktop />
-      <FooterMobile />
+      <FooterWrapper>
+        <FooterDesktop />
+        <FooterMobile />
+      </FooterWrapper>
     </FooterContainer>
   );
 };

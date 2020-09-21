@@ -1,6 +1,6 @@
 export const blue = {
   200: "#007AFF",
-  300: "#007AFF",
+  300: "#006ADE",
 };
 
 export const darkPurple = {
