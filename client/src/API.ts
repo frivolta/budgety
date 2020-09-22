@@ -2,20 +2,16 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTaskInput = {
+export type CreateBlogInput = {
   id?: string | null,
-  title: string,
-  description?: string | null,
-  status?: string | null,
+  name: string,
 };
 
-export type ModelTaskConditionInput = {
-  title?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  status?: ModelStringInput | null,
-  and?: Array< ModelTaskConditionInput | null > | null,
-  or?: Array< ModelTaskConditionInput | null > | null,
-  not?: ModelTaskConditionInput | null,
+export type ModelBlogConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelBlogConditionInput | null > | null,
+  or?: Array< ModelBlogConditionInput | null > | null,
+  not?: ModelBlogConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -58,73 +54,27 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type UpdateTaskInput = {
+export type UpdateBlogInput = {
   id: string,
-  title?: string | null,
-  description?: string | null,
-  status?: string | null,
+  name?: string | null,
 };
 
-export type DeleteTaskInput = {
+export type DeleteBlogInput = {
   id?: string | null,
 };
 
-export type CreatePrivateNoteInput = {
+export type CreatePostInput = {
   id?: string | null,
-  content: string,
+  title: string,
+  blogID: string,
 };
 
-export type ModelPrivateNoteConditionInput = {
-  content?: ModelStringInput | null,
-  and?: Array< ModelPrivateNoteConditionInput | null > | null,
-  or?: Array< ModelPrivateNoteConditionInput | null > | null,
-  not?: ModelPrivateNoteConditionInput | null,
-};
-
-export type UpdatePrivateNoteInput = {
-  id: string,
-  content?: string | null,
-};
-
-export type DeletePrivateNoteInput = {
-  id?: string | null,
-};
-
-export type CreateAccountInformationsInput = {
-  id?: string | null,
-  accountName: string,
-  startingBalance: string,
-  monthlyBudget: string,
-};
-
-export type ModelAccountInformationsConditionInput = {
-  accountName?: ModelStringInput | null,
-  startingBalance?: ModelStringInput | null,
-  monthlyBudget?: ModelStringInput | null,
-  and?: Array< ModelAccountInformationsConditionInput | null > | null,
-  or?: Array< ModelAccountInformationsConditionInput | null > | null,
-  not?: ModelAccountInformationsConditionInput | null,
-};
-
-export type UpdateAccountInformationsInput = {
-  id: string,
-  accountName?: string | null,
-  startingBalance?: string | null,
-  monthlyBudget?: string | null,
-};
-
-export type DeleteAccountInformationsInput = {
-  id?: string | null,
-};
-
-export type ModelTaskFilterInput = {
-  id?: ModelIDInput | null,
+export type ModelPostConditionInput = {
   title?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  status?: ModelStringInput | null,
-  and?: Array< ModelTaskFilterInput | null > | null,
-  or?: Array< ModelTaskFilterInput | null > | null,
-  not?: ModelTaskFilterInput | null,
+  blogID?: ModelIDInput | null,
+  and?: Array< ModelPostConditionInput | null > | null,
+  or?: Array< ModelPostConditionInput | null > | null,
+  not?: ModelPostConditionInput | null,
 };
 
 export type ModelIDInput = {
@@ -143,208 +93,412 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelPrivateNoteFilterInput = {
-  id?: ModelIDInput | null,
+export type UpdatePostInput = {
+  id: string,
+  title?: string | null,
+  blogID?: string | null,
+};
+
+export type DeletePostInput = {
+  id?: string | null,
+};
+
+export type CreateCommentInput = {
+  id?: string | null,
+  postID: string,
+  content: string,
+};
+
+export type ModelCommentConditionInput = {
+  postID?: ModelIDInput | null,
   content?: ModelStringInput | null,
-  and?: Array< ModelPrivateNoteFilterInput | null > | null,
-  or?: Array< ModelPrivateNoteFilterInput | null > | null,
-  not?: ModelPrivateNoteFilterInput | null,
+  and?: Array< ModelCommentConditionInput | null > | null,
+  or?: Array< ModelCommentConditionInput | null > | null,
+  not?: ModelCommentConditionInput | null,
 };
 
-export type ModelAccountInformationsFilterInput = {
+export type UpdateCommentInput = {
+  id: string,
+  postID?: string | null,
+  content?: string | null,
+};
+
+export type DeleteCommentInput = {
+  id?: string | null,
+};
+
+export type ModelBlogFilterInput = {
   id?: ModelIDInput | null,
-  accountName?: ModelStringInput | null,
-  startingBalance?: ModelStringInput | null,
-  monthlyBudget?: ModelStringInput | null,
-  and?: Array< ModelAccountInformationsFilterInput | null > | null,
-  or?: Array< ModelAccountInformationsFilterInput | null > | null,
-  not?: ModelAccountInformationsFilterInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelBlogFilterInput | null > | null,
+  or?: Array< ModelBlogFilterInput | null > | null,
+  not?: ModelBlogFilterInput | null,
 };
 
-export type CreateTaskMutationVariables = {
-  input: CreateTaskInput,
-  condition?: ModelTaskConditionInput | null,
+export type ModelPostFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  blogID?: ModelIDInput | null,
+  and?: Array< ModelPostFilterInput | null > | null,
+  or?: Array< ModelPostFilterInput | null > | null,
+  not?: ModelPostFilterInput | null,
 };
 
-export type CreateTaskMutation = {
-  createTask:  {
-    __typename: "Task",
+export type ModelCommentFilterInput = {
+  id?: ModelIDInput | null,
+  postID?: ModelIDInput | null,
+  content?: ModelStringInput | null,
+  and?: Array< ModelCommentFilterInput | null > | null,
+  or?: Array< ModelCommentFilterInput | null > | null,
+  not?: ModelCommentFilterInput | null,
+};
+
+export type CreateBlogMutationVariables = {
+  input: CreateBlogInput,
+  condition?: ModelBlogConditionInput | null,
+};
+
+export type CreateBlogMutation = {
+  createBlog:  {
+    __typename: "Blog",
     id: string,
-    title: string,
-    description: string | null,
-    status: string | null,
+    name: string,
+    posts:  {
+      __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdateTaskMutationVariables = {
-  input: UpdateTaskInput,
-  condition?: ModelTaskConditionInput | null,
+export type UpdateBlogMutationVariables = {
+  input: UpdateBlogInput,
+  condition?: ModelBlogConditionInput | null,
 };
 
-export type UpdateTaskMutation = {
-  updateTask:  {
-    __typename: "Task",
+export type UpdateBlogMutation = {
+  updateBlog:  {
+    __typename: "Blog",
     id: string,
-    title: string,
-    description: string | null,
-    status: string | null,
+    name: string,
+    posts:  {
+      __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeleteTaskMutationVariables = {
-  input: DeleteTaskInput,
-  condition?: ModelTaskConditionInput | null,
+export type DeleteBlogMutationVariables = {
+  input: DeleteBlogInput,
+  condition?: ModelBlogConditionInput | null,
 };
 
-export type DeleteTaskMutation = {
-  deleteTask:  {
-    __typename: "Task",
+export type DeleteBlogMutation = {
+  deleteBlog:  {
+    __typename: "Blog",
     id: string,
-    title: string,
-    description: string | null,
-    status: string | null,
+    name: string,
+    posts:  {
+      __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type CreatePrivateNoteMutationVariables = {
-  input: CreatePrivateNoteInput,
-  condition?: ModelPrivateNoteConditionInput | null,
+export type CreatePostMutationVariables = {
+  input: CreatePostInput,
+  condition?: ModelPostConditionInput | null,
 };
 
-export type CreatePrivateNoteMutation = {
-  createPrivateNote:  {
-    __typename: "PrivateNote",
+export type CreatePostMutation = {
+  createPost:  {
+    __typename: "Post",
     id: string,
+    title: string,
+    blogID: string,
+    blog:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      posts:  {
+        __typename: "ModelPostConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments:  {
+      __typename: "ModelCommentConnection",
+      items:  Array< {
+        __typename: "Comment",
+        id: string,
+        postID: string,
+        content: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdatePostMutationVariables = {
+  input: UpdatePostInput,
+  condition?: ModelPostConditionInput | null,
+};
+
+export type UpdatePostMutation = {
+  updatePost:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    blogID: string,
+    blog:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      posts:  {
+        __typename: "ModelPostConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments:  {
+      __typename: "ModelCommentConnection",
+      items:  Array< {
+        __typename: "Comment",
+        id: string,
+        postID: string,
+        content: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeletePostMutationVariables = {
+  input: DeletePostInput,
+  condition?: ModelPostConditionInput | null,
+};
+
+export type DeletePostMutation = {
+  deletePost:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    blogID: string,
+    blog:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      posts:  {
+        __typename: "ModelPostConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments:  {
+      __typename: "ModelCommentConnection",
+      items:  Array< {
+        __typename: "Comment",
+        id: string,
+        postID: string,
+        content: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateCommentMutationVariables = {
+  input: CreateCommentInput,
+  condition?: ModelCommentConditionInput | null,
+};
+
+export type CreateCommentMutation = {
+  createComment:  {
+    __typename: "Comment",
+    id: string,
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      blogID: string,
+      blog:  {
+        __typename: "Blog",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      comments:  {
+        __typename: "ModelCommentConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
-    owner: string | null,
   } | null,
 };
 
-export type UpdatePrivateNoteMutationVariables = {
-  input: UpdatePrivateNoteInput,
-  condition?: ModelPrivateNoteConditionInput | null,
+export type UpdateCommentMutationVariables = {
+  input: UpdateCommentInput,
+  condition?: ModelCommentConditionInput | null,
 };
 
-export type UpdatePrivateNoteMutation = {
-  updatePrivateNote:  {
-    __typename: "PrivateNote",
+export type UpdateCommentMutation = {
+  updateComment:  {
+    __typename: "Comment",
     id: string,
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      blogID: string,
+      blog:  {
+        __typename: "Blog",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      comments:  {
+        __typename: "ModelCommentConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
-    owner: string | null,
   } | null,
 };
 
-export type DeletePrivateNoteMutationVariables = {
-  input: DeletePrivateNoteInput,
-  condition?: ModelPrivateNoteConditionInput | null,
+export type DeleteCommentMutationVariables = {
+  input: DeleteCommentInput,
+  condition?: ModelCommentConditionInput | null,
 };
 
-export type DeletePrivateNoteMutation = {
-  deletePrivateNote:  {
-    __typename: "PrivateNote",
+export type DeleteCommentMutation = {
+  deleteComment:  {
+    __typename: "Comment",
     id: string,
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      blogID: string,
+      blog:  {
+        __typename: "Blog",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      comments:  {
+        __typename: "ModelCommentConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
-    owner: string | null,
   } | null,
 };
 
-export type CreateAccountInformationsMutationVariables = {
-  input: CreateAccountInformationsInput,
-  condition?: ModelAccountInformationsConditionInput | null,
-};
-
-export type CreateAccountInformationsMutation = {
-  createAccountInformations:  {
-    __typename: "AccountInformations",
-    id: string,
-    accountName: string,
-    startingBalance: string,
-    monthlyBudget: string,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type UpdateAccountInformationsMutationVariables = {
-  input: UpdateAccountInformationsInput,
-  condition?: ModelAccountInformationsConditionInput | null,
-};
-
-export type UpdateAccountInformationsMutation = {
-  updateAccountInformations:  {
-    __typename: "AccountInformations",
-    id: string,
-    accountName: string,
-    startingBalance: string,
-    monthlyBudget: string,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type DeleteAccountInformationsMutationVariables = {
-  input: DeleteAccountInformationsInput,
-  condition?: ModelAccountInformationsConditionInput | null,
-};
-
-export type DeleteAccountInformationsMutation = {
-  deleteAccountInformations:  {
-    __typename: "AccountInformations",
-    id: string,
-    accountName: string,
-    startingBalance: string,
-    monthlyBudget: string,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type GetTaskQueryVariables = {
+export type GetBlogQueryVariables = {
   id: string,
 };
 
-export type GetTaskQuery = {
-  getTask:  {
-    __typename: "Task",
+export type GetBlogQuery = {
+  getBlog:  {
+    __typename: "Blog",
     id: string,
-    title: string,
-    description: string | null,
-    status: string | null,
+    name: string,
+    posts:  {
+      __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListTasksQueryVariables = {
-  filter?: ModelTaskFilterInput | null,
+export type ListBlogsQueryVariables = {
+  filter?: ModelBlogFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTasksQuery = {
-  listTasks:  {
-    __typename: "ModelTaskConnection",
+export type ListBlogsQuery = {
+  listBlogs:  {
+    __typename: "ModelBlogConnection",
     items:  Array< {
-      __typename: "Task",
+      __typename: "Blog",
       id: string,
-      title: string,
-      description: string | null,
-      status: string | null,
+      name: string,
+      posts:  {
+        __typename: "ModelPostConnection",
+        nextToken: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -352,210 +506,393 @@ export type ListTasksQuery = {
   } | null,
 };
 
-export type GetPrivateNoteQueryVariables = {
+export type GetPostQueryVariables = {
   id: string,
 };
 
-export type GetPrivateNoteQuery = {
-  getPrivateNote:  {
-    __typename: "PrivateNote",
+export type GetPostQuery = {
+  getPost:  {
+    __typename: "Post",
     id: string,
-    content: string,
+    title: string,
+    blogID: string,
+    blog:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      posts:  {
+        __typename: "ModelPostConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments:  {
+      __typename: "ModelCommentConnection",
+      items:  Array< {
+        __typename: "Comment",
+        id: string,
+        postID: string,
+        content: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    owner: string | null,
   } | null,
 };
 
-export type ListPrivateNotesQueryVariables = {
-  filter?: ModelPrivateNoteFilterInput | null,
+export type ListPostsQueryVariables = {
+  filter?: ModelPostFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListPrivateNotesQuery = {
-  listPrivateNotes:  {
-    __typename: "ModelPrivateNoteConnection",
+export type ListPostsQuery = {
+  listPosts:  {
+    __typename: "ModelPostConnection",
     items:  Array< {
-      __typename: "PrivateNote",
+      __typename: "Post",
       id: string,
+      title: string,
+      blogID: string,
+      blog:  {
+        __typename: "Blog",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      comments:  {
+        __typename: "ModelCommentConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
+export type GetCommentQueryVariables = {
+  id: string,
+};
+
+export type GetCommentQuery = {
+  getComment:  {
+    __typename: "Comment",
+    id: string,
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      blogID: string,
+      blog:  {
+        __typename: "Blog",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      comments:  {
+        __typename: "ModelCommentConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    content: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListCommentsQueryVariables = {
+  filter?: ModelCommentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCommentsQuery = {
+  listComments:  {
+    __typename: "ModelCommentConnection",
+    items:  Array< {
+      __typename: "Comment",
+      id: string,
+      postID: string,
+      post:  {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       content: string,
       createdAt: string,
       updatedAt: string,
-      owner: string | null,
     } | null > | null,
     nextToken: string | null,
   } | null,
 };
 
-export type GetAccountInformationsQueryVariables = {
-  id: string,
-};
-
-export type GetAccountInformationsQuery = {
-  getAccountInformations:  {
-    __typename: "AccountInformations",
+export type OnCreateBlogSubscription = {
+  onCreateBlog:  {
+    __typename: "Blog",
     id: string,
-    accountName: string,
-    startingBalance: string,
-    monthlyBudget: string,
+    name: string,
+    posts:  {
+      __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    owner: string | null,
   } | null,
 };
 
-export type ListAccountInformationssQueryVariables = {
-  filter?: ModelAccountInformationsFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+export type OnUpdateBlogSubscription = {
+  onUpdateBlog:  {
+    __typename: "Blog",
+    id: string,
+    name: string,
+    posts:  {
+      __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
-export type ListAccountInformationssQuery = {
-  listAccountInformationss:  {
-    __typename: "ModelAccountInformationsConnection",
-    items:  Array< {
-      __typename: "AccountInformations",
+export type OnDeleteBlogSubscription = {
+  onDeleteBlog:  {
+    __typename: "Blog",
+    id: string,
+    name: string,
+    posts:  {
+      __typename: "ModelPostConnection",
+      items:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreatePostSubscription = {
+  onCreatePost:  {
+    __typename: "Post",
+    id: string,
+    title: string,
+    blogID: string,
+    blog:  {
+      __typename: "Blog",
       id: string,
-      accountName: string,
-      startingBalance: string,
-      monthlyBudget: string,
+      name: string,
+      posts:  {
+        __typename: "ModelPostConnection",
+        nextToken: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
-      owner: string | null,
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
-};
-
-export type OnCreateTaskSubscription = {
-  onCreateTask:  {
-    __typename: "Task",
-    id: string,
-    title: string,
-    description: string | null,
-    status: string | null,
+    } | null,
+    comments:  {
+      __typename: "ModelCommentConnection",
+      items:  Array< {
+        __typename: "Comment",
+        id: string,
+        postID: string,
+        content: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateTaskSubscription = {
-  onUpdateTask:  {
-    __typename: "Task",
+export type OnUpdatePostSubscription = {
+  onUpdatePost:  {
+    __typename: "Post",
     id: string,
     title: string,
-    description: string | null,
-    status: string | null,
+    blogID: string,
+    blog:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      posts:  {
+        __typename: "ModelPostConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments:  {
+      __typename: "ModelCommentConnection",
+      items:  Array< {
+        __typename: "Comment",
+        id: string,
+        postID: string,
+        content: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteTaskSubscription = {
-  onDeleteTask:  {
-    __typename: "Task",
+export type OnDeletePostSubscription = {
+  onDeletePost:  {
+    __typename: "Post",
     id: string,
     title: string,
-    description: string | null,
-    status: string | null,
+    blogID: string,
+    blog:  {
+      __typename: "Blog",
+      id: string,
+      name: string,
+      posts:  {
+        __typename: "ModelPostConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    comments:  {
+      __typename: "ModelCommentConnection",
+      items:  Array< {
+        __typename: "Comment",
+        id: string,
+        postID: string,
+        content: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnCreatePrivateNoteSubscriptionVariables = {
-  owner: string,
-};
-
-export type OnCreatePrivateNoteSubscription = {
-  onCreatePrivateNote:  {
-    __typename: "PrivateNote",
+export type OnCreateCommentSubscription = {
+  onCreateComment:  {
+    __typename: "Comment",
     id: string,
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      blogID: string,
+      blog:  {
+        __typename: "Blog",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      comments:  {
+        __typename: "ModelCommentConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
-    owner: string | null,
   } | null,
 };
 
-export type OnUpdatePrivateNoteSubscriptionVariables = {
-  owner: string,
-};
-
-export type OnUpdatePrivateNoteSubscription = {
-  onUpdatePrivateNote:  {
-    __typename: "PrivateNote",
+export type OnUpdateCommentSubscription = {
+  onUpdateComment:  {
+    __typename: "Comment",
     id: string,
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      blogID: string,
+      blog:  {
+        __typename: "Blog",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      comments:  {
+        __typename: "ModelCommentConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
-    owner: string | null,
   } | null,
 };
 
-export type OnDeletePrivateNoteSubscriptionVariables = {
-  owner: string,
-};
-
-export type OnDeletePrivateNoteSubscription = {
-  onDeletePrivateNote:  {
-    __typename: "PrivateNote",
+export type OnDeleteCommentSubscription = {
+  onDeleteComment:  {
+    __typename: "Comment",
     id: string,
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      title: string,
+      blogID: string,
+      blog:  {
+        __typename: "Blog",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      comments:  {
+        __typename: "ModelCommentConnection",
+        nextToken: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type OnCreateAccountInformationsSubscriptionVariables = {
-  owner: string,
-};
-
-export type OnCreateAccountInformationsSubscription = {
-  onCreateAccountInformations:  {
-    __typename: "AccountInformations",
-    id: string,
-    accountName: string,
-    startingBalance: string,
-    monthlyBudget: string,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type OnUpdateAccountInformationsSubscriptionVariables = {
-  owner: string,
-};
-
-export type OnUpdateAccountInformationsSubscription = {
-  onUpdateAccountInformations:  {
-    __typename: "AccountInformations",
-    id: string,
-    accountName: string,
-    startingBalance: string,
-    monthlyBudget: string,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
-  } | null,
-};
-
-export type OnDeleteAccountInformationsSubscriptionVariables = {
-  owner: string,
-};
-
-export type OnDeleteAccountInformationsSubscription = {
-  onDeleteAccountInformations:  {
-    __typename: "AccountInformations",
-    id: string,
-    accountName: string,
-    startingBalance: string,
-    monthlyBudget: string,
-    createdAt: string,
-    updatedAt: string,
-    owner: string | null,
   } | null,
 };
