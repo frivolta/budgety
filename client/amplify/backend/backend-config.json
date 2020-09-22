@@ -14,21 +14,5 @@
       "type": "manual"
     }
   },
-  "api": {
-    "budgetyapi": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authbudgety6de1865c"
-            }
-          },
-          "additionalAuthenticationProviders": []
-        }
-      }
-    }
-  }
+  "api": {}
 }
