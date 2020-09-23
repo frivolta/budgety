@@ -12,9 +12,8 @@ import { Auth } from "aws-amplify";
 import { LogInCardSpan, BrandLogo } from "./styled";
 import { H1 } from "../../styles/typography";
 import { formatNetworkErrorMessages } from "../../lib/utils/format";
-import { LogInFormData } from "./types";
+import { Error, LogInFormData } from "./types";
 import { Link, useHistory } from "react-router-dom";
-import { FirebaseError } from "firebase";
 import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
 import { LOGIN_SUCCESS, LOGIN_ERRORS } from "../../lib/messages/index";
 import { red } from "../../styles";
@@ -29,7 +28,7 @@ const initialFormValues: LogInFormData = {
 export const LogIn: FC = () => {
   const [isUserLoading, currentUser] = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<FirebaseError | undefined>(undefined);
+  const [error, setError] = useState<Error | undefined>(undefined);
   const history = useHistory();
 
   const redirectToDashboardPage = React.useCallback(() => {
