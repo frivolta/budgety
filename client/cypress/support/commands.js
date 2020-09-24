@@ -23,43 +23,26 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-//Login by cognito API
-Cypress.Commands.add("loginByCognitoApi", (username, password) =>
-  cy
-    .task("loginCognitoUserByApi", {
-      username,
-      password,
-    })
-    .as("cognitoResponse")
-    .get("@cognitoResponse")
-    .then((cognitoResponse) => {
-      const keyPrefixWithUsername = `${cognitoResponse.keyPrefix}.${cognitoResponse.username}`;
-      window.localStorage.setItem(
-        `${keyPrefixWithUsername}.idToken`,
-        cognitoResponse.signInUserSession.idToken.jwtToken
-      );
-      window.localStorage.setItem(
-        `${keyPrefixWithUsername}.accessToken`,
-        cognitoResponse.signInUserSession.accessToken.jwtToken
-      );
-      window.localStorage.setItem(
-        `${keyPrefixWithUsername}.refreshToken`,
-        cognitoResponse.signInUserSession.refreshToken.token
-      );
-      window.localStorage.setItem(
-        `${keyPrefixWithUsername}.clockDrift`,
-        cognitoResponse.signInUserSession.clockDrift
-      );
-      window.localStorage.setItem(
-        `${cognitoResponse.keyPrefix}.LastAuthUser`,
-        cognitoResponse.username
-      );
-      window.localStorage.setItem(
-        "amplify-authenticator-authState",
-        "signedIn"
-      );
-    })
-);
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
+import "firebase/firestore";
+import { attachCustomCommands } from "cypress-firebase";
+
+const fbConfig = {
+  apiKey: "AIzaSyDQZs2_OC0Q7kem5Uy27RS3iX9I6ezAjfs",
+  authDomain: "budgety-v5.firebaseapp.com",
+  databaseURL: "https://budgety-v5.firebaseio.com",
+  projectId: "budgety-v5",
+  storageBucket: "budgety-v5.appspot.com",
+  messagingSenderId: "1004978960871",
+  appId: "1:1004978960871:web:8b4f236934513bc0da6542",
+  measurementId: "G-L2WW7LNYZN",
+};
+
+firebase.initializeApp(fbConfig);
+
+attachCustomCommands({ Cypress, cy, firebase });
 // Fill fields and click signup button
 export const signupUser = (user) => {
   cy.get('input[name="email"]').click().type(user.email);

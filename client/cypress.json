@@ -1,6 +1,6 @@
 {
   "env": {
-    "TEST_USER": "rivoltafilippo@gmail.com",
-    "TEST_PASSWORD": "Lampone01!"
+    "TEST_UID": "03hJSZG2B5aYBKNILm1NioLAQ8G2",
+    "FIREBASE_PROJECT_ID": "budgety-v5"
   }
 }

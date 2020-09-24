@@ -22,45 +22,4 @@ describe("Signin requests", function () {
       },
     }).contains("Sign in");
   });
-
-  it("rejects user login if user email does not exists", () => {
-    // Stub rejection server
-    cy.server();
-    cy.route({
-      url: "https://cognito-idp.eu-west-2.amazonaws.com/",
-      method: "POST",
-      status: 400,
-      response: {
-        __type: "UserNotFoundException",
-        message: "User does not exist.",
-      },
-      delay: 200,
-    }).as("signin-reject");
-
-    cy.signinUser({ email: "testuser@email.com", password: "TestPassword01!" });
-
-    // Wait for server response
-    cy.wait("@signin-reject").then((xhr) => {
-      expect(xhr.status).to.equal(400);
-      cy.get(".Toastify__toast")
-        .contains("Oops, something went wrong...")
-        .should("be.visible");
-    });
-  });
-  it("signs in user with correct credentials", () => {
-    cy.signinUser({
-      email: Cypress.env("TEST_USER"),
-      password: Cypress.env("TEST_PASSWORD"),
-    });
-    cy.location("pathname").should("include", "/dashboard");
-  });
-});
-describe("Cognito Authentication by API", () => {
-  beforeEach(() => {
-    cy.loginByCognitoApi("rivoltafilippo@gmail.com", `Lampone01!`);
-  });
-
-  it("display the home page after logged in", () => {
-    cy.visit(`${NETWORK.LOCAL}/dashboard`).contains("User");
-  });
 });
