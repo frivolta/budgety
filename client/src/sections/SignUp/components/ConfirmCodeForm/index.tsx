@@ -4,7 +4,6 @@ import { H1 } from "../../../../styles/typography";
 import { Link } from "react-router-dom";
 import { formatNetworkErrorMessages } from "../../../../lib/utils/format";
 import { ConfirmCodeFormSpan } from "./styled";
-import { Auth } from "aws-amplify";
 import { defaultTheme } from "../../../../styles";
 import { SIGNUP_ERRORS, SIGNUP_SUCCESS } from "../../../../lib/messages";
 import { toasterSuccess } from "../../../../lib/utils/toaster";
@@ -27,7 +26,7 @@ export const ConfirmCodeForm: FC<Props> = ({ userEmail }) => {
     setIsLoading(true);
     if (confirmationCodeValue && userEmail) {
       try {
-        await Auth.confirmSignUp(userEmail, confirmationCodeValue);
+        //await Auth.confirmSignUp(userEmail, confirmationCodeValue);
         setIsLoading(false);
         toasterSuccess(SIGNUP_SUCCESS.confirmSucces);
       } catch (error) {

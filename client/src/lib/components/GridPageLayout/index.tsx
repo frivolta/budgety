@@ -1,21 +1,17 @@
 import React from "react";
-import { UserAuth } from "../../../types";
 import { GridContainer, GridHeader, GridMain, GridFooter } from "./styled";
+import { User } from "firebase";
 
 interface Props {
   children: React.ReactNode;
-  user: UserAuth;
+  user: User;
   sectionName: string;
 }
 
 export const GridPageLayout = ({ children, user, sectionName }: Props) => {
   return (
     <GridContainer>
-      <GridHeader
-        isAuthorized={user.authenticated}
-        user={user}
-        sectionName={sectionName}
-      />
+      <GridHeader isAuthorized={!!user} user={user} sectionName={sectionName} />
       <GridMain>{children}</GridMain>
       <GridFooter />
     </GridContainer>

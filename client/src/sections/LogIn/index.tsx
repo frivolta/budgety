@@ -8,17 +8,18 @@ import {
   Label,
   Card,
 } from "../../lib/components";
-import { Auth } from "aws-amplify";
 import { LogInCardSpan, BrandLogo } from "./styled";
 import { H1 } from "../../styles/typography";
 import { formatNetworkErrorMessages } from "../../lib/utils/format";
-import { Error, LogInFormData } from "./types";
+import { LogInFormData } from "./types";
+import { FirebaseError } from "firebase";
 import { Link, useHistory } from "react-router-dom";
 import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
 import { LOGIN_SUCCESS, LOGIN_ERRORS } from "../../lib/messages/index";
 import { red } from "../../styles";
 import brandLogo from "./assets/images/brand.svg";
-import { useAuth } from "../../lib/cognitoAuthentication/useAuth";
+import useAuthContext from "../../lib/auth/useAuthContext";
+import { auth } from "../../lib/api/firebase";
 
 const initialFormValues: LogInFormData = {
   email: "",
@@ -26,20 +27,10 @@ const initialFormValues: LogInFormData = {
 };
 
 export const LogIn: FC = () => {
-  const [isUserLoading, currentUser] = useAuth();
+  const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error | undefined>(undefined);
+  const [error, setError] = useState<FirebaseError | undefined>(undefined);
   const history = useHistory();
-
-  const redirectToDashboardPage = React.useCallback(() => {
-    history.push("/dashboard");
-  }, [history]);
-
-  React.useEffect(() => {
-    if (!isUserLoading && currentUser.authenticated) {
-      redirectToDashboardPage();
-    }
-  }, [isUserLoading, currentUser.authenticated, redirectToDashboardPage]);
 
   const formik = useFormik<LogInFormData>({
     initialValues: { ...initialFormValues },
@@ -47,7 +38,7 @@ export const LogIn: FC = () => {
     onSubmit: async ({ email, password }) => {
       setIsLoading(true);
       try {
-        await Auth.signIn(email, password);
+        await auth.signInWithEmailAndPassword(email, password);
         setError(undefined);
         setIsLoading(false);
         formik.resetForm();
@@ -61,6 +52,14 @@ export const LogIn: FC = () => {
       }
     },
   });
+
+  const redirectToDashboardPage = React.useCallback(() => {
+    history.push("/dashboard");
+  }, [history]);
+
+  if (currentUser?.uid && !isLoadingCurrentUser) {
+    redirectToDashboardPage();
+  }
 
   const errorElement =
     error && error.message ? (

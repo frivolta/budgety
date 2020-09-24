@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { Redirect, RouteProps } from "react-router-dom";
-import { useAuth } from "../../cognitoAuthentication/useAuth";
+import useAuthContext from "../../auth/useAuthContext";
 import { LoadingScreen } from "../LoadingScreen";
 
 interface Props extends RouteProps {
@@ -9,7 +9,8 @@ interface Props extends RouteProps {
 }
 
 export const PrivateRoute = ({ component: Component, ...rest }: Props) => {
-  const [isLoading, currentUser] = useAuth();
+  const [currentUser, isLoading] = useAuthContext();
+  const isAuthorized = currentUser?.uid ? true : false;
 
   if (isLoading) {
     return <LoadingScreen loadingText="Loading user details..." />;
@@ -19,11 +20,7 @@ export const PrivateRoute = ({ component: Component, ...rest }: Props) => {
     <Route
       {...rest}
       render={(props) =>
-        currentUser.authenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
+        isAuthorized ? <Component {...props} /> : <Redirect to="/login" />
       }
     />
   );

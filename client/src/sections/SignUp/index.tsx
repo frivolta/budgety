@@ -3,43 +3,40 @@ import { BrandLogo } from "./styled";
 import { Card, FullPageLayout } from "../../lib/components";
 import { SignUpForm, ConfirmCodeForm } from "./components";
 import brandLogo from "./assets/images/brand.svg";
-import { useAuth } from "../../lib/cognitoAuthentication/useAuth";
 import { useHistory } from "react-router-dom";
+import useAuthContext from "../../lib/auth/useAuthContext";
 
 interface Props {
   renderConfirmationView?: boolean;
 }
 
 export const SignUp: FC<Props> = ({ renderConfirmationView }) => {
-  const [isUserLoading, currentUser] = useAuth();
+  const [currentUser, isLoadingCurrentUser] = useAuthContext();
+
   const [signupEmail, setSignupEmail] = useState<string | undefined>(undefined);
   const [renderConfirmationEmail, setRenderConfirmationEmail] = useState<
     boolean
   >(false);
   const history = useHistory();
 
-  const redirectToDashboardPage = React.useCallback(() => {
-    history.push("/dashboard");
-  }, [history]);
-
   React.useEffect(() => {
     if (renderConfirmationView) {
       setRenderConfirmationEmail(true);
     }
-    if (!isUserLoading && currentUser.authenticated) {
-      redirectToDashboardPage();
-    }
-  }, [
-    renderConfirmationView,
-    isUserLoading,
-    currentUser.authenticated,
-    redirectToDashboardPage,
-  ]);
+  }, [renderConfirmationView]);
 
   const handleSignupFormSubmit = (email: string) => {
     setSignupEmail(email);
     setRenderConfirmationEmail(true);
   };
+
+  const redirectToDashboardPage = () => {
+    history.push("/dashboard");
+  };
+
+  if (currentUser?.uid && !isLoadingCurrentUser) {
+    redirectToDashboardPage();
+  }
 
   const formElement =
     signupEmail && renderConfirmationEmail ? (

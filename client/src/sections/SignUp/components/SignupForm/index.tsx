@@ -1,5 +1,4 @@
 import React, { FC, useState } from "react";
-import { Auth } from "aws-amplify";
 import { useFormik } from "formik";
 import { toasterSuccess, toasterError } from "../../../../lib/utils/toaster";
 import { SIGNUP_SUCCESS, SIGNUP_ERRORS } from "../../../../lib/messages/index";
@@ -12,6 +11,7 @@ import { SignupCardSpan } from "../.././styled";
 import { Link } from "react-router-dom";
 import { defaultTheme } from "../../../../styles";
 import { formatNetworkErrorMessages } from "../../../../lib/utils/format";
+import { auth } from "../../../../lib/api/firebase";
 
 const initialFormValues: SignupFormData = {
   email: "",
@@ -42,13 +42,7 @@ export const SignUpForm: FC<Props> = ({ handleFormSubmit }) => {
       setIsLoading(true);
       setError(undefined);
       try {
-        await Auth.signUp({
-          username: email,
-          password,
-          attributes: {
-            email,
-          },
-        });
+        await auth.createUserWithEmailAndPassword(email, password);
         setUserEmail(email);
         setIsLoading(false);
         toasterSuccess(SIGNUP_SUCCESS.success);

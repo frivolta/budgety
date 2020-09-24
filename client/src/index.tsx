@@ -1,8 +1,5 @@
 import React, { FC } from "react";
 import ReactDOM from "react-dom";
-//AWS
-import awsconfig from "./aws-exports";
-import Amplify from "aws-amplify";
 // Router
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 // Styles
@@ -16,9 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 // Sections & components
 import { Dashboard, SignUp, LogIn } from "./sections";
 import { PrivateRoute } from "./lib/components";
-
-// Amplify config
-Amplify.configure(awsconfig);
+import { AuthProvider } from "./lib/auth/useAuthContext";
+//import useAuthContext from "./lib/auth/useAuthContext";
 
 // Toaster configuration
 toast.configure({
@@ -28,9 +24,9 @@ toast.configure({
   autoClose: 2000,
 });
 
-//@ToDo: Header logged in, User header menu, card mobile, Log in page logo
-
 export const App: FC = () => {
+  //const [currentUser, isLoading] = useAuthContext();
+
   return (
     <Router>
       <Switch>
@@ -48,7 +44,9 @@ ReactDOM.render(
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <ToastContainer />
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

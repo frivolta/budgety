@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { UserAuth } from "../../../types";
+import { User } from "firebase";
 import brandLogo from "./assets/images/brand.svg";
 import { HeaderMobile, HeaderUser } from "./components";
 import {
@@ -13,22 +13,12 @@ import {
 interface Props {
   isAuthorized: boolean;
   sectionName: string;
-  user?: UserAuth;
+  user?: User;
   fixedTop?: boolean;
 }
 
-//@ToDo: add bottom menu
-export const Header: React.FC<Props> = ({
-  isAuthorized,
-  fixedTop,
-  user,
-  sectionName,
-}) => {
-  const headerUser: UserAuth = user
-    ? user
-    : { email: "", authenticated: isAuthorized };
-
-  const appMenuElement = isAuthorized ? (
+export const Header: React.FC<Props> = ({ fixedTop, user, sectionName }) => {
+  const appMenuElement = user ? (
     <>
       <HeaderMenu data-testid="HeaderMenu">
         <Link to="/dashboard">Dashboard</Link>
@@ -40,9 +30,7 @@ export const Header: React.FC<Props> = ({
     </>
   ) : null;
 
-  const userMenuElement = isAuthorized ? (
-    <HeaderUser user={headerUser} />
-  ) : null;
+  const userMenuElement = user ? <HeaderUser user={user} /> : null;
 
   return (
     <HeaderWrapper fixedTop={fixedTop}>

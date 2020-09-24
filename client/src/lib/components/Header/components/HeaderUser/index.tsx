@@ -1,9 +1,9 @@
 import React from "react";
-import { UserAuth } from "../../../../../types";
+import { User } from "firebase";
 import { StyledHeaderUser } from "./styled";
 
 interface Props {
-  user: UserAuth;
+  user: User;
 }
 
 export const HeaderUser = ({ user }: Props) => {
