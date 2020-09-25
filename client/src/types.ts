@@ -1,9 +1,9 @@
 // User
-export interface User {
-  isActive: boolean;
+export interface UserProfile {
+  isActive: false;
   accountName: string;
-  startingBalance: number;
-  monthlyBudget: number;
+  startingBalance: string;
+  monthlyBudget: string;
 }
 
 // Cognito User

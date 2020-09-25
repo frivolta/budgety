@@ -2,5 +2,7 @@
   "env": {
     "TEST_UID": "03hJSZG2B5aYBKNILm1NioLAQ8G2",
     "FIREBASE_PROJECT_ID": "budgety-v5"
-  }
+  },
+  "viewportWidth": 375,
+  "viewportHeight": 812
 }

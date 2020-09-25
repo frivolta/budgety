@@ -1,5 +1,5 @@
 import { firestore } from "./firebase";
-import { Expense } from "../../types";
+import { Expense, UserProfile } from "../../types";
 
 // Categories
 export const updateCategory = async <T>(
@@ -30,6 +30,26 @@ export const getCategories = async (userUid: string) => {
     return categories;
   } catch (error) {
     console.error("[err]: Error getting categories: ", error);
+  }
+};
+
+// User Profile
+export const getUserProfile = async (userUid: string) => {
+  console.log("Fetching for", userUid);
+  try {
+    const snapshot = await firestore
+      .collection("users")
+      .doc(userUid)
+      .collection("profile")
+      .get();
+    const profile = snapshot.docs.map((doc) => doc.data());
+    console.log("Got: ", profile[0]);
+    if (profile[0]) {
+      return profile[0] as UserProfile;
+    }
+    return null;
+  } catch (error) {
+    console.error("[err]: Error getting user profile: ", error);
   }
 };
 
