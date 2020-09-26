@@ -9,6 +9,7 @@ export const darkPurple = {
 
 export const purple = {
   200: "#6F52ED",
+  500: "#FF2773",
 };
 
 export const violet = {
