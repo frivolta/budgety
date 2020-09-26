@@ -11,6 +11,7 @@ export const GridContainer = styled.div`
   height: 100vh;
   overflow: hidden;
   width: 100%;
+  background-color: ${(props) => props.theme.colors.pageBackground};
   @media ${mediaQueries.tabletMax} {
     grid-template-areas: "header" "main" "footer";
     grid-template-columns: 1fr;
@@ -26,6 +27,7 @@ export const GridHeader = styled(Header)`
 export const GridMain = styled.div`
   grid-area: main;
   background-color: ${(props) => props.theme.pageBackground};
+  padding: ${(props) => props.theme.space.xl};
 `;
 export const GridFooter = styled(Footer)`
   grid-area: footer;

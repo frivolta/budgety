@@ -6,6 +6,7 @@ export const HeaderMobileContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: ${(props) => props.theme.colors.pageBackground};
   @media ${mediaQueries.tablet} {
     display: none;
   }

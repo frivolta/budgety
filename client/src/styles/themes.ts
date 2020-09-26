@@ -42,6 +42,7 @@ export const defaultTheme = {
   },
   borderRadius: {
     base: "5px",
+    large: "15px",
   },
   shadows: {
     default: "2px 0px 15px rgba(0, 0, 0, 0.05)",

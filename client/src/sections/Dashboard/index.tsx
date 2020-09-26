@@ -1,15 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { auth } from "../../lib/api/firebase";
-import { getUserProfile } from "../../lib/api/queries";
 import useAuthContext from "../../lib/auth/useAuthContext";
-import { Card } from "../../lib/components";
 import { GridPageLayout } from "../../lib/components/GridPageLayout";
-import { useUserProfile } from "../../lib/hooks/useUserProfile";
+import { PageWrapper } from "../../lib/components/PageWrapper";
 
 export const Dashboard = () => {
   const [currentUser, isLoadingCurrentUser] = useAuthContext();
-  const { userProfile, loading: userProfileIsLoading } = useUserProfile();
   const history = useHistory();
 
   const handleLogOut = async () => {
@@ -17,27 +14,13 @@ export const Dashboard = () => {
     history.push("/login");
   };
 
-  const redirectToDashboardPage = () => {
-    history.push("/dashboard");
-  };
-
-  if (!currentUser?.uid && !isLoadingCurrentUser) {
-    redirectToDashboardPage();
-  }
-
-  const userProfileElement =
-    !userProfileIsLoading && !userProfile?.isActive ? (
-      <p> You need to update your settings to start using Budgety.</p>
-    ) : (
-      <p>you have a correct profile</p>
-    );
-
   const dashboardElement =
     currentUser && !isLoadingCurrentUser ? (
-      <GridPageLayout user={currentUser} sectionName="Dashboard">
-        {userProfileElement}
-        <button onClick={handleLogOut}>Log out</button>
-      </GridPageLayout>
+      <PageWrapper>
+        <GridPageLayout user={currentUser} sectionName="Dashboard">
+          <button onClick={handleLogOut}>Log out</button>
+        </GridPageLayout>
+      </PageWrapper>
     ) : null;
 
   return <>{dashboardElement}</>;

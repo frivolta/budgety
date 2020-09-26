@@ -10,6 +10,7 @@ interface Props extends RouteProps {
 
 export const PrivateRoute = ({ component: Component, ...rest }: Props) => {
   const [currentUser, isLoading] = useAuthContext();
+
   const isAuthorized = currentUser?.uid ? true : false;
 
   if (isLoading) {

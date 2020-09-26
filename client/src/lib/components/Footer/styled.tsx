@@ -29,8 +29,8 @@ export const FooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 ${spaceUnit}px;
   max-width: 100%;
+  width: 100%;
   @media ${mediaQueries.tabletMax} {
     position: fixed;
     bottom: 0;

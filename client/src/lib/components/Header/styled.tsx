@@ -20,7 +20,6 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   font-weight: ${(props) => props.theme.fonts.header.weight};
   background-color: ${(props) => props.theme.colors.componentBackground};
   border-bottom: 1px solid ${(props) => props.theme.colors.borderColor};
-  padding: ${(props) => props.theme.space.xl};
   color: ${(props) => props.theme.colors.primaryDarkColor};
   display: flex;
   justify-content: space-between;
@@ -29,12 +28,15 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   overflow: hidden;
   ${(props) => (props.fixedTop ? HEADER_MODIFIERS.fixedTop : null)};
   @media ${mediaQueries.tabletMax} {
+    background-color: ${(props) => props.theme.colors.pageBackground};
     border-bottom: none;
   }
 `;
 
 export const HeaderContainer = styled.div`
   display: flex;
+  padding: ${(props) => props.theme.space.xl};
+
   justify-content: space-between;
   align-items: center;
   width: 100%;

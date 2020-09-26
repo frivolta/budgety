@@ -1,4 +1,4 @@
-describe("Dashboard Page", () => {
+describe("Routes", () => {
   describe("when NOT authenticated", () => {
     before(() => {
       cy.logout();
@@ -22,9 +22,9 @@ describe("Dashboard Page", () => {
       cy.url().should("include", "/dashboard");
     });
 
-    /* after(() => {
+    after(() => {
       cy.logout();
-    }); */
+    });
   });
 
   describe("when newly created user", () => {
@@ -38,8 +38,9 @@ describe("Dashboard Page", () => {
       cy.visit("/dashboard");
     });
 
-    it.only("includes button to initialize user settings", () => {
-      cy.url().should("include", "/dashboard");
+    it("redirects user to settings page with warning", () => {
+      cy.location("pathname").should("eq", "/settings");
+      cy.contains("Update the settings below to start using Budgety.");
     });
 
     after(() => {

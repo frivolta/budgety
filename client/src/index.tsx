@@ -11,10 +11,9 @@ import * as serviceWorker from "./serviceWorker";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // Sections & components
-import { Dashboard, SignUp, LogIn } from "./sections";
+import { Dashboard, SignUp, LogIn, Settings } from "./sections";
 import { PrivateRoute } from "./lib/components";
 import { AuthProvider } from "./lib/auth/useAuthContext";
-//import useAuthContext from "./lib/auth/useAuthContext";
 
 // Toaster configuration
 toast.configure({
@@ -25,8 +24,6 @@ toast.configure({
 });
 
 export const App: FC = () => {
-  //const [currentUser, isLoading] = useAuthContext();
-
   return (
     <Router>
       <Switch>
@@ -34,6 +31,7 @@ export const App: FC = () => {
         <Route exact path="/login" component={LogIn} />
         <PrivateRoute exact path="/" component={Dashboard} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/settings" component={Settings} />
       </Switch>
     </Router>
   );
