@@ -1,5 +1,7 @@
 import { parseAbbrValue } from "./parseAbbrValue";
 
+const DECIMAL_SEPARATOR = ",";
+
 export const addCommas = (value: string): string =>
   value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -58,11 +60,22 @@ export const padTrimValue = (value: string, precision?: number): string => {
 };
 
 /**
+ * Remove heading 0 from valid number
+ */
+const trimInt = (int: string): string => {
+  if (int.length > 1 && int[0] === "0") {
+    return int.slice(1);
+  }
+  return int;
+};
+
+/**
  * Format value with commas and prefix
  */
 export const formatValue = (value: string, prefix?: string): string => {
   const [int, decimals] = value.split(".");
+  const trimmedInt = trimInt(int);
   const includePrefix = prefix ? prefix : "";
   const includeDecimals = value.includes(".") ? `.${decimals}` : "";
-  return `${includePrefix}${addCommas(int)}${includeDecimals}`;
+  return `${includePrefix}${addCommas(trimmedInt)}${includeDecimals}`;
 };
