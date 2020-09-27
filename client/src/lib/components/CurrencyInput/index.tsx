@@ -66,7 +66,7 @@ export const CurrencyInput: FC<CurrencyInputProps> = ({
     const valueOnly = cleanValue(value, allowDecimals, decimalsLimit, prefix);
 
     if (!valueOnly) {
-      //onChange && onChange(undefined, name);
+      onChange && onChange("0", name);
       return setStateValue("");
     }
 

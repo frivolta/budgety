@@ -1,7 +1,5 @@
 import { parseAbbrValue } from "./parseAbbrValue";
 
-const DECIMAL_SEPARATOR = ",";
-
 export const addCommas = (value: string): string =>
   value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -11,7 +9,6 @@ export const checkIsValidNumber = (input: string): boolean => {
   if (Number(input) < 0 || isNaN(Number(input))) {
     return false;
   }
-
   return true;
 };
 
