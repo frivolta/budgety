@@ -42,8 +42,9 @@ export const getUserProfile = async (userUid: string) => {
       .doc(userUid)
       .collection("profile")
       .get();
-    const profile = snapshot.docs.map((doc) => doc.data());
-    console.log("Got: ", profile[0]);
+    const profile = snapshot.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
     if (profile[0]) {
       return profile[0] as UserProfile;
     }

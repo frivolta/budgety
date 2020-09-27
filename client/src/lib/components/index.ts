@@ -8,3 +8,4 @@ export * from "./GridPageLayout";
 export * from "./Footer";
 export * from "./PrivateRoute";
 export * from "./InfoCard";
+export * from "./CurrencyInput";

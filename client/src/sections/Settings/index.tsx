@@ -19,9 +19,9 @@ export const Settings = () => {
     ) : null;
 
   const editSettingsElement =
-    isEditSettings && userProfile ? (
+    isEditSettings && userProfile && currentUser ? (
       <EditSettings
-        userSettings={userProfile}
+        currentUser={currentUser}
         handleSwitchToSettings={() => setIsEditSettings(false)}
       />
     ) : null;

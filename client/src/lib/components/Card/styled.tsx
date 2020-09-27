@@ -3,6 +3,7 @@ import { mediaQueries, spaceUnit } from "../../../styles";
 
 interface StyledCardProps {
   height?: string;
+  margin?: string;
 }
 
 export const StyledCard = styled.div<StyledCardProps>`
@@ -10,6 +11,7 @@ export const StyledCard = styled.div<StyledCardProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: ${(props) => (props.margin ? props.margin : "0")};
   background-color: ${(props) => props.theme.colors.componentBackground};
   box-shadow: ${(props) => props.theme.shadows.default};
   border-radius: ${(props) => props.theme.borderRadius.base};

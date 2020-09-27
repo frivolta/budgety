@@ -4,11 +4,12 @@ import { StyledCard, StyledCardContent } from "./styled";
 interface Props {
   children: React.ReactNode;
   height?: string;
+  margin?: string;
 }
 
-export const Card: FC<Props> = ({ children, height }: Props) => {
+export const Card: FC<Props> = ({ children, height, margin }: Props) => {
   return (
-    <StyledCard height={height}>
+    <StyledCard height={height} margin={margin}>
       <StyledCardContent>{children}</StyledCardContent>
     </StyledCard>
   );

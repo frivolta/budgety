@@ -11,3 +11,9 @@ export const StyledEditSettingsForm = styled.form`
   max-width: 100%;
   width: 100%;
 `;
+
+export const StyledEditSettingsImage = styled.img`
+  max-width: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+`;

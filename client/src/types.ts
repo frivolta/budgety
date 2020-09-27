@@ -1,5 +1,6 @@
 // User
 export interface UserProfile {
+  id: string;
   isActive: false;
   accountName: string;
   startingBalance: string;
