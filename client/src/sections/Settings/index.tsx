@@ -4,7 +4,7 @@ import { InfoCard } from "../../lib/components";
 import { GridPageLayout } from "../../lib/components/GridPageLayout";
 import { useUserProfile } from "../../lib/hooks/useUserProfile";
 import { IoIosHelpCircleOutline } from "react-icons/io";
-import { UserInfo } from "./components/UserInfo";
+import { ProfileInfo, UserInfo } from "./components";
 
 export const Settings = () => {
   const [currentUser, isLoadingCurrentUser] = useAuthContext();
@@ -21,6 +21,7 @@ export const Settings = () => {
     currentUser && !isLoadingCurrentUser ? (
       <GridPageLayout user={currentUser} sectionName="Settings">
         {settingsAlertCard}
+        <ProfileInfo />
         <UserInfo />
       </GridPageLayout>
     ) : null;
