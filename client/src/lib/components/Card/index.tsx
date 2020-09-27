@@ -3,11 +3,12 @@ import { StyledCard, StyledCardContent } from "./styled";
 
 interface Props {
   children: React.ReactNode;
+  height?: string;
 }
 
-export const Card: FC<Props> = ({ children }) => {
+export const Card: FC<Props> = ({ children, height }: Props) => {
   return (
-    <StyledCard>
+    <StyledCard height={height}>
       <StyledCardContent>{children}</StyledCardContent>
     </StyledCard>
   );

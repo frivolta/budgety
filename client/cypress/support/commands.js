@@ -59,4 +59,4 @@ export const signinUser = (user) => {
   cy.get("button").contains("Sign in").click();
 };
 Cypress.Commands.add("signinUser", signinUser);
-Cypress.Commands.add("getTest", (s) => cy.get(`[data-test=${s}]`));
+Cypress.Commands.add("getTest", (s) => cy.get(`[data-testid=${s}]`));

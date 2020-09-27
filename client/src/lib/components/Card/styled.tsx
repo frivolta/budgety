@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { mediaQueries, spaceUnit } from "../../../styles";
 
-export const StyledCard = styled.div`
+interface StyledCardProps {
+  height?: string;
+}
+
+export const StyledCard = styled.div<StyledCardProps>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -10,7 +14,7 @@ export const StyledCard = styled.div`
   box-shadow: ${(props) => props.theme.shadows.default};
   border-radius: ${(props) => props.theme.borderRadius.base};
   width: 100%;
-  height: 100%;
+  height: ${(props) => (props.height ? props.height : "100%")};
   color: ${(props) => props.theme.colors.primaryDarkColor};
   @media ${mediaQueries.tablet} {
     min-width: 512px;
@@ -21,5 +25,5 @@ export const StyledCard = styled.div`
 
 export const StyledCardContent = styled.div`
   width: 100%;
-  padding: ${spaceUnit * 3}px ${spaceUnit * 2}px;
+  padding: ${spaceUnit * 1}px ${spaceUnit * 2}px;
 `;

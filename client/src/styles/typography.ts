@@ -3,6 +3,7 @@ export const primaryFont = '"Poppins", sans-serif';
 export type TypographyProps = {
   color?: string;
   size?: string;
+  weight?: string;
 };
 
 export const typeScale = {
@@ -27,35 +28,35 @@ export const H1 = styled.h1<TypographyProps>`
 
 export const H2 = styled.h2<TypographyProps>`
   font-size: ${typeScale.header2};
-  font-weight: bold;
+  font-weight: ${(props) => (props.weight ? props.weight : "bold")};
   color: ${(props) =>
     props.color ? props.color : props.theme.colors.primaryDarkColor};
 `;
 
 export const H3 = styled.h3<TypographyProps>`
   font-size: ${typeScale.header3};
-  font-weight: bold;
+  font-weight: ${(props) => (props.weight ? props.weight : "bold")};
   color: ${(props) =>
     props.color ? props.color : props.theme.colors.primaryDarkColor};
 `;
 
 export const H4 = styled.h4<TypographyProps>`
   font-size: ${typeScale.header4};
-  font-weight: bold;
+  font-weight: ${(props) => (props.weight ? props.weight : "bold")};
   color: ${(props) =>
     props.color ? props.color : props.theme.colors.primaryDarkColor};
 `;
 
 export const H5 = styled.h5<TypographyProps>`
   font-size: ${typeScale.header5};
-  font-weight: bold;
+  font-weight: ${(props) => (props.weight ? props.weight : "bold")};
   color: ${(props) =>
     props.color ? props.color : props.theme.colors.primaryDarkColor};
 `;
 
 export const H6 = styled.h6<TypographyProps>`
   font-size: ${typeScale.helperText};
-  font-weight: bold;
+  font-weight: ${(props) => (props.weight ? props.weight : "bold")};
   color: ${(props) =>
     props.color ? props.color : props.theme.colors.primaryDarkColor};
 `;

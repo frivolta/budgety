@@ -7,7 +7,7 @@ interface Props {
 }
 export const InfoCard = ({ children, iconComponent }: Props) => {
   return (
-    <InfoCardWrapper>
+    <InfoCardWrapper data-testid="InfoCard">
       <InfoCardTitle>{iconComponent}</InfoCardTitle>
       {children}
     </InfoCardWrapper>
