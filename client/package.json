@@ -36,6 +36,7 @@
     "react-window": "^1.8.5",
     "styled-components": "^5.1.1",
     "styled-components-modifiers": "^1.2.5",
+    "styled-system": "^5.1.5",
     "typescript": "~3.7.2",
     "uuid": "^8.3.0",
     "yup": "^0.29.3"
@@ -83,6 +84,7 @@
     "@types/react-select": "^3.0.19",
     "@types/react-toastify": "^4.1.0",
     "@types/styled-components": "^5.1.2",
+    "@types/styled-system": "^5.1.10",
     "@types/yup": "^0.29.6",
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",

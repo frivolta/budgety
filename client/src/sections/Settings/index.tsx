@@ -9,7 +9,7 @@ import { EditSettings, ProfileInfo, UserInfo } from "./components";
 export const Settings = () => {
   const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const { userProfile, loading: userProfileIsLoading } = useUserProfile();
-  const [isEditSettings, setIsEditSettings] = useState<boolean>(false);
+  const [isEditSettings, setIsEditSettings] = useState<boolean>(true);
 
   const settingsAlertCard =
     !userProfileIsLoading && !userProfile?.isActive ? (
@@ -20,7 +20,10 @@ export const Settings = () => {
 
   const editSettingsElement =
     isEditSettings && userProfile ? (
-      <EditSettings userSettings={userProfile} />
+      <EditSettings
+        userSettings={userProfile}
+        handleSwitchToSettings={() => setIsEditSettings(false)}
+      />
     ) : null;
 
   const settingsViewElement = !isEditSettings ? (

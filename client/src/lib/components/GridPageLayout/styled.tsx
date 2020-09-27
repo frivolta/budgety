@@ -16,6 +16,7 @@ export const GridContainer = styled.div`
     grid-template-areas: "header" "main" "footer";
     grid-template-columns: 1fr;
     min-height: 100vh;
+    max-width: 100%;
     height: auto;
   }
 `;

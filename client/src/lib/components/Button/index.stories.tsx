@@ -41,5 +41,13 @@ stories.add("All states", () => (
       width="200px"
       disabled
     />
+    <H2>Secondary button</H2>
+    <p>Default State</p>
+    <Button
+      secondary
+      text="Button"
+      handleClick={action("button-click")}
+      width="200px"
+    />
   </>
 ));

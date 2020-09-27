@@ -12,10 +12,20 @@ export interface Props {
   isLoading?: boolean;
   margin?: string;
   width?: string;
+  secondary?: boolean;
 }
 
 export const Button: React.FC<Props> = (props) => {
-  const { handleClick, disabled, margin, isLoading, icon, text, width } = props;
+  const {
+    handleClick,
+    disabled,
+    margin,
+    isLoading,
+    icon,
+    text,
+    width,
+    secondary,
+  } = props;
 
   const buttonIconElement = icon ? (
     <ButtonIcon src={icon} alt="button icon" />
@@ -43,6 +53,7 @@ export const Button: React.FC<Props> = (props) => {
       data-testid="Button"
       margin={margin}
       width={width}
+      secondary={secondary}
     >
       {buttonIconElement}
       {buttonLabelElement}

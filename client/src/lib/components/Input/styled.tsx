@@ -43,7 +43,7 @@ export const StyledInputError = styled.span`
 
 export const StyledInputLabel = styled.label`
   font-size: ${(props) => props.theme.fonts.default.size};
-  font-weight: ${(props) => props.theme.fonts.default.secondaryWeight};
+  font-weight: ${(props) => props.theme.fonts.default.tertiaryWeight};
   color: ${(props) => props.theme.colors.primaryDarkColor};
   padding-bottom: ${(props) => props.theme.fonts.default.size};
 `;

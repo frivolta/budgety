@@ -27,6 +27,7 @@ export const defaultTheme = {
       size: typeScale.paragraph,
       weight: "500",
       secondaryWeight: "300",
+      tertiaryWeight: "700",
     },
     small: {
       size: typeScale.helperText,
