@@ -1,11 +1,15 @@
-import React from "react";
-import { Card } from "../../../../lib/components";
+import React, { useState } from "react";
+import { Button, Card } from "../../../../lib/components";
 import { useUserProfile } from "../../../../lib/hooks/useUserProfile";
 import { formatPrice } from "../../../../lib/utils/format";
 import { H3, H5, Text } from "../../../../styles";
 import { StyledUserInfoInformation, StyledUserInfoWrapper } from "./styled";
 
-export const UserInfo = () => {
+interface Props {
+  handleEditSettingsClick: () => void;
+}
+
+export const UserInfo = ({ handleEditSettingsClick }: Props) => {
   const { userProfile, loading: userProfileIsLoading } = useUserProfile();
 
   const userProfileElement =
@@ -25,6 +29,7 @@ export const UserInfo = () => {
             <H5>Monthly Budget</H5>
             <Text>{formatPrice(userProfile.monthlyBudget)}</Text>
           </StyledUserInfoInformation>
+          <Button handleClick={handleEditSettingsClick} text="Edit settings" />
         </Card>
       </>
     ) : null;

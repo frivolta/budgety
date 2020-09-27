@@ -2,7 +2,7 @@ import React from "react";
 import { auth } from "../../../../lib/api/firebase";
 import useAuthContext from "../../../../lib/auth/useAuthContext";
 import { Button, Card } from "../../../../lib/components";
-import { H3, H5, H6, Text } from "../../../../styles";
+import { H3, H6, Text } from "../../../../styles";
 import userProfileImage from "./assets/images/user-profile.svg";
 import {
   StyledProfileInfoWrapper,

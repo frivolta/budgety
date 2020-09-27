@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuthContext from "../../lib/auth/useAuthContext";
 import { InfoCard } from "../../lib/components";
 import { GridPageLayout } from "../../lib/components/GridPageLayout";
 import { useUserProfile } from "../../lib/hooks/useUserProfile";
 import { IoIosHelpCircleOutline } from "react-icons/io";
-import { ProfileInfo, UserInfo } from "./components";
+import { EditSettings, ProfileInfo, UserInfo } from "./components";
 
 export const Settings = () => {
   const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const { userProfile, loading: userProfileIsLoading } = useUserProfile();
+  const [isEditSettings, setIsEditSettings] = useState<boolean>(false);
 
   const settingsAlertCard =
     !userProfileIsLoading && !userProfile?.isActive ? (
@@ -17,12 +18,25 @@ export const Settings = () => {
       </InfoCard>
     ) : null;
 
+  const editSettingsElement =
+    isEditSettings && userProfile ? (
+      <EditSettings userSettings={userProfile} />
+    ) : null;
+
+  const settingsViewElement = !isEditSettings ? (
+    <>
+      {settingsAlertCard}
+      <ProfileInfo />
+      <UserInfo handleEditSettingsClick={() => setIsEditSettings(true)} />
+    </>
+  ) : (
+    editSettingsElement
+  );
+
   const settingsElement =
     currentUser && !isLoadingCurrentUser ? (
       <GridPageLayout user={currentUser} sectionName="Settings">
-        {settingsAlertCard}
-        <ProfileInfo />
-        <UserInfo />
+        {settingsViewElement}
       </GridPageLayout>
     ) : null;
 
