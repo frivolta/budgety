@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { firestore } from "../../../../lib/api/firebase";
+import { updateUserProfile } from "../../../../lib/api/queries";
 import { Button, Card, CurrencyInput, Input } from "../../../../lib/components";
 import { useUserProfile } from "../../../../lib/hooks/useUserProfile";
 import {
@@ -30,6 +30,13 @@ export const EditSettings = ({
   const [monthlyBudget, setMonthlyBudget] = useState(
     userProfile?.monthlyBudget || "0.00"
   );
+  const [formErrors, setFormErrors] = useState({
+    accountName: { isValid: true, errorMessage: null },
+    startingBalance: { isValid: true, errorMessage: null },
+    monthlyBudget: { isValid: true, errorMessage: null },
+  });
+
+  const [isFormDirty, setIsFormDirty] = useState(false);
 
   React.useEffect(() => {
     if (!userProfileIsLoading && userProfile) {
@@ -46,18 +53,17 @@ export const EditSettings = ({
     setIsLoading(true);
     const newUserProfile = {
       isActive: true,
-      accountName,
+      accountName: accountName.length > 1 ? accountName : "No account name",
       startingBalance,
       monthlyBudget,
     };
     if (userProfile?.id) {
       try {
-        await firestore
-          .collection("users")
-          .doc(currentUser.uid)
-          .collection("profile")
-          .doc(userProfile.id)
-          .set(newUserProfile);
+        await updateUserProfile(
+          newUserProfile,
+          userProfile.id,
+          currentUser.uid
+        );
         toasterSuccess(EDIT_SETTINGS_SUCCESS.settingsUpdated);
         handleSwitchToSettings();
       } catch (error) {
@@ -72,11 +78,13 @@ export const EditSettings = ({
   };
 
   const handleStartingBalanceChange = (formattedValue: string | undefined) => {
+    !isFormDirty && setIsFormDirty(true);
     if (formattedValue) {
       setStartingBalance(formattedValue);
     }
   };
   const handleMonthlyBudgetChange = (formattedValue: string | undefined) => {
+    !isFormDirty && setIsFormDirty(true);
     if (formattedValue) {
       setMonthlyBudget(formattedValue);
     }
@@ -90,7 +98,10 @@ export const EditSettings = ({
         placeholder="account-name"
         type="text"
         name="accountName"
-        handleChange={(event) => setAccountName(event.target.value)}
+        handleChange={(event) => {
+          !isFormDirty && setIsFormDirty(true);
+          setAccountName(event.target.value);
+        }}
       />
       <CurrencyInput
         name="currency"
@@ -116,6 +127,7 @@ export const EditSettings = ({
         text="Save settings"
         handleClick={(event) => handleSubmitSettings(event)}
         isLoading={isLoading || userProfileIsLoading}
+        disabled={!isFormDirty}
       />
       <Button
         secondary

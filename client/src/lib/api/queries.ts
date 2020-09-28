@@ -1,5 +1,5 @@
 import { firestore } from "./firebase";
-import { Expense, UserProfile } from "../../types";
+import { Expense, NewUserProfile, UserProfile } from "../../types";
 
 // Categories
 export const updateCategory = async <T>(
@@ -54,6 +54,23 @@ export const getUserProfile = async (userUid: string) => {
   }
 };
 
+// Update user profile
+export const updateUserProfile = async (
+  newUserProfile: NewUserProfile,
+  documentUid: string,
+  userUid: string
+) => {
+  try {
+    await firestore
+      .collection("users")
+      .doc(userUid)
+      .collection("profile")
+      .doc(documentUid)
+      .set(newUserProfile);
+  } catch (error) {
+    console.error("[err]: Error updating user profile: ", error);
+  }
+};
 // Expenses
 export const addExpense = async (userUid: string, expense: Expense) => {
   console.log(userUid, expense);

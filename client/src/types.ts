@@ -1,11 +1,16 @@
 // User
 export interface UserProfile {
   id: string;
-  isActive: false;
+  isActive: boolean;
   accountName: string;
   startingBalance: string;
   monthlyBudget: string;
 }
+
+export type NewUserProfile = Pick<
+  UserProfile,
+  "accountName" | "isActive" | "startingBalance" | "monthlyBudget"
+>;
 
 // Cognito User
 export type UserAuth = {

@@ -9,7 +9,7 @@ import { EditSettings, ProfileInfo, UserInfo } from "./components";
 export const Settings = () => {
   const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const { userProfile, loading: userProfileIsLoading } = useUserProfile();
-  const [isEditSettings, setIsEditSettings] = useState<boolean>(true);
+  const [isEditSettings, setIsEditSettings] = useState<boolean>(false);
 
   const settingsAlertCard =
     !userProfileIsLoading && !userProfile?.isActive ? (
