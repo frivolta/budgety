@@ -7,11 +7,13 @@ import { SignupFormData } from "../../types";
 import { Label, Input, Button } from "../../../../lib/components";
 import { H1 } from "../../../../styles/typography";
 import { SignupCardSpan } from "../.././styled";
-//import { User } from "../../../../types";
 import { Link } from "react-router-dom";
 import { defaultTheme } from "../../../../styles";
 import { formatNetworkErrorMessages } from "../../../../lib/utils/format";
-import { auth } from "../../../../lib/api/firebase";
+import { auth, firestore } from "../../../../lib/api/firebase";
+import { NewUserProfile } from "../../../../types";
+import { seedInitialDatas } from "../../../../lib/utils/seedInitialData";
+import { defaultCategories } from "../../../../lib/initialData";
 
 const initialFormValues: SignupFormData = {
   email: "",
@@ -19,13 +21,13 @@ const initialFormValues: SignupFormData = {
   confirmPassword: "",
 };
 
-/* const defaultUser: User = {
+const defaultUser: NewUserProfile = {
   isActive: false,
   accountName: "No balance",
-  startingBalance: 0.0,
-  monthlyBudget: 0.0,
+  startingBalance: "0.00",
+  monthlyBudget: "0.00",
 };
- */
+
 interface Props {
   handleFormSubmit: (email: string) => void;
 }
@@ -42,7 +44,23 @@ export const SignUpForm: FC<Props> = ({ handleFormSubmit }) => {
       setIsLoading(true);
       setError(undefined);
       try {
-        await auth.createUserWithEmailAndPassword(email, password);
+        const { user } = await auth.createUserWithEmailAndPassword(
+          email,
+          password
+        );
+        // Add default user profile
+        if (user && user.uid) {
+          await firestore
+            .collection("users")
+            .doc(user.uid)
+            .collection("profile")
+            .add(defaultUser);
+          await seedInitialDatas(user.uid, "categories", defaultCategories);
+          setIsLoading(false);
+          toasterSuccess(SIGNUP_SUCCESS.success);
+          formik.resetForm();
+        }
+        // Add user categories
         setUserEmail(email);
         setIsLoading(false);
         toasterSuccess(SIGNUP_SUCCESS.success);
