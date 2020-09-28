@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mediaQueries, spaceUnit } from "../../../styles";
+import { mediaQueries } from "../../../styles";
 
 export const FooterWrapper = styled.div`
   width: 100%;

@@ -30,11 +30,6 @@ export const EditSettings = ({
   const [monthlyBudget, setMonthlyBudget] = useState(
     userProfile?.monthlyBudget || "0.00"
   );
-  const [formErrors, setFormErrors] = useState({
-    accountName: { isValid: true, errorMessage: null },
-    startingBalance: { isValid: true, errorMessage: null },
-    monthlyBudget: { isValid: true, errorMessage: null },
-  });
 
   const [isFormDirty, setIsFormDirty] = useState(false);
 
@@ -104,7 +99,7 @@ export const EditSettings = ({
         }}
       />
       <CurrencyInput
-        name="currency"
+        name="startingBalance"
         label="Starting Balance"
         prefix="€ "
         allowDecimals
@@ -114,8 +109,8 @@ export const EditSettings = ({
         precision={2}
       />
       <CurrencyInput
-        name="currency"
-        label="Monthly Balance"
+        name="monthlyBudget"
+        label="Monthly Budget"
         prefix="€ "
         allowDecimals
         decimalsLimit={2}
