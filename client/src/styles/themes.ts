@@ -17,6 +17,9 @@ export const defaultTheme = {
     borderColor: neutral[300],
     error: red[200],
     placeholder: neutral[400],
+    incomesColor: darkPurple[100],
+    needsColor: darkPurple[100],
+    wantsColor: purple[200],
   },
   fonts: {
     header: {
