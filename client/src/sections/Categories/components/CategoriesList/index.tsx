@@ -5,8 +5,6 @@ import { useTheme } from "styled-components";
 import { H3 } from "../../../../styles";
 import { updateCategory } from "../../../../lib/api/queries";
 import { changeCategoryType } from "../../../../lib/utils/categories";
-import { toasterSuccess } from "../../../../lib/utils/toaster";
-import { EDIT_CATEGORIES_SUCCESS } from "../../../../lib/messages";
 import { Category } from "../../../../types";
 
 interface Props {

@@ -13,7 +13,10 @@ import { formatNetworkErrorMessages } from "../../../../lib/utils/format";
 import { auth, firestore } from "../../../../lib/api/firebase";
 import { NewUserProfile } from "../../../../types";
 import { seedInitialDatas } from "../../../../lib/utils/seedInitialData";
-import { defaultCategories } from "../../../../lib/initialData";
+import {
+  defaultCategories,
+  defaultUserBudget,
+} from "../../../../lib/initialData";
 
 const initialFormValues: SignupFormData = {
   email: "",
@@ -56,6 +59,11 @@ export const SignUpForm: FC<Props> = ({ handleFormSubmit }) => {
             .collection("profile")
             .add(defaultUser);
           await seedInitialDatas(user.uid, "categories", defaultCategories);
+          await firestore
+            .collection("users")
+            .doc(user.uid)
+            .collection("budget")
+            .add(defaultUserBudget);
           setIsLoading(false);
           toasterSuccess(SIGNUP_SUCCESS.success);
           formik.resetForm();

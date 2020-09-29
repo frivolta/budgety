@@ -3,3 +3,4 @@ export * from "./LogIn";
 export * from "./Dashboard";
 export * from "./Settings";
 export * from "./Categories";
+export * from "./Budget";

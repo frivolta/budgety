@@ -11,7 +11,14 @@ import * as serviceWorker from "./serviceWorker";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // Sections & components
-import { Dashboard, SignUp, LogIn, Settings, Categories } from "./sections";
+import {
+  Dashboard,
+  SignUp,
+  LogIn,
+  Settings,
+  Categories,
+  Budget,
+} from "./sections";
 import { PrivateRoute } from "./lib/components";
 import { AuthProvider } from "./lib/auth/useAuthContext";
 
@@ -33,6 +40,7 @@ export const App: FC = () => {
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/settings" component={Settings} />
         <PrivateRoute exact path="/categories" component={Categories} />
+        <PrivateRoute exact path="/budget" component={Budget} />
       </Switch>
     </Router>
   );

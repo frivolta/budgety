@@ -1,5 +1,5 @@
 import { firestore } from "./firebase";
-import { Expense, NewUserProfile, UserProfile } from "../../types";
+import { Expense, NewUserProfile, UserBudget, UserProfile } from "../../types";
 
 // Categories
 export const updateCategory = async <T>(
@@ -89,4 +89,24 @@ export const getExpenses = async (userUid: string) => {
     .get();
   const expenses = snapshot.docs.map((doc) => doc.data());
   return expenses;
+};
+// Budget Details
+export const getUserBudget = async (userUid: string) => {
+  console.log("Fetching for", userUid);
+  try {
+    const snapshot = await firestore
+      .collection("users")
+      .doc(userUid)
+      .collection("budget")
+      .get();
+    const budget = snapshot.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
+    if (budget[0]) {
+      return budget[0] as UserBudget;
+    }
+    return null;
+  } catch (error) {
+    console.error("[err]: Error getting user budget: ", error);
+  }
 };

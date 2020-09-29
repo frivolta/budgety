@@ -54,3 +54,11 @@ export interface Option {
   value: string;
   label: string;
 }
+
+// Budget
+export interface UserBudget {
+  id?: string;
+  needs: number;
+  wants: number;
+  savings: number;
+}

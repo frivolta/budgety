@@ -1,6 +1,6 @@
 import React from "react";
 import useAuthContext from "../../lib/auth/useAuthContext";
-import { GridPageLayout, InfoCard } from "../../lib/components";
+import { GridPageLayout } from "../../lib/components";
 import { CategoriesList } from "./components";
 
 export const Categories = () => {
