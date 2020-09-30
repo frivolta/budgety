@@ -5,6 +5,7 @@ interface Props {
   children: React.ReactNode;
   height?: string;
   margin?: string;
+  handleCLick?: () => void;
 }
 
 export const Card: FC<Props> = ({ children, height, margin }: Props) => {

@@ -14,12 +14,7 @@ export const FooterMobile = () => {
   return (
     <StyledFooterMobile>
       <SyledFooterIcon>
-        <Link to="/dashboard">
-          <DashboardIcon size={ICONS_SIZE} />
-        </Link>
-      </SyledFooterIcon>
-      <SyledFooterIcon>
-        <Link to="/expense-list">
+        <Link to="/expenses">
           <ExpensesList size={ICONS_SIZE} />
         </Link>
       </SyledFooterIcon>

@@ -19,6 +19,7 @@ import {
   Categories,
   Budget,
   AddExpense,
+  Expenses,
 } from "./sections";
 import { PrivateRoute } from "./lib/components";
 import { AuthProvider } from "./lib/auth/useAuthContext";
@@ -43,6 +44,7 @@ export const App: FC = () => {
         <PrivateRoute exact path="/categories" component={Categories} />
         <PrivateRoute exact path="/budget" component={Budget} />
         <PrivateRoute exact path="/add-expense" component={AddExpense} />
+        <PrivateRoute exact path="/expenses" component={Expenses} />
       </Switch>
     </Router>
   );
