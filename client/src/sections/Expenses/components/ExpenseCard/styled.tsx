@@ -56,7 +56,7 @@ export const StyledExpenseCardHeaderDate = styled.h6`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${(props) => props.theme.colors.primaryColor};
+  color: ${(props) => props.theme.colors.primary};
 `;
 export const StyledExpenseCardBodyDescription = styled.div`
   display: block;

@@ -3,13 +3,14 @@ import ReactLoading from "react-loading";
 import { StyledLoadingContainer } from "./styled";
 import { H4 } from "../../../styles/typography";
 import { useTheme } from "styled-components";
+import { Theme } from "react-select/src/types";
 
 interface Props {
   loadingText: string;
 }
 
 export const LoadingScreen: FC<Props> = ({ loadingText }) => {
-  const theme = useTheme() as any;
+  const theme = useTheme() as Theme;
 
   return (
     <StyledLoadingContainer>

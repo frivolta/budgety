@@ -10,12 +10,13 @@ export const StyledCurrencyInputContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   font-size: ${(props) => props.theme.fonts.default.size};
-  color: ${(props) => props.theme.colors.primaryDarkColor};
+  color: ${(props) => props.theme.colors.lightText};
 `;
 
 export const StyledCurrencyInputField = styled.input<
   StyledCurrencyInputFieldProps
 >`
+  background-color: ${(props) => props.theme.colors.componentBackground};
   padding: 14px;
   border-radius: ${(props) => props.theme.borderRadius.base};
   box-shadow: none;
@@ -24,14 +25,14 @@ export const StyledCurrencyInputField = styled.input<
       props.hasErrors
         ? props.theme.colors.error
         : props.theme.colors.placeholder};
-  color: ${(props) => props.theme.colors.primaryDarkColor};
+  color: ${(props) => props.theme.colors.lightText};
   outline: none;
   font-weight: 300;
   ::placeholder {
     color: ${(props) => props.theme.colors.placeholder};
   }
   :focus {
-    border: 1px solid ${(props) => props.theme.colors.primaryColor};
+    border: 1px solid ${(props) => props.theme.colors.primary};
     transition: all 0.5s;
   }
 `;
@@ -46,6 +47,6 @@ export const StyledCurrencyInputError = styled.span`
 export const StyledCurrencyInputLabel = styled.label`
   font-size: ${(props) => props.theme.fonts.default.size};
   font-weight: ${(props) => props.theme.fonts.default.tertiaryWeight};
-  color: ${(props) => props.theme.colors.primaryDarkColor};
+  color: ${(props) => props.theme.colors.lightText};
   padding-bottom: ${(props) => props.theme.fonts.default.size};
 `;

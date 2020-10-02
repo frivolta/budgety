@@ -24,5 +24,5 @@ export const FullPageWrapper = styled.div`
   overflow-y: auto;
   transition: all 0.15s ease-in;
   z-index: 1000;
-  background-color: ${(props) => props.theme.colors.pageBackground};
+  background-color: ${(props) => props.theme.colors.background};
 `;

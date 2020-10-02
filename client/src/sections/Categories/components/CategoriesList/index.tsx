@@ -6,6 +6,7 @@ import { H3 } from "../../../../styles";
 import { updateCategory } from "../../../../lib/api/queries";
 import { changeCategoryType } from "../../../../lib/utils/categories";
 import { Category } from "../../../../types";
+import { Theme } from "react-select/src/types";
 
 interface Props {
   currentUserId: string;
@@ -15,7 +16,7 @@ export const CategoriesList = ({ currentUserId }: Props) => {
   const { categories, categoriesIsLoading } = useCategories({
     currentUserId,
   });
-  const theme = useTheme() as any;
+  const theme = useTheme() as Theme;
 
   const handleChangeCategoryBudgetType = async (
     category: firebase.firestore.DocumentData

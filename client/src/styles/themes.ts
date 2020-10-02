@@ -19,7 +19,7 @@ export const defaultTheme: Theme = {
     primaryActive: neonBlue[700],
     text: romanSilver[500],
     lightText: darkThemeNeutral[100],
-    componentBackgroud: spaceCadet[800],
+    componentBackground: spaceCadet[800],
     componentHover: spaceCadet[700],
     needs: neonBlue[500],
     needsBackground: neonBlue.rgba,

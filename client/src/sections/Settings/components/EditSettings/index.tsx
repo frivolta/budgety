@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { updateUserProfile } from "../../../../lib/api/queries";
 import { Button, Card, CurrencyInput, Input } from "../../../../lib/components";
+import { FormGroup } from "../../../../lib/components/FormGroup";
 import { useUserProfile } from "../../../../lib/hooks/useUserProfile";
 import {
   EDIT_SETTINGS_ERROR,
@@ -87,48 +88,56 @@ export const EditSettings = ({
 
   const editSettingsFormElement = (
     <StyledEditSettingsForm>
-      <Input
-        value={accountName}
-        label="Account Name"
-        placeholder="account-name"
-        type="text"
-        name="accountName"
-        handleChange={(event) => {
-          !isFormDirty && setIsFormDirty(true);
-          setAccountName(event.target.value);
-        }}
-      />
-      <CurrencyInput
-        name="startingBalance"
-        label="Starting Balance"
-        prefix="€ "
-        allowDecimals
-        decimalsLimit={2}
-        value={startingBalance}
-        onChange={handleStartingBalanceChange}
-        precision={2}
-      />
-      <CurrencyInput
-        name="monthlyBudget"
-        label="Monthly Budget"
-        prefix="€ "
-        allowDecimals
-        decimalsLimit={2}
-        value={monthlyBudget}
-        onChange={handleMonthlyBudgetChange}
-        precision={2}
-      />
-      <Button
-        text="Save settings"
-        handleClick={(event) => handleSubmitSettings(event)}
-        isLoading={isLoading || userProfileIsLoading}
-        disabled={!isFormDirty}
-      />
-      <Button
-        secondary
-        text="Cancel and go back"
-        handleClick={handleSwitchToSettings}
-      />
+      <FormGroup>
+        <Input
+          value={accountName}
+          label="Account Name"
+          placeholder="account-name"
+          type="text"
+          name="accountName"
+          handleChange={(event) => {
+            !isFormDirty && setIsFormDirty(true);
+            setAccountName(event.target.value);
+          }}
+        />
+      </FormGroup>
+      <FormGroup>
+        <CurrencyInput
+          name="startingBalance"
+          label="Starting Balance"
+          prefix="€ "
+          allowDecimals
+          decimalsLimit={2}
+          value={startingBalance}
+          onChange={handleStartingBalanceChange}
+          precision={2}
+        />
+      </FormGroup>
+      <FormGroup>
+        <CurrencyInput
+          name="monthlyBudget"
+          label="Monthly Budget"
+          prefix="€ "
+          allowDecimals
+          decimalsLimit={2}
+          value={monthlyBudget}
+          onChange={handleMonthlyBudgetChange}
+          precision={2}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Button
+          text="Save settings"
+          handleClick={(event) => handleSubmitSettings(event)}
+          isLoading={isLoading || userProfileIsLoading}
+          disabled={!isFormDirty}
+        />
+        <Button
+          secondary
+          text="Cancel and go back"
+          handleClick={handleSwitchToSettings}
+        />
+      </FormGroup>
     </StyledEditSettingsForm>
   );
 

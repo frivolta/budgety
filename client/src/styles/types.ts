@@ -6,7 +6,7 @@ export interface Theme {
     primaryActive: string;
     text: string;
     lightText: string;
-    componentBackgroud: string;
+    componentBackground: string;
     componentHover: string;
     needs: string;
     needsBackground: string;

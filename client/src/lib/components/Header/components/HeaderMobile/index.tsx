@@ -8,13 +8,14 @@ import {
 } from "./styled";
 import { IoMdSwitch } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { Theme } from "react-select/src/types";
 
 interface Props {
   sectionName: string;
 }
 
 export const HeaderMobile = ({ sectionName }: Props) => {
-  const theme = useTheme() as any;
+  const theme = useTheme() as Theme;
 
   return (
     <HeaderMobileContainer>

@@ -20,7 +20,7 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   font-weight: ${(props) => props.theme.fonts.header.weight};
   background-color: ${(props) => props.theme.colors.componentBackground};
   border-bottom: 1px solid ${(props) => props.theme.colors.borderColor};
-  color: ${(props) => props.theme.colors.primaryDarkColor};
+  color: ${(props) => props.theme.colors.lightText};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,7 +28,7 @@ export const HeaderWrapper = styled.div<HeaderWrapperProps>`
   overflow: hidden;
   ${(props) => (props.fixedTop ? HEADER_MODIFIERS.fixedTop : null)};
   @media ${mediaQueries.tabletMax} {
-    background-color: ${(props) => props.theme.colors.pageBackground};
+    background-color: ${(props) => props.theme.colors.background};
     border-bottom: none;
   }
 `;
@@ -53,7 +53,7 @@ export const HeaderMenu = styled.div`
   width: 100%;
   margin-left: ${(props) => props.theme.space.xxl};
   a {
-    color: ${(props) => props.theme.colors.primaryDarkColor};
+    color: ${(props) => props.theme.colors.lightText};
     text-decoration: none;
     opacity: 0.3;
     transition: opacity 0.3s;

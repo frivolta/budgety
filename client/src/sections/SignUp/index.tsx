@@ -1,8 +1,6 @@
 import React, { FC, useState } from "react";
-import { BrandLogo } from "./styled";
 import { Card, FullPageLayout } from "../../lib/components";
 import { SignUpForm, ConfirmCodeForm } from "./components";
-import brandLogo from "./assets/images/brand.svg";
 import { useHistory } from "react-router-dom";
 import useAuthContext from "../../lib/auth/useAuthContext";
 
@@ -47,10 +45,7 @@ export const SignUp: FC<Props> = ({ renderConfirmationView }) => {
 
   return (
     <FullPageLayout>
-      <Card>
-        <BrandLogo src={brandLogo} />
-        {formElement}
-      </Card>
+      <Card>{formElement}</Card>
     </FullPageLayout>
   );
 };

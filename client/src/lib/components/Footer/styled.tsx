@@ -6,15 +6,15 @@ export const FooterWrapper = styled.div`
   font-size: ${(props) => props.theme.fonts.header.size};
   font-weight: ${(props) => props.theme.fonts.header.weight};
   background-color: ${(props) => props.theme.colors.componentBackground};
-  border-top: 1px solid ${(props) => props.theme.colors.borderColor};
+  border-top: 1px solid ${(props) => props.theme.colors.border};
   padding: ${(props) => props.theme.space.m};
-  color: ${(props) => props.theme.colors.primaryDarkColor};
+  color: ${(props) => props.theme.colors.lightText};
   display: flex;
   justify-content: flex-end;
   align-items: center;
 
   a {
-    color: ${(props) => props.theme.colors.primaryDarkColor};
+    color: ${(props) => props.theme.colors.lightText};
     text-decoration: none;
     transition: opacity 0.3s;
     padding: 0 ${(props) => props.theme.space.m};

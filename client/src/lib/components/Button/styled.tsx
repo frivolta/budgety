@@ -17,14 +17,14 @@ export const StyledButton = styled.button<ButtonProps>`
   background-color: ${(props) =>
     props.secondary
       ? props.theme.colors.componentBackground
-      : props.theme.colors.primaryColor};
+      : props.theme.colors.primary};
   box-shadow: ${(props) =>
     props.secondary ? "none" : props.theme.shadows.small};
   border-radius: ${(props) => props.theme.borderRadius.base};
   color: ${(props) =>
     props.secondary
-      ? props.theme.colors.primaryColor
-      : props.theme.colors.textColorPrimary};
+      ? props.theme.colors.primary
+      : props.theme.colors.lightText};
   width: ${(props) => (props.width ? props.width : `100%`)};
   padding: ${(props) => props.theme.space.xl};
   margin: ${(props) =>
@@ -33,7 +33,7 @@ export const StyledButton = styled.button<ButtonProps>`
   opacity: ${(props) => (props.disabled ? "0.4" : "1")};
   transition: all ease-out 0.5s;
   border: ${(props) =>
-    props.secondary ? `1px solid ${props.theme.colors.primaryColor}` : "none"};
+    props.secondary ? `1px solid ${props.theme.colors.primary}` : "none"};
   :hover {
     opacity: ${(props) => (props.disabled ? "0.4" : "0.8")};
     transition: all ease-out 0.5s;

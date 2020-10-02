@@ -6,7 +6,7 @@ export const StyledUserInfoWrapper = styled.div`
 export const StyledUserInfoInformation = styled.div`
   padding-top: ${(props) => props.theme.space.s};
   padding-bottom: ${(props) => props.theme.space.xl};
-  border-top: 1px solid ${(props) => props.theme.colors.borderColor};
+  border-top: 1px solid ${(props) => props.theme.colors.border};
   :first-child {
     border-top: none;
     padding-top: 0;

@@ -16,13 +16,13 @@ export const StyledFooterMobile = styled.div`
 export const SyledFooterIcon = styled.div`
   cursor: pointer;
   display: flex;
-  color: ${(props) => props.theme.colors.primaryColor};
+  color: ${(props) => props.theme.colors.primary};
   opacity: 1;
   a {
     opacity: 1;
   }
   svg {
-    fill: ${(props) => props.theme.colors.primaryColor};
+    fill: ${(props) => props.theme.colors.primary};
     opacity: 1;
   }
 `;
