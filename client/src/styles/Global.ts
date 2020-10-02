@@ -18,6 +18,7 @@ body {
   line-height: 22px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #ffffff;
 }
 
 main {

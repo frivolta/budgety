@@ -70,6 +70,11 @@ export const Span = styled.span<TypographyProps>`
   color: ${(props) => (props.color ? props.color : props.theme.colors.text)};
 `;
 
+export const Tag = styled.span<TypographyProps>`
+  color: ${(props) => (props.color ? props.color : props.theme.colors.text)};
+  font-size: ${typeScale.helperText};
+`;
+
 export const Small = styled.small`
   font-size: ${typeScale.copyrightText};
 `;

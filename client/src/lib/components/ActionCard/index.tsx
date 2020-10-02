@@ -1,20 +1,33 @@
 import React from "react";
-import { ActionCardTitle, ActionCardWrapper } from "./styled";
+import { getBudgetTypeById } from "../../utils/categories";
+import {
+  ActionCardContainer,
+  ActionCardName,
+  ActionCardTag,
+  ActionCardWrapper,
+} from "./styled";
 
 interface Props {
-  color: string;
-  title: string;
-  iconComponent: string;
-  onClick?: () => void;
+  budgetType: number;
+  categoryName: string;
+  handleClick: () => void;
 }
 
-export const ActionCard = ({ color, title, iconComponent, onClick }: Props) => {
-  const inactiveCardElement = (
-    <ActionCardWrapper data-testid="ActionCard" color={color} onClick={onClick}>
-      <ActionCardTitle>{iconComponent}</ActionCardTitle>
-      {title}
+export const ActionCard = ({
+  budgetType,
+  categoryName,
+  handleClick,
+}: Props) => {
+  const budgetTag = getBudgetTypeById(budgetType);
+
+  return (
+    <ActionCardWrapper onClick={handleClick}>
+      <ActionCardContainer>
+        <ActionCardTag type={budgetType}>
+          {budgetTag?.caption || "NEEDS"}
+        </ActionCardTag>
+        <ActionCardName>{categoryName}</ActionCardName>
+      </ActionCardContainer>
     </ActionCardWrapper>
   );
-
-  return <>{inactiveCardElement}</>;
 };

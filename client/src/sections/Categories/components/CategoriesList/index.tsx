@@ -7,6 +7,7 @@ import { updateCategory } from "../../../../lib/api/queries";
 import { changeCategoryType } from "../../../../lib/utils/categories";
 import { Category } from "../../../../types";
 import { Theme } from "react-select/src/types";
+import { StyledCategoriesListColumn, StyledCategoriesListRow } from "./styled";
 
 interface Props {
   currentUserId: string;
@@ -26,32 +27,31 @@ export const CategoriesList = ({ currentUserId }: Props) => {
     const updatedCategory = changeCategoryType(category as Category);
     await updateCategory(currentUserId, documentId, updatedCategory);
   };
-  // Colors
-  const needsColor = theme.colors.needsColor;
-  const wantsColor = theme.colors.wantsColor;
-  const incomesColor = theme.colors.incomesColor;
 
   const expenseListElement = categories
     ? categories
         .filter((category) => category.expenseType === 1)
         .map((category) => (
-          <ActionCard
-            color={category.budgetType === 1 ? needsColor : wantsColor}
-            title={category.caption}
-            iconComponent={category.budgetType === 1 ? "NEEDS" : "WANTS"}
-            onClick={() => handleChangeCategoryBudgetType(category)}
-          />
+          <StyledCategoriesListColumn>
+            <ActionCard
+              budgetType={category.budgetType}
+              categoryName={category.caption}
+              handleClick={() => handleChangeCategoryBudgetType(category)}
+            />
+          </StyledCategoriesListColumn>
         ))
     : null;
   const incomeListElement = categories
     ? categories
         .filter((category) => category.expenseType === 2)
         .map((category) => (
-          <ActionCard
-            color={incomesColor}
-            title={category.caption}
-            iconComponent="INCOME"
-          />
+          <StyledCategoriesListColumn>
+            <ActionCard
+              budgetType={category.budgetType}
+              categoryName={category.caption}
+              handleClick={() => handleChangeCategoryBudgetType(category)}
+            />
+          </StyledCategoriesListColumn>
         ))
     : null;
 
@@ -62,9 +62,10 @@ export const CategoriesList = ({ currentUserId }: Props) => {
   return (
     <>
       <H3>Expenses</H3>
-      {expenseListElement}
+      <StyledCategoriesListRow>{expenseListElement}</StyledCategoriesListRow>
+
       <H3>Incomes</H3>
-      {incomeListElement}
+      <StyledCategoriesListRow>{incomeListElement}</StyledCategoriesListRow>
     </>
   );
 };
