@@ -55,6 +55,7 @@ export const defaultTheme: Theme = {
     l: "0.75rem" /* 12px */,
     xl: "1rem" /* 16px */,
     xxl: "1.5rem" /* 24px */,
+    max: "2rem" /* 32px */,
   },
   borderRadius: {
     base: "5px",

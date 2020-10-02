@@ -42,6 +42,7 @@ export interface Theme {
     l: string;
     xl: string;
     xxl: string;
+    max: string;
   };
   borderRadius: {
     base: string;

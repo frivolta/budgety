@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
-import { mediaQueries, headerHeight } from "../../../styles";
+import { mediaQueries, headerHeight, footerHeight } from "../../../styles";
 
 export const GridContainer = styled.div`
   display: grid;
@@ -13,7 +13,8 @@ export const GridContainer = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme.colors.background};
   @media ${mediaQueries.tabletMax} {
-    grid-template-areas: "header" "main" "footer";
+    display: block;
+    flex-direction: column;
     grid-template-columns: 1fr;
     min-height: 100vh;
     max-width: 100%;
@@ -27,8 +28,9 @@ export const GridHeader = styled(Header)`
 
 export const GridMain = styled.div`
   grid-area: main;
-  background-color: ${(props) => props.theme.background};
-  padding: ${(props) => props.theme.space.xl};
+  background-color: ${(props) => props.theme.pageBackground};
+  padding: 0 ${(props) => props.theme.space.xl};
+  margin-bottom: ${footerHeight * 1.5}px;
 `;
 export const GridFooter = styled(Footer)`
   grid-area: footer;
