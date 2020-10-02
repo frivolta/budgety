@@ -1,5 +1,6 @@
 import React from "react";
-import { defaultTheme, H1 } from "../../../../../styles";
+import { useTheme } from "styled-components";
+import { H1 } from "../../../../../styles";
 import {
   HeaderMobileTitle,
   HeaderMobileIcons,
@@ -13,6 +14,8 @@ interface Props {
 }
 
 export const HeaderMobile = ({ sectionName }: Props) => {
+  const theme = useTheme() as any;
+
   return (
     <HeaderMobileContainer>
       <HeaderMobileTitle>
@@ -20,7 +23,7 @@ export const HeaderMobile = ({ sectionName }: Props) => {
       </HeaderMobileTitle>
       <HeaderMobileIcons>
         <Link to="/settings" data-testid="HeaderMobileSettings">
-          <IoMdSwitch size={32} color={defaultTheme.colors.primaryColor} />
+          <IoMdSwitch size={32} color={theme.colors.primary} />
         </Link>
       </HeaderMobileIcons>
     </HeaderMobileContainer>

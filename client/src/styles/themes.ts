@@ -1,25 +1,37 @@
-import { blue, neutral, darkPurple, purple, red } from "./colors";
+import {
+  risinBlack,
+  spaceCadet,
+  neonBlue,
+  romanSilver,
+  darkThemeNeutral,
+  winterSky,
+  emerald,
+  vermillion,
+} from "./darkModeColors";
 import { primaryFont, typeScale } from "./typography";
+import { Theme } from "./types";
 
-export const defaultTheme = {
+export const defaultTheme: Theme = {
   primaryFont: primaryFont,
   colors: {
-    primaryColor: blue[200],
-    primaryDarkColor: darkPurple[100],
-    primaryHoverColor: blue[300],
-    primaryActiveColor: blue[200],
-    textColorPrimary: neutral[100],
-    secondaryColor: purple[200],
-    textColor: neutral[500],
-    textColorInverted: neutral[100],
-    pageBackground: neutral[200],
-    componentBackground: neutral[100],
-    borderColor: neutral[300],
-    error: red[200],
-    placeholder: neutral[400],
-    incomesColor: darkPurple[100],
-    needsColor: darkPurple[100],
-    wantsColor: purple[200],
+    primary: neonBlue[500],
+    primaryHover: neonBlue[400],
+    primaryActive: neonBlue[700],
+    text: romanSilver[500],
+    lightText: darkThemeNeutral[100],
+    componentBackgroud: spaceCadet[800],
+    componentHover: spaceCadet[700],
+    needs: neonBlue[500],
+    needsBackground: neonBlue.rgba,
+    wants: winterSky[500],
+    wantsBackground: winterSky.rgba,
+    incomes: emerald[500],
+    incomesBackground: emerald.rgba,
+    error: vermillion[500],
+    errorBackground: vermillion.rgba,
+    background: risinBlack[800],
+    border: spaceCadet[500],
+    placeholder: romanSilver[500],
   },
   fonts: {
     header: {
@@ -34,7 +46,7 @@ export const defaultTheme = {
     },
     small: {
       size: typeScale.helperText,
-      weight: 500,
+      weight: "500",
     },
   },
   space: {

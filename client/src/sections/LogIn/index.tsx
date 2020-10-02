@@ -16,7 +16,6 @@ import { FirebaseError } from "firebase";
 import { Link, useHistory } from "react-router-dom";
 import { toasterSuccess, toasterError } from "../../lib/utils/toaster";
 import { LOGIN_SUCCESS, LOGIN_ERRORS } from "../../lib/messages/index";
-import { red } from "../../styles";
 import brandLogo from "./assets/images/brand.svg";
 import useAuthContext from "../../lib/auth/useAuthContext";
 import { auth } from "../../lib/api/firebase";
@@ -63,9 +62,7 @@ export const LogIn: FC = () => {
 
   const errorElement =
     error && error.message ? (
-      <Label color={red[200]}>
-        {formatNetworkErrorMessages(error.message)}
-      </Label>
+      <Label>{formatNetworkErrorMessages(error.message)}</Label>
     ) : null;
 
   return (
