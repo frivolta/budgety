@@ -11,3 +11,4 @@ export * from "./InfoCard";
 export * from "./CurrencyInput";
 export * from "./Select";
 export * from "./LoadingScreen";
+export * from "./IntroDescription";
