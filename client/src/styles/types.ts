@@ -47,6 +47,7 @@ export interface Theme {
   borderRadius: {
     base: string;
     large: string;
+    circle: string;
   };
   shadows: {
     default: string;

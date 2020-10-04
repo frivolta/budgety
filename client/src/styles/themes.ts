@@ -60,6 +60,7 @@ export const defaultTheme: Theme = {
   borderRadius: {
     base: "5px",
     large: "15px",
+    circle: "50%",
   },
   shadows: {
     default: "2px 0px 15px rgba(0, 0, 0, 0.05)",

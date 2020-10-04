@@ -54,3 +54,12 @@ export enum ADD_EXPENSE_ERRORS {
 export enum ADD_EXPENSE_SUCCESS {
   expenseAdded = "Expense saved!",
 }
+
+export enum BUDGET_ERRORS {
+  globalThreshold = "You cannot have a budget over 100%",
+  updateError = "Sorry, We couldn't update your budget :(",
+}
+
+export enum BUDGET_SUCCESS {
+  updateSuccess = "Budget succesfully updated!",
+}

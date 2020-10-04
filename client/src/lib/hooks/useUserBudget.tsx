@@ -12,7 +12,7 @@ export const useUserBudget = () => {
     if (!currentUserIsLoading && currentUser?.uid) {
       getData(currentUser.uid);
     }
-  }, [currentUser, currentUserIsLoading]);
+  }, []);
 
   const getData = async (uuid: string) => {
     const budget = await getUserBudget(uuid);

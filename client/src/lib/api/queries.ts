@@ -90,6 +90,7 @@ export const getExpenses = async (userUid: string) => {
   const expenses = snapshot.docs.map((doc) => doc.data());
   return expenses;
 };
+
 // Budget Details
 export const getUserBudget = async (userUid: string) => {
   console.log("Fetching for", userUid);
@@ -109,4 +110,17 @@ export const getUserBudget = async (userUid: string) => {
   } catch (error) {
     console.error("[err]: Error getting user budget: ", error);
   }
+};
+
+export const updateUserBudget = async (
+  userUid: string,
+  budgetId: string,
+  values: UserBudget
+) => {
+  await firestore
+    .collection("users")
+    .doc(userUid)
+    .collection("budget")
+    .doc(budgetId)
+    .update(values);
 };

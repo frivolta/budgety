@@ -18,7 +18,7 @@ export const Budget = () => {
     currentUser && !isLoadingCurrentUser ? (
       <GridPageLayout user={currentUser} sectionName="Budget">
         {introDescriptionElement}
-        <BudgetView />
+        <BudgetView userUid={currentUser.uid} />
       </GridPageLayout>
     ) : null;
 
