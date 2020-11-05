@@ -12,10 +12,10 @@ import {
   Select,
   CurrencyInput,
   Button,
+  Calendar,
 } from "../../../../lib/components";
 import { arrayToOption } from "../../../../lib/utils/form";
 import { defaultCategories } from "../../../../lib/initialData";
-import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 interface Props {
@@ -132,16 +132,6 @@ export const NewExpenseForm = ({
       </>
     ) : null;
 
-  const calendarFieldElement = () => (
-    <Calendar
-      value={expenseValues.date}
-      onChange={(newDate) => {
-        if (newDate instanceof Date)
-          setExpenseValues({ ...expenseValues, date: newDate });
-      }}
-    />
-  );
-
   const inputFieldElements = () => (
     <>
       <Input
@@ -182,7 +172,7 @@ export const NewExpenseForm = ({
   return (
     <ExpenseFormElement onSubmit={(event) => validateAndSend(event)}>
       {selectFieldElements}
-      {calendarFieldElement()}
+      <Calendar />
       {amountFieldElement()}
       {inputFieldElements()}
       <Button
