@@ -52,6 +52,28 @@ export const Calendar = () => {
   }
 
   const days = isLeapYear(date.getFullYear()) ? DAYS_LEAP : DAYS;
+
+  // Elements
+  const weekDaysElement = () => {
+    return DAYS_OF_THE_WEEK.map((dayName, index) => (
+      <StyledDay key={index}>{dayName}</StyledDay>
+    ));
+  };
+
+  const daysNumberElement = () => {
+    // Get filler days, the number of days before the first day to show as blank
+    // Since sunday is rapresented by "0", if the day is sunday it corresponds to "0-1 = 6"
+    const fillerDays = startDay === 0 ? 6 : startDay - 1;
+    // Create an array with the right number of days (eg. November: DAYS[10] = 30)
+    const daysInMonthArray = Array(DAYS[month] + fillerDays).fill(null);
+
+    //a) Loop daysInMonthArray, if index is less than fillerDays - 1 (?) then print a filler element (action is disabled, content is null) else print the correct day in the month
+    //b) Loop fillerDays and print null, loop daysInMonth and print the day
+
+    //Check if the day selected corresponds to the current day date
+  };
+
+  daysNumberElement();
   return (
     <StyledFrame>
       <StyledHeader>
@@ -66,15 +88,11 @@ export const Calendar = () => {
         </StyledButton>
       </StyledHeader>
       <StyledBody>
-        {DAYS_OF_THE_WEEK.map((d) => (
-          <StyledDay key={d}>
-            <strong>{d}</strong>
-          </StyledDay>
-        ))}
+        {weekDaysElement()}
         {Array(days[month] + (startDay - 1))
           .fill(null)
           .map((_, index) => {
-            const d = index - (startDay - 2);
+            const d = index - (startDay === 0 ? 5 : startDay - 2);
             return (
               <StyledDay
                 key={index}
