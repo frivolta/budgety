@@ -7,8 +7,6 @@ import {
   StyledHeader,
 } from "./styled";
 
-interface Props {}
-
 /**Mapping days, months constats */
 const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -56,8 +54,15 @@ export const Calendar = () => {
   // Elements
   const weekDaysElement = () => {
     return DAYS_OF_THE_WEEK.map((dayName, index) => (
-      <StyledDay key={index}>{dayName}</StyledDay>
+      <StyledDay key={index} isToday={false} isSelected={false} isWeekDay>
+        {dayName}
+      </StyledDay>
     ));
+  };
+
+  const handleChangeDate = (day: number, month: number, year: number) => {
+    const selectedDate = new Date(year, month, day);
+    setDate(selectedDate);
   };
 
   const daysNumberElement = () => {
@@ -66,44 +71,56 @@ export const Calendar = () => {
     const fillerDays = startDay === 0 ? 6 : startDay - 1;
     // Create an array with the right number of days (eg. November: DAYS[10] = 30)
     const daysInMonthArray = Array(DAYS[month] + fillerDays).fill(null);
-
-    //a) Loop daysInMonthArray, if index is less than fillerDays - 1 (?) then print a filler element (action is disabled, content is null) else print the correct day in the month
-    //b) Loop fillerDays and print null, loop daysInMonth and print the day
-
+    // Cells elements
+    // Loop daysInMonthArray, if index is less than fillerDays - 1 (?) then print a filler element (action is disabled, content is null) else print the correct day in the month
+    const cells = daysInMonthArray.map((_, index) => {
+      const day = index - fillerDays + 1;
+      const isToday = day === today.getDate() && month === today.getMonth();
+      const isSelected = day === date.getDate() && month === date.getMonth();
+      console.log(day);
+      if (index < fillerDays) {
+        return (
+          <StyledDay key={index} isSelected={false} isToday={false}></StyledDay>
+        );
+      } else {
+        const dayLabel = index + 1;
+        return (
+          <StyledDay
+            key={index}
+            isToday={isToday}
+            isSelected={isSelected}
+            onClick={() => handleChangeDate(day, month, year)}
+            isTrueDay
+          >
+            {dayLabel - fillerDays}
+          </StyledDay>
+        );
+      }
+    });
+    return cells;
     //Check if the day selected corresponds to the current day date
   };
 
-  daysNumberElement();
   return (
     <StyledFrame>
       <StyledHeader>
-        <StyledButton onClick={() => setDate(new Date(year, month - 1, day))}>
-          Prev
+        <StyledButton
+          onClick={() => handleChangeDate(day, month - 1, year)}
+          isNavigation
+        >
+          {`<`}
         </StyledButton>
-        <div>
-          {MONTHS[month]} {year}
-        </div>
-        <StyledButton onClick={() => setDate(new Date(year, month + 1, day))}>
-          Next
+        {MONTHS[month]} {year}
+        <StyledButton
+          onClick={() => handleChangeDate(day, month + 1, year)}
+          isNavigation
+        >
+          {`>`}
         </StyledButton>
       </StyledHeader>
       <StyledBody>
         {weekDaysElement()}
-        {Array(days[month] + (startDay - 1))
-          .fill(null)
-          .map((_, index) => {
-            const d = index - (startDay === 0 ? 5 : startDay - 2);
-            return (
-              <StyledDay
-                key={index}
-                isToday={d === today.getDate()}
-                isSelected={d === day}
-                onClick={() => setDate(new Date(year, month, d))}
-              >
-                {d > 0 ? d : ""}
-              </StyledDay>
-            );
-          })}
+        {daysNumberElement()}
       </StyledBody>
     </StyledFrame>
   );
