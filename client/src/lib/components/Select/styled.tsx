@@ -5,7 +5,7 @@ export const SelectField = styled.select`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  margin: 14px 0px;
+  margin: 0 0 ${(props) => props.theme.fonts.default.size} 0;
   width: 100%;
   font-size: 16px;
   padding: 14px;
@@ -27,4 +27,12 @@ export const SelectField = styled.select`
     border: 1px solid ${(props) => props.theme.colors.primary};
     transition: all 0.5s;
   }
+`;
+
+export const StyledSelectLabel = styled.label`
+  font-size: ${(props) => props.theme.fonts.default.size};
+  font-weight: ${(props) => props.theme.fonts.default.tertiaryWeight};
+  color: ${(props) => props.theme.colors.lightText};
+  padding-bottom: ${(props) => props.theme.fonts.default.size};
+  margin-top: ${(props) => props.theme.fonts.default.size};
 `;

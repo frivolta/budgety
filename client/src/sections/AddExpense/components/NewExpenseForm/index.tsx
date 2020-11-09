@@ -123,11 +123,13 @@ export const NewExpenseForm = ({
     categories && selectableCategories ? (
       <>
         <Select
+          label="Select category"
           options={selectableCategories}
           name="category"
           onChange={(event) => handleCategoryChange(event.target.value)}
         />
         <Select
+          label="Select expense type"
           options={selectableExpenseTypes}
           name="expenseType"
           onChange={(event) => handleExpenseTypeChange(event.target.value)}
