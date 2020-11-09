@@ -73,7 +73,6 @@ export const updateUserProfile = async (
 };
 // Expenses
 export const addExpense = async (userUid: string, expense: Expense) => {
-  console.log(userUid, expense);
   await firestore
     .collection("users")
     .doc(userUid)

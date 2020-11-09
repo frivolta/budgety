@@ -21,8 +21,15 @@ export const AddExpense: FC<Props> = () => {
   );
   const [isExpenseLoading, setIsExpenseLoading] = useState<boolean>(false);
 
+  React.useEffect(() => {
+    // Get categories if user is available
+    if (currentUser && currentUser.uid) {
+      getInitialData(currentUser.uid);
+    }
+  }, [currentUser]);
+
   // Get categories from firestore
-  const getInitialData = React.useCallback(async (userUid: string) => {
+  const getInitialData = async (userUid: string) => {
     const categories = await getCategories(userUid);
     if (categories) {
       setCategories(categories as Category[]);
@@ -31,14 +38,7 @@ export const AddExpense: FC<Props> = () => {
         "expense"
       );
     }
-  }, []);
-
-  React.useEffect(() => {
-    // Get categories if user is available
-    if (currentUser && currentUser.uid) {
-      getInitialData(currentUser.uid);
-    }
-  }, [currentUser, getInitialData]);
+  };
 
   // Map categories to an object that can be read from select
   const defineSelectableCategoriesByExpenseValue = (

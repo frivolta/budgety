@@ -46,30 +46,32 @@ export const NewExpenseForm = ({
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const selectableExpenseTypes = arrayToOption(expenseTypes);
 
+  // Define categories by expenses at start
+  useEffect(() => {
+    handleExpenseTypeChange("expense");
+  }, []);
+
   // Filter categories when expense type is changed
-  const handleExpenseTypeChange = React.useCallback(
-    (value: string) => {
-      const filteredCategories = defineSelectableCategoriesByExpenseValue(
+  const handleExpenseTypeChange = (value: string) => {
+    const filteredCategories = defineSelectableCategoriesByExpenseValue(
+      categories,
+      value
+    );
+    const selectableCategoriesUpdated = arrayToOption(filteredCategories);
+    setSelectableCategories(selectableCategoriesUpdated);
+    setExpenseValues({
+      ...expenseValues,
+      category: selectableCategoriesUpdated[0].value,
+      categoryType: getCategoryByCategoryValue(
         categories,
-        value
-      );
-      const selectableCategoriesUpdated = arrayToOption(filteredCategories);
-      setSelectableCategories(selectableCategoriesUpdated);
-      setExpenseValues({
-        ...expenseValues,
-        category: selectableCategoriesUpdated[0].value,
-        categoryType: getCategoryByCategoryValue(
-          categories,
-          selectableCategoriesUpdated[0].value
-        ).budgetType,
-        expenseType: getCategoryByCategoryValue(
-          categories,
-          selectableCategoriesUpdated[0].value
-        ).expenseType,
-      });
-    },
-    [categories, expenseValues]
-  );
+        selectableCategoriesUpdated[0].value
+      ).budgetType,
+      expenseType: getCategoryByCategoryValue(
+        categories,
+        selectableCategoriesUpdated[0].value
+      ).expenseType,
+    });
+  };
 
   const handleCategoryChange = (categoryValue: string) => {
     setExpenseValues({
@@ -84,12 +86,8 @@ export const NewExpenseForm = ({
 
   const handleChangeDate = (newDate: Date) => {
     setSelectedDate(newDate);
+    setExpenseValues({ ...expenseValues, date: newDate });
   };
-
-  // Define categories by expenses at start
-  useEffect(() => {
-    handleExpenseTypeChange("expense");
-  }, [handleExpenseTypeChange]);
 
   const expenseValidation = () => {
     const { amount, description } = expenseValues;
