@@ -1,7 +1,6 @@
 import React from "react";
 import { StyledFooterMobile, SyledFooterIcon } from "./styled";
 import { spaceUnit } from "../../../../../styles";
-import { IoIosKeypad as DashboardIcon } from "react-icons/io";
 import { IoIosAddCircle as AddExpenseIcon } from "react-icons/io";
 import { IoIosList as ExpensesList } from "react-icons/io";
 import { IoIosColorFilter as BudgetManagement } from "react-icons/io";

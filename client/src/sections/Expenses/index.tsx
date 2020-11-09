@@ -17,17 +17,13 @@ export const Expenses: FC = () => {
   const [expenses, setExpenses] = useState<Expense[] | null>(null);
   const [categories, setCategories] = useState<Category[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error>({
+  const [, setError] = useState<Error>({
     hasErrors: false,
     errorMessage: undefined,
   });
 
-  useEffect(() => {
-    currentUser?.uid && getInitialData(currentUser.uid);
-  }, [currentUser]);
-
   // Get categories from firestore
-  const getInitialData = async (userUid: string) => {
+  const getInitialData = React.useCallback(async (userUid: string) => {
     setIsLoading(true);
     clearErrors();
     try {
@@ -45,7 +41,11 @@ export const Expenses: FC = () => {
       toasterError("Error retrieving your expenses, try again later...");
       console.error("[err]: Error getting expenses: ", error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    currentUser?.uid && getInitialData(currentUser.uid);
+  }, [currentUser, getInitialData]);
 
   const clearErrors = () =>
     setError({ errorMessage: undefined, hasErrors: false });

@@ -36,13 +36,8 @@ export const BudgetView = ({ userUid }: Props) => {
 
   const theme = useTheme() as Theme;
 
-  //Get initial values
-  React.useEffect(() => {
-    getInitialBudgetValues();
-  }, [loadingUserBudget]);
-
   // Set budget values from db values
-  const getInitialBudgetValues = () => {
+  const getInitialBudgetValues = React.useCallback(() => {
     if (!loadingUserBudget && userBudget) {
       const { needs, wants, savings } = userBudget;
       const budgetValuesSum = needs + wants + savings;
@@ -55,7 +50,12 @@ export const BudgetView = ({ userUid }: Props) => {
         throw new Error("[err:]>>>Invalid initial budget");
       }
     }
-  };
+  }, [loadingUserBudget, userBudget]);
+
+  //Get initial values
+  React.useEffect(() => {
+    getInitialBudgetValues();
+  }, [loadingUserBudget, getInitialBudgetValues]);
 
   const updateBudgetValues = async () => {
     const budgetValue: UserBudget = {
