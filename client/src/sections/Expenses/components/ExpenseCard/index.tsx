@@ -5,20 +5,19 @@ import {
   StyledExpenseCardBody,
   StyledExpenseCardBodyAmount,
   StyledExpenseCardBodyDescription,
-  StyledExpenseCardHeaderDate,
   StyledExpenseCardHeaderCategories,
   StyledExpenseCardHeader,
   StyledExpenseCardContainer,
   StyledCategoryText,
   StyledBudgetText,
 } from "./styled";
-import { Card, Button } from "../../../../lib/components";
 import {
   getCategoryByCategoryValue,
   getBudgetTypeById,
 } from "../../../../lib/utils/categories";
 import { formatPrice } from "../../../../lib/utils/format";
-import { H4 } from "../../../../styles";
+import { Card } from "../../../../lib/components";
+import { ExpenseTag } from "../../../../styles";
 
 interface Props {
   expense: Expense;
@@ -51,19 +50,13 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
 
   const triggerCardActivation = () => setIsCardActive(!isCardActive);
 
-  const cardElement = isCardActive ? (
-    <Card height="auto" handleCLick={triggerCardActivation}>
-      <StyledExpenseCardContainer>
-        <StyledExpenseCardHeader>
-          <H4>DO YOU WANT TO DELETE THIS EXPENSE?</H4>
-        </StyledExpenseCardHeader>
-        <StyledExpenseCardBody>
-          <Button text="DELETE" handleClick={() => console.log("delete")} />
-        </StyledExpenseCardBody>
-      </StyledExpenseCardContainer>
-    </Card>
-  ) : (
-    <Card height="auto" handleCLick={triggerCardActivation}>
+  const cardElement = (
+    <Card
+      height="auto"
+      handleCLick={triggerCardActivation}
+      size="small"
+      margin="0 0 16px 0"
+    >
       <StyledExpenseCardContainer>
         <StyledExpenseCardHeader>
           <StyledExpenseCardHeaderCategories>
@@ -72,9 +65,7 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
             </StyledCategoryText>
             <StyledBudgetText>{budgetType?.caption}</StyledBudgetText>
           </StyledExpenseCardHeaderCategories>
-          <StyledExpenseCardHeaderDate>
-            {moment().format("ll")}
-          </StyledExpenseCardHeaderDate>
+          <ExpenseTag color="#ffffff">{moment().format("ll")}</ExpenseTag>
         </StyledExpenseCardHeader>
         <StyledExpenseCardBody>
           <StyledExpenseCardBodyDescription>

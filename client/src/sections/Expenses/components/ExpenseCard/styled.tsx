@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Amount, Description, ExpenseTag } from "../../../../styles";
 
 interface StyledCategoryTextProps {
   categoryColor: string;
@@ -21,7 +22,7 @@ export const StyledExpenseCardHeader = styled.div`
   align-items: center;
   width: 100%;
   flex-direction: row;
-  margin: 0 0 16px 0;
+  margin-bottom: 16px;
 `;
 
 export const StyledExpenseCardBody = styled.div`
@@ -41,38 +42,43 @@ export const StyledExpenseCardHeaderCategories = styled.div`
   align-items: center;
 `;
 
-export const StyledCategoryText = styled.h6<StyledCategoryTextProps>`
+export const StyledCategoryText = styled(ExpenseTag)<StyledCategoryTextProps>`
   color: ${({ categoryColor }) => categoryColor};
   background-color: ${({ categoryColor }) => categoryColor + "7f"};
   padding: 4px 8px;
-  border-radius: ${(props) => props.theme.borderRadius.default};
+  border-radius: ${(props) => props.theme.borderRadius.base};
+`;
+export const Exp = styled(ExpenseTag)<StyledCategoryTextProps>`
+  color: ${({ categoryColor }) => categoryColor};
+  background-color: ${({ categoryColor }) => categoryColor + "7f"};
+  padding: 4px 8px;
+  border-radius: ${(props) => props.theme.borderRadius.base};
 `;
 
-export const StyledBudgetText = styled.h6`
+export const StyledBudgetText = styled(ExpenseTag)`
   padding: 4px 8px;
 `;
 
-export const StyledExpenseCardHeaderDate = styled.h6`
+export const StyledExpenseCardHeaderDate = styled(ExpenseTag)`
   display: flex;
   justify-content: center;
   align-items: center;
   color: ${(props) => props.theme.colors.primary};
 `;
-export const StyledExpenseCardBodyDescription = styled.div`
+
+export const StyledExpenseCardBodyDescription = styled(Description)`
   display: block;
   max-width: 60%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  font-size: 14px;
   font-weight: normal;
   color: ${(props) =>
     props.color ? props.color : props.theme.colors.darkPrimary};
 `;
-export const StyledExpenseCardBodyAmount = styled.div`
+export const StyledExpenseCardBodyAmount = styled(Amount)`
   display: block;
   max-width: 40%;
-  font-size: 18px;
   font-weight: bold;
   color: ${(props) =>
     props.color ? props.color : props.theme.colors.darkPrimary};

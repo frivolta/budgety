@@ -6,6 +6,10 @@ interface StyledCardProps {
   margin?: string;
 }
 
+interface StyledCardContentProps {
+  size?: "small" | "regular";
+}
+
 export const StyledCard = styled.div<StyledCardProps>`
   position: relative;
   display: flex;
@@ -25,7 +29,13 @@ export const StyledCard = styled.div<StyledCardProps>`
   }
 `;
 
-export const StyledCardContent = styled.div`
+const smallCardContentSize = `${(spaceUnit / 4) * 1}px ${
+  (spaceUnit / 4) * 2
+}px;`;
+const regularCardContentSize = `${spaceUnit * 1}px ${spaceUnit * 2}px;`;
+
+export const StyledCardContent = styled.div<StyledCardContentProps>`
   width: 100%;
-  padding: ${spaceUnit * 1}px ${spaceUnit * 2}px;
+  padding: ${(props) =>
+    props.size === "small" ? smallCardContentSize : regularCardContentSize};
 `;

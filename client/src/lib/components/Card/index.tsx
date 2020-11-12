@@ -5,13 +5,14 @@ interface Props {
   children: React.ReactNode;
   height?: string;
   margin?: string;
+  size?: "small" | "regular";
   handleCLick?: () => void;
 }
 
-export const Card: FC<Props> = ({ children, height, margin }: Props) => {
+export const Card: FC<Props> = ({ children, height, margin, size }: Props) => {
   return (
     <StyledCard height={height} margin={margin}>
-      <StyledCardContent>{children}</StyledCardContent>
+      <StyledCardContent size={size}>{children}</StyledCardContent>
     </StyledCard>
   );
 };

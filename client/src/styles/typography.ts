@@ -15,6 +15,7 @@ export const typeScale = {
   paragraph: "1rem",
   helperText: "0.8rem",
   copyrightText: "0.7rem",
+  smallText: "0.7rem"
 };
 
 // Define typography styles
@@ -66,6 +67,16 @@ export const Text = styled.p`
   color: ${(props) => (props.color ? props.color : props.theme.colors.text)};
 `;
 
+export const Description = styled.span`
+  font-size: ${typeScale.helperText};
+  color: ${(props) => (props.color ? props.color : props.theme.colors.text)};
+`;
+
+export const Amount = styled.span`
+  font-size: ${typeScale.paragraph};
+  color: ${(props) => (props.color ? props.color : props.theme.colors.text)};
+`;
+
 export const Span = styled.span<TypographyProps>`
   color: ${(props) => (props.color ? props.color : props.theme.colors.text)};
 `;
@@ -73,6 +84,12 @@ export const Span = styled.span<TypographyProps>`
 export const Tag = styled.span<TypographyProps>`
   color: ${(props) => (props.color ? props.color : props.theme.colors.text)};
   font-size: ${typeScale.helperText};
+`;
+
+export const ExpenseTag = styled.span<TypographyProps>`
+  color: ${(props) => (props.color ? props.color : props.theme.colors.text)};
+  font-size: ${typeScale.smallText};
+  font-weight: 700;
 `;
 
 export const Small = styled.small`
