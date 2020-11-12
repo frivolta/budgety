@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Expense, Category } from "../../../../types";
+import { Expense, Category, CategoryType } from "../../../../types";
 import moment from "moment";
 import {
   StyledExpenseCardBody,
@@ -10,6 +10,7 @@ import {
   StyledExpenseCardContainer,
   StyledCategoryText,
   StyledBudgetText,
+  StyledExpenseCardHeaderDate,
 } from "./styled";
 import {
   getCategoryByCategoryValue,
@@ -17,7 +18,8 @@ import {
 } from "../../../../lib/utils/categories";
 import { formatPrice } from "../../../../lib/utils/format";
 import { Card } from "../../../../lib/components";
-import { ExpenseTag } from "../../../../styles";
+import { useTheme } from "styled-components";
+import { Theme } from "../../../../styles/types";
 
 interface Props {
   expense: Expense;
@@ -26,12 +28,41 @@ interface Props {
 const MAX_DESCRIPTION_CHAR = 40;
 
 export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
-  const [isCardActive, setIsCardActive] = React.useState<boolean>(false);
+  const theme = useTheme() as Theme;
+  const {
+    needs,
+    needsBackground,
+    wants,
+    wantsBackground,
+    incomes,
+    incomesBackground,
+  } = theme.colors;
+
   const trimLongString = (string: string) => {
     if (string.length > MAX_DESCRIPTION_CHAR) {
       return string.substring(0, MAX_DESCRIPTION_CHAR) + "...";
     }
     return string;
+  };
+
+  const defineBudgetColor = (budget: CategoryType | undefined) => {
+    switch (budget?.id) {
+      case 1:
+        return {
+          color: needs,
+          backgroundColor: needsBackground,
+        };
+      case 2:
+        return {
+          color: wants,
+          backgroundColor: wantsBackground,
+        };
+      default:
+        return {
+          color: incomes,
+          backgroundColor: incomesBackground,
+        };
+    }
   };
 
   const expenseCategory = getCategoryByCategoryValue(
@@ -40,7 +71,6 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
   );
 
   const budgetType = getBudgetTypeById(expenseCategory.budgetType);
-
   const getStyledPrice = (expense: Expense) => {
     const formattedPrice = formatPrice(expense.amount);
     console.log(expense.expenseType);
@@ -48,24 +78,24 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
     return `${isIncome ? "+" : "-"}${formattedPrice}`;
   };
 
-  const triggerCardActivation = () => setIsCardActive(!isCardActive);
-
   const cardElement = (
-    <Card
-      height="auto"
-      handleCLick={triggerCardActivation}
-      size="small"
-      margin="0 0 16px 0"
-    >
+    <Card height="auto" size="small" margin="0 0 16px 0">
       <StyledExpenseCardContainer>
         <StyledExpenseCardHeader>
           <StyledExpenseCardHeaderCategories>
             <StyledCategoryText categoryColor={expenseCategory.color}>
               {expenseCategory.caption}
             </StyledCategoryText>
-            <StyledBudgetText>{budgetType?.caption}</StyledBudgetText>
+            <StyledBudgetText
+              color={defineBudgetColor(budgetType).color}
+              background={defineBudgetColor(budgetType).backgroundColor}
+            >
+              {budgetType?.caption}
+            </StyledBudgetText>
           </StyledExpenseCardHeaderCategories>
-          <ExpenseTag color="#ffffff">{moment().format("ll")}</ExpenseTag>
+          <StyledExpenseCardHeaderDate>
+            {moment().format("ll")}
+          </StyledExpenseCardHeaderDate>
         </StyledExpenseCardHeader>
         <StyledExpenseCardBody>
           <StyledExpenseCardBodyDescription>
@@ -79,5 +109,5 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
     </Card>
   );
 
-  return <div onClick={triggerCardActivation}>{cardElement}</div>;
+  return <div>{cardElement}</div>;
 };

@@ -5,6 +5,11 @@ interface StyledCategoryTextProps {
   categoryColor: string;
 }
 
+interface StyledBudgetText {
+  color: string;
+  background: string;
+}
+
 export const StyledExpenseCardContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -55,31 +60,35 @@ export const Exp = styled(ExpenseTag)<StyledCategoryTextProps>`
   border-radius: ${(props) => props.theme.borderRadius.base};
 `;
 
-export const StyledBudgetText = styled(ExpenseTag)`
+export const StyledBudgetText = styled(ExpenseTag)<StyledBudgetText>`
   padding: 4px 8px;
+  color: ${(props) => props.color};
+  background-color: ${(props) => props.background};
+  margin-left: 16px;
+  border-radius: ${(props) => props.theme.borderRadius.base};
 `;
 
 export const StyledExpenseCardHeaderDate = styled(ExpenseTag)`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.lightText};
 `;
 
 export const StyledExpenseCardBodyDescription = styled(Description)`
   display: block;
-  max-width: 60%;
+  max-width: 55%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   font-weight: normal;
   color: ${(props) =>
-    props.color ? props.color : props.theme.colors.darkPrimary};
+    props.color ? props.color : props.theme.colors.lightText};
 `;
 export const StyledExpenseCardBodyAmount = styled(Amount)`
   display: block;
   max-width: 40%;
   font-weight: bold;
   color: ${(props) =>
-    props.color ? props.color : props.theme.colors.darkPrimary};
+    props.color ? props.color : props.theme.colors.lightText};
 `;
