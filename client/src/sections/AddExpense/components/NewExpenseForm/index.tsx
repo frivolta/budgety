@@ -114,7 +114,6 @@ export const NewExpenseForm = ({
   const validateAndSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (expenseValidation()) {
-      console.log(expenseValues);
       handleSubmit(expenseValues);
     }
   };

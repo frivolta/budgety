@@ -16,7 +16,10 @@ import {
   getCategoryByCategoryValue,
   getBudgetTypeById,
 } from "../../../../lib/utils/categories";
-import { formatPrice } from "../../../../lib/utils/format";
+import {
+  formatDateFromTimestamp,
+  formatPrice,
+} from "../../../../lib/utils/format";
 import { Card } from "../../../../lib/components";
 import { useTheme } from "styled-components";
 import { Theme } from "../../../../styles/types";
@@ -28,6 +31,7 @@ interface Props {
 const MAX_DESCRIPTION_CHAR = 40;
 
 export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
+  const expenseDate = formatDateFromTimestamp(expense.date);
   const theme = useTheme() as Theme;
   const {
     needs,
@@ -94,7 +98,7 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
             </StyledBudgetText>
           </StyledExpenseCardHeaderCategories>
           <StyledExpenseCardHeaderDate>
-            {moment().format("ll")}
+            {expenseDate}
           </StyledExpenseCardHeaderDate>
         </StyledExpenseCardHeader>
         <StyledExpenseCardBody>
