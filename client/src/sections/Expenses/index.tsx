@@ -1,11 +1,17 @@
 import React, { FC, useState, useEffect } from "react";
-import { GridPageLayout, LoadingScreen, Card } from "../../lib/components";
+import {
+  GridPageLayout,
+  LoadingScreen,
+  Card,
+  Modal,
+} from "../../lib/components";
 import useAuthContext from "../../lib/auth/useAuthContext";
 import { Expense, Category } from "../../types";
 import { getExpenses, getCategories } from "../../lib/api/queries";
 import { toasterError } from "../../lib/utils/toaster";
 import { ExpensesContainer } from "./components";
 import { Link } from "react-router-dom";
+import { useSingleExpenseModalValue } from "../../lib/context";
 
 interface Error {
   hasErrors: boolean;
@@ -21,6 +27,8 @@ export const Expenses: FC = () => {
     hasErrors: false,
     errorMessage: undefined,
   });
+
+  const { isModalOpen } = useSingleExpenseModalValue();
 
   // Get categories from firestore
   const getInitialData = React.useCallback(async (userUid: string) => {
@@ -44,14 +52,18 @@ export const Expenses: FC = () => {
   }, []);
 
   useEffect(() => {
-    currentUser?.uid && getInitialData(currentUser.uid);
-  }, [currentUser, getInitialData]);
+    !isModalOpen && currentUser?.uid && getInitialData(currentUser.uid);
+  }, [currentUser, getInitialData, isModalOpen]);
 
   const clearErrors = () =>
     setError({ errorMessage: undefined, hasErrors: false });
 
   if (isLoading || isLoadingCurrentUser) {
     return <LoadingScreen loadingText="Loading expenses..." />;
+  }
+
+  if (isModalOpen) {
+    return <Modal />;
   }
 
   const expensesContainerElement =

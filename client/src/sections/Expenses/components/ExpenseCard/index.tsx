@@ -23,6 +23,7 @@ import {
 import { Card } from "../../../../lib/components";
 import { useTheme } from "styled-components";
 import { Theme } from "../../../../styles/types";
+import { useSingleExpenseModalValue } from "../../../../lib/context";
 
 interface Props {
   expense: Expense;
@@ -31,6 +32,7 @@ interface Props {
 const MAX_DESCRIPTION_CHAR = 40;
 
 export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
+  const { setIsModalOpen } = useSingleExpenseModalValue();
   const expenseDate = formatDateFromTimestamp(expense.date);
   const theme = useTheme() as Theme;
   const {
@@ -75,11 +77,16 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
   );
 
   const budgetType = getBudgetTypeById(expenseCategory.budgetType);
+
   const getStyledPrice = (expense: Expense) => {
     const formattedPrice = formatPrice(expense.amount);
     console.log(expense.expenseType);
     const isIncome = expense.expenseType === 2 ? true : false;
     return `${isIncome ? "+" : "-"}${formattedPrice}`;
+  };
+
+  const handleCardClick = () => {
+    setIsModalOpen(true);
   };
 
   const cardElement = (
@@ -113,5 +120,5 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
     </Card>
   );
 
-  return <div>{cardElement}</div>;
+  return <div onClick={() => handleCardClick()}>{cardElement}</div>;
 };
