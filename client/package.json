@@ -83,6 +83,7 @@
     "cypress-skip-and-only-ui": "^1.2.7",
     "cypress-watch-and-reload": "^1.2.18",
     "firebase-admin": "^9.2.0",
+    "react-context-devtool": "^2.0.0",
     "react-is": "^16.13.1"
   },
   "jest": {

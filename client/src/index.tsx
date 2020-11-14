@@ -22,6 +22,10 @@ import {
 } from "./sections";
 import { PrivateRoute } from "./lib/components";
 import { AuthProvider } from "./lib/auth/useAuthContext";
+import {
+  UseSingleExpenseModalProvider,
+  SingleExpenseProvider,
+} from "./lib/context";
 
 // Toaster configuration
 toast.configure({
@@ -54,7 +58,11 @@ ReactDOM.render(
       <GlobalStyle />
       <ToastContainer />
       <AuthProvider>
-        <App />
+        <UseSingleExpenseModalProvider>
+          <SingleExpenseProvider>
+            <App />
+          </SingleExpenseProvider>
+        </UseSingleExpenseModalProvider>
       </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,
