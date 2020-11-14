@@ -7,7 +7,7 @@ interface ProviderProps {
 
 interface ISingleExpenseContext {
   expense: Expense | null;
-  setExpense: (expense: Expense) => void;
+  setExpense: (expense: Expense | null) => void;
 }
 
 const initialState = {
