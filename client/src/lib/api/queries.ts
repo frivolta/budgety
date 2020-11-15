@@ -80,14 +80,25 @@ export const addExpense = async (userUid: string, expense: Expense) => {
     .add(expense);
 };
 
+
 export const getExpenses = async (userUid: string) => {
   const snapshot = await firestore
     .collection("users")
     .doc(userUid)
     .collection("expenses")
     .get();
-  const expenses = snapshot.docs.map((doc) => doc.data());
+  const expenses = snapshot.docs.map((doc) => {
+    return {id: doc.id, ...doc.data()}
+  });
   return expenses;
+};
+
+export const deleteExpense = async (userUid: string, expenseId: string) => {
+  await firestore
+    .collection("users")
+    .doc(userUid)
+    .collection("expenses")
+    .doc(expenseId).delete();
 };
 
 // Budget Details

@@ -23,7 +23,10 @@ import {
 import { Card } from "../../../../lib/components";
 import { useTheme } from "styled-components";
 import { Theme } from "../../../../styles/types";
-import { useSingleExpenseModalValue } from "../../../../lib/context";
+import {
+  useSingleExpenseModalValue,
+  useSingleExpenseValue,
+} from "../../../../lib/context";
 
 interface Props {
   expense: Expense;
@@ -33,6 +36,7 @@ const MAX_DESCRIPTION_CHAR = 40;
 
 export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
   const { setIsModalOpen } = useSingleExpenseModalValue();
+  const { setExpense } = useSingleExpenseValue();
   const expenseDate = formatDateFromTimestamp(expense.date);
   const theme = useTheme() as Theme;
   const {
@@ -87,6 +91,7 @@ export const ExpenseCard: FC<Props> = ({ expense, categories }) => {
 
   const handleCardClick = () => {
     setIsModalOpen(true);
+    setExpense(expense);
   };
 
   const cardElement = (

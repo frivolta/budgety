@@ -26,6 +26,7 @@ export interface ExpenseType {
 }
 
 export type Expense = {
+  id?: string;
   amount: string;
   date: Date;
   description: string;

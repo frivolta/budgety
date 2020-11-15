@@ -42,6 +42,7 @@ export const SingleExpenseTagContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-transform: uppercase;
 `;
 export const SingleExpenseTagElement = styled.div<SingleExpenseTagElementProps>`
   background-color: ${(props) => props.background};

@@ -55,6 +55,14 @@ export enum ADD_EXPENSE_SUCCESS {
   expenseAdded = "Expense saved!",
 }
 
+export enum DELETE_EXPENSE_SUCCESS {
+  expenseDeleted = "Expense deleted!",
+}
+
+export enum DELETE_EXPENSE_ERROR {
+  genericError = "Expense not deleted, please try again later...",
+}
+
 export enum BUDGET_ERRORS {
   globalThreshold = "You cannot have a budget over 100%",
   updateError = "Sorry, We couldn't update your budget :(",

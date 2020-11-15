@@ -19,7 +19,7 @@ const UseSingleExpenseContextModal = React.createContext<
 >(initialState);
 
 const UseSingleExpenseModalProvider = ({ children }: ProviderProps) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   console.log("Called");
   return (
     <UseSingleExpenseContextModal.Provider
