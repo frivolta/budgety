@@ -16,3 +16,4 @@ export * from "./RangePicker";
 export * from "./ErrorCard";
 export * from "./Calendar";
 export * from './Modal'
+export * from './MonthSelector'

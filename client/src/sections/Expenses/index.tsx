@@ -1,5 +1,10 @@
 import React, { FC, useState, useEffect } from "react";
-import { GridPageLayout, LoadingScreen, Card } from "../../lib/components";
+import {
+  GridPageLayout,
+  LoadingScreen,
+  Card,
+  MonthSelector,
+} from "../../lib/components";
 import useAuthContext from "../../lib/auth/useAuthContext";
 import { Expense, Category } from "../../types";
 import { getExpenses, getCategories } from "../../lib/api/queries";
@@ -14,6 +19,9 @@ interface Error {
 }
 
 export const Expenses: FC = () => {
+  //Refactor:
+  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  //Refactor ends
   const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const [expenses, setExpenses] = useState<Expense[] | null>(null);
   const [categories, setCategories] = useState<Category[] | null>(null);
@@ -64,6 +72,7 @@ export const Expenses: FC = () => {
   const expensesContainerElement =
     expenses && categories && currentUser ? (
       <GridPageLayout user={currentUser} sectionName="Expenses">
+        <MonthSelector currentMonth={currentMonth} />
         <ExpensesContainer expenses={expenses} categories={categories} />
       </GridPageLayout>
     ) : (

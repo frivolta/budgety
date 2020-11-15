@@ -26,6 +26,7 @@ import {
   UseSingleExpenseModalProvider,
   SingleExpenseProvider,
 } from "./lib/context";
+//import { executeSeed } from "./seed";
 
 // Toaster configuration
 toast.configure({
@@ -36,6 +37,7 @@ toast.configure({
 });
 
 export const App: FC = () => {
+  //executeSeed("GymGLWHCnIR04PP8GGRW9zdPN2z1", 100);
   return (
     <Router>
       <Switch>

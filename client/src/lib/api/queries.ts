@@ -85,7 +85,7 @@ export const getExpenses = async (userUid: string) => {
   const snapshot = await firestore
     .collection("users")
     .doc(userUid)
-    .collection("expenses")
+    .collection("expenses").orderBy('date', 'desc')
     .get();
   const expenses = snapshot.docs.map((doc) => {
     return {id: doc.id, ...doc.data()}
