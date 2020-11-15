@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { Expense, Category, CategoryType } from "../../../../types";
-import moment from "moment";
 import {
   StyledExpenseCardBody,
   StyledExpenseCardBodyAmount,

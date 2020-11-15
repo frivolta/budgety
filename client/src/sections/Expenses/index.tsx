@@ -1,15 +1,10 @@
 import React, { FC, useState, useEffect } from "react";
-import {
-  GridPageLayout,
-  LoadingScreen,
-  Card,
-  Modal,
-} from "../../lib/components";
+import { GridPageLayout, LoadingScreen, Card } from "../../lib/components";
 import useAuthContext from "../../lib/auth/useAuthContext";
 import { Expense, Category } from "../../types";
 import { getExpenses, getCategories } from "../../lib/api/queries";
 import { toasterError } from "../../lib/utils/toaster";
-import { ExpensesContainer } from "./components";
+import { ExpensesContainer, SingleExpenseModal } from "./components";
 import { Link } from "react-router-dom";
 import { useSingleExpenseModalValue } from "../../lib/context";
 
@@ -63,7 +58,7 @@ export const Expenses: FC = () => {
   }
 
   if (isModalOpen) {
-    return <Modal />;
+    return <SingleExpenseModal />;
   }
 
   const expensesContainerElement =
