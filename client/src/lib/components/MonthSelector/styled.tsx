@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { H2, H3 } from "../../../styles";
+import { H2, H3, H4, H5 } from "../../../styles";
 
 interface MonthsTagProps {
   isActive?: boolean;
@@ -11,6 +11,7 @@ export const MonthSelectorWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: ${(props) => props.theme.space.xxl};
+  flex-direction: column;
 `;
 
 export const MonthSelectorMonthsContainer = styled.div`
@@ -39,6 +40,11 @@ export const MonthsTag = styled(H3)`
   margin: 0;
   padding: 0;
   color: ${(props) => props.theme.colors.primary};
+`;
+export const YearTag = styled(H5)`
+  margin: 0;
+  padding: 0;
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 export const ArrowButton = styled.button`

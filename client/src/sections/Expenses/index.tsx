@@ -23,7 +23,7 @@ interface Error {
 
 export const Expenses: FC = () => {
   //Refactor:
-  const { filterDate } = useFilterExpenses();
+  const { filterDate, setFilterDate } = useFilterExpenses();
   //Refactor ends
   const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const [expenses, setExpenses] = useState<Expense[] | null>(null);
@@ -75,7 +75,10 @@ export const Expenses: FC = () => {
   const expensesContainerElement =
     expenses && categories && currentUser ? (
       <GridPageLayout user={currentUser} sectionName="Expenses">
-        <MonthSelector currentDate={filterDate} />
+        <MonthSelector
+          currentDate={filterDate}
+          handleChangeDate={setFilterDate}
+        />
         <ExpensesContainer expenses={expenses} categories={categories} />
       </GridPageLayout>
     ) : (
