@@ -11,7 +11,10 @@ import { getExpenses, getCategories } from "../../lib/api/queries";
 import { toasterError } from "../../lib/utils/toaster";
 import { ExpensesContainer, SingleExpenseModal } from "./components";
 import { Link } from "react-router-dom";
-import { useSingleExpenseModalValue } from "../../lib/context";
+import {
+  useFilterExpenses,
+  useSingleExpenseModalValue,
+} from "../../lib/context";
 
 interface Error {
   hasErrors: boolean;
@@ -20,7 +23,7 @@ interface Error {
 
 export const Expenses: FC = () => {
   //Refactor:
-  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  const { filterDate } = useFilterExpenses();
   //Refactor ends
   const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const [expenses, setExpenses] = useState<Expense[] | null>(null);
@@ -72,7 +75,7 @@ export const Expenses: FC = () => {
   const expensesContainerElement =
     expenses && categories && currentUser ? (
       <GridPageLayout user={currentUser} sectionName="Expenses">
-        <MonthSelector currentMonth={currentMonth} />
+        <MonthSelector currentDate={filterDate} />
         <ExpensesContainer expenses={expenses} categories={categories} />
       </GridPageLayout>
     ) : (

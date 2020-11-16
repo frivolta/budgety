@@ -25,6 +25,7 @@ import { AuthProvider } from "./lib/auth/useAuthContext";
 import {
   UseSingleExpenseModalProvider,
   SingleExpenseProvider,
+  FilterExpensesProvider,
 } from "./lib/context";
 //import { executeSeed } from "./seed";
 
@@ -60,11 +61,13 @@ ReactDOM.render(
       <GlobalStyle />
       <ToastContainer />
       <AuthProvider>
-        <UseSingleExpenseModalProvider>
-          <SingleExpenseProvider>
-            <App />
-          </SingleExpenseProvider>
-        </UseSingleExpenseModalProvider>
+        <FilterExpensesProvider>
+          <UseSingleExpenseModalProvider>
+            <SingleExpenseProvider>
+              <App />
+            </SingleExpenseProvider>
+          </UseSingleExpenseModalProvider>
+        </FilterExpensesProvider>
       </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,

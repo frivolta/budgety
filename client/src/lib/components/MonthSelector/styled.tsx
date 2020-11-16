@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { H2 } from "../../../styles";
+import { H2, H3 } from "../../../styles";
 
 interface MonthsTagProps {
   isActive?: boolean;
@@ -35,7 +35,7 @@ export const MonthSelectorMonthsTag = styled.div<MonthsTagProps>`
   }
 `;
 
-export const MonthsTag = styled(H2)`
+export const MonthsTag = styled(H3)`
   margin: 0;
   padding: 0;
   color: ${(props) => props.theme.colors.primary};
