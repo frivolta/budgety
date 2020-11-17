@@ -60,13 +60,35 @@ export const MonthSelector = ({ currentDate, handleChangeDate }: Props) => {
     <MonthSelectorWrapper>
       {/*Years*/}
       <MonthSelectorMonthsContainer>
-        <MonthSelectorMonthsTag onClick={() => console.log("clicked")}>
+        <MonthSelectorMonthsTag
+          onClick={() =>
+            handleSelection(
+              currentDate.getMonth(),
+              currentDate.getFullYear() - 1
+            )
+          }
+        >
           <YearTag>{currentDate.getFullYear() - 1}</YearTag>
         </MonthSelectorMonthsTag>
-        <MonthSelectorMonthsTag onClick={() => console.log("clicked")} isActive>
+        <MonthSelectorMonthsTag
+          onClick={() =>
+            handleSelection(
+              currentDate.getMonth(),
+              currentDate.getFullYear() - 2
+            )
+          }
+          isActive
+        >
           <YearTag>{currentDate.getFullYear()}</YearTag>
         </MonthSelectorMonthsTag>
-        <MonthSelectorMonthsTag onClick={() => console.log("clicked")}>
+        <MonthSelectorMonthsTag
+          onClick={() =>
+            handleSelection(
+              currentDate.getMonth(),
+              currentDate.getFullYear() + 1
+            )
+          }
+        >
           <YearTag>{currentDate.getFullYear() + 1}</YearTag>
         </MonthSelectorMonthsTag>
       </MonthSelectorMonthsContainer>
