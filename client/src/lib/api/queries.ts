@@ -81,11 +81,11 @@ export const addExpense = async (userUid: string, expense: Expense) => {
 };
 
 
-export const getExpenses = async (userUid: string) => {
+export const getExpenses = async (userUid: string, filterStart: Date, filterEnd: Date) => {
   const snapshot = await firestore
     .collection("users")
     .doc(userUid)
-    .collection("expenses").orderBy('date', 'desc')
+    .collection("expenses").orderBy('date', 'desc').where('date','>=', filterStart).where('date', '<=', filterEnd)
     .get();
   const expenses = snapshot.docs.map((doc) => {
     return {id: doc.id, ...doc.data()}

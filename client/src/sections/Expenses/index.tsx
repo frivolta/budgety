@@ -36,30 +36,48 @@ export const Expenses: FC = () => {
 
   const { isModalOpen } = useSingleExpenseModalValue();
 
+  //Get month start day and end day
+
   // Get categories from firestore
-  const getInitialData = React.useCallback(async (userUid: string) => {
-    setIsLoading(true);
-    clearErrors();
-    try {
-      const expenses = await getExpenses(userUid);
-      const categories = await getCategories(userUid);
-      expenses && setExpenses(expenses as Expense[]);
-      categories && setCategories(categories as Category[]);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      setError({
-        hasErrors: true,
-        errorMessage: "We couldn't get your expenses, try again later...",
-      });
-      toasterError("Error retrieving your expenses, try again later...");
-      console.error("[err]: Error getting expenses: ", error);
-    }
-  }, []);
+  const getInitialData = React.useCallback(
+    async (userUid: string, filterDate: Date = new Date()) => {
+      const filterStart = new Date(
+        filterDate.getFullYear(),
+        filterDate.getMonth(),
+        1
+      );
+      const filterEnd = new Date(
+        filterDate.getFullYear(),
+        filterDate.getMonth() + 1,
+        0
+      );
+      console.log(filterStart, filterEnd);
+      setIsLoading(true);
+      clearErrors();
+      try {
+        const expenses = await getExpenses(userUid, filterStart, filterEnd);
+        const categories = await getCategories(userUid);
+        expenses && setExpenses(expenses as Expense[]);
+        categories && setCategories(categories as Category[]);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        setError({
+          hasErrors: true,
+          errorMessage: "We couldn't get your expenses, try again later...",
+        });
+        toasterError("Error retrieving your expenses, try again later...");
+        console.error("[err]: Error getting expenses: ", error);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
-    !isModalOpen && currentUser?.uid && getInitialData(currentUser.uid);
-  }, [currentUser, getInitialData, isModalOpen]);
+    !isModalOpen &&
+      currentUser?.uid &&
+      getInitialData(currentUser.uid, filterDate);
+  }, [currentUser, getInitialData, isModalOpen, filterDate]);
 
   const clearErrors = () =>
     setError({ errorMessage: undefined, hasErrors: false });
@@ -73,7 +91,7 @@ export const Expenses: FC = () => {
   }
 
   const expensesContainerElement =
-    expenses && categories && currentUser ? (
+    expenses?.length && categories && currentUser ? (
       <GridPageLayout user={currentUser} sectionName="Expenses">
         <MonthSelector
           currentDate={filterDate}
@@ -83,7 +101,7 @@ export const Expenses: FC = () => {
       </GridPageLayout>
     ) : (
       <Card height="auto">
-        You don't have any expense yet...{" "}
+        You don't have any expense yet for this...{" "}
         <Link to="/add-expense">Create one.</Link>
       </Card>
     );
