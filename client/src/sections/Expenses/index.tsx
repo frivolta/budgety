@@ -82,8 +82,8 @@ export const Expenses: FC = () => {
   const clearErrors = () =>
     setError({ errorMessage: undefined, hasErrors: false });
 
-  if (isLoading || isLoadingCurrentUser) {
-    return <LoadingScreen loadingText="Loading expenses..." />;
+  if (isLoadingCurrentUser) {
+    return <LoadingScreen loadingText="Loading user..." />;
   }
 
   if (isModalOpen) {
@@ -91,19 +91,20 @@ export const Expenses: FC = () => {
   }
 
   const expensesContainerElement =
-    expenses?.length && categories && currentUser ? (
+    expenses && categories && currentUser ? (
       <GridPageLayout user={currentUser} sectionName="Expenses">
         <MonthSelector
           currentDate={filterDate}
           handleChangeDate={setFilterDate}
         />
-        <ExpensesContainer expenses={expenses} categories={categories} />
+        <ExpensesContainer
+          expenses={expenses.length ? expenses : []}
+          categories={categories}
+          isLoading={isLoading}
+        />
       </GridPageLayout>
     ) : (
-      <Card height="auto">
-        You don't have any expense yet for this...{" "}
-        <Link to="/add-expense">Create one.</Link>
-      </Card>
+      <LoadingScreen loadingText="Retrieving data..." />
     );
 
   return <>{expensesContainerElement}</>;

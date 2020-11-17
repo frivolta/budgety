@@ -53,7 +53,7 @@ export const LogIn: FC = () => {
   });
 
   const redirectToDashboardPage = React.useCallback(() => {
-    history.push("/dashboard");
+    history.push("/expenses");
   }, [history]);
 
   if (currentUser?.uid && !isLoadingCurrentUser) {

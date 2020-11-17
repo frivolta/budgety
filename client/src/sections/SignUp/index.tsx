@@ -29,7 +29,7 @@ export const SignUp: FC<Props> = ({ renderConfirmationView }) => {
   };
 
   const redirectToDashboardPage = () => {
-    history.push("/dashboard");
+    history.push("/expenses");
   };
 
   if (currentUser?.uid && !isLoadingCurrentUser) {
