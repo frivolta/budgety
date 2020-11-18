@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Category } from "../../../../types";
 import { expenseTypes, categoryTypes } from "../../../../lib/costants";
 import { Expense, Option } from "../../../../types";
@@ -46,13 +46,7 @@ export const NewExpenseForm = ({
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const selectableExpenseTypes = arrayToOption(expenseTypes);
 
-  // Define categories by expenses at start
-  useEffect(() => {
-    handleExpenseTypeChange("expense");
-  }, []);
-
-  // Filter categories when expense type is changed
-  const handleExpenseTypeChange = (value: string) => {
+  const handleExpenseTypeChange = useCallback((value: string) => {
     const filteredCategories = defineSelectableCategoriesByExpenseValue(
       categories,
       value
@@ -71,7 +65,13 @@ export const NewExpenseForm = ({
         selectableCategoriesUpdated[0].value
       ).expenseType,
     });
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Define categories by expenses at start
+  useEffect(() => {
+    handleExpenseTypeChange("expense");
+  }, [handleExpenseTypeChange]);
 
   const handleCategoryChange = (categoryValue: string) => {
     setExpenseValues({

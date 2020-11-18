@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { H2, H3, H4, H5 } from "../../../styles";
+import { H3, H5 } from "../../../styles";
 
 interface MonthsTagProps {
   isActive?: boolean;

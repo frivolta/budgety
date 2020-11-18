@@ -2,7 +2,6 @@ import React, { FC, useState, useEffect } from "react";
 import {
   GridPageLayout,
   LoadingScreen,
-  Card,
   MonthSelector,
 } from "../../lib/components";
 import useAuthContext from "../../lib/auth/useAuthContext";
@@ -10,7 +9,6 @@ import { Expense, Category } from "../../types";
 import { getExpenses, getCategories } from "../../lib/api/queries";
 import { toasterError } from "../../lib/utils/toaster";
 import { ExpensesContainer, SingleExpenseModal } from "./components";
-import { Link } from "react-router-dom";
 import {
   useFilterExpenses,
   useSingleExpenseModalValue,
