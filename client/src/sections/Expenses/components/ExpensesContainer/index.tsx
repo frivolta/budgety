@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
-import { Card, LoadingScreen } from "../../../../lib/components";
-import { H2, H3, H4 } from "../../../../styles";
+import { useHistory } from "react-router-dom";
+import { Button, Card, LoadingScreen } from "../../../../lib/components";
+import { H4 } from "../../../../styles";
 import { Expense, Category } from "../../../../types";
 import { ExpenseCard } from "../ExpenseCard";
 
@@ -16,6 +16,12 @@ export const ExpensesContainer: FC<Props> = ({
   categories,
   isLoading,
 }) => {
+  const history = useHistory();
+
+  function redirectToNewExpenses() {
+    history.push("/add-expense");
+  }
+
   const expenseElements = expenses.length ? (
     expenses.map((expense, index) => (
       <ExpenseCard expense={expense} categories={categories} key={index} />
@@ -23,7 +29,7 @@ export const ExpensesContainer: FC<Props> = ({
   ) : (
     <Card height="auto">
       <H4>You don't have any expense for this month yet...</H4>
-      <Link to="/add-expense">Create one.</Link>
+      <Button text="Add an expense" handleClick={redirectToNewExpenses} />
     </Card>
   );
 
