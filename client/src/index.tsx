@@ -19,6 +19,7 @@ import {
   Budget,
   AddExpense,
   Expenses,
+  Dashboard,
 } from "./sections";
 import { PrivateRoute } from "./lib/components";
 import { AuthProvider } from "./lib/auth/useAuthContext";
@@ -27,7 +28,6 @@ import {
   SingleExpenseProvider,
   FilterExpensesProvider,
 } from "./lib/context";
-//import { executeSeed } from "./seed";
 
 // Toaster configuration
 toast.configure({
@@ -38,7 +38,6 @@ toast.configure({
 });
 
 export const App: FC = () => {
-  //executeSeed("GymGLWHCnIR04PP8GGRW9zdPN2z1", 100);
   return (
     <Router>
       <Switch>
@@ -50,6 +49,7 @@ export const App: FC = () => {
         <PrivateRoute exact path="/budget" component={Budget} />
         <PrivateRoute exact path="/add-expense" component={AddExpense} />
         <PrivateRoute exact path="/expenses" component={Expenses} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
       </Switch>
     </Router>
   );

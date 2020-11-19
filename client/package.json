@@ -48,7 +48,8 @@
     "build-storybook": "build-storybook -s public",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "cy:open": "cross-env GCLOUD_PROJECT=budgety-v5 CYPRESS_baseUrl=http://localhost:3000 cypress open",
-    "cy:run": "cross-env GCLOUD_PROJECT=budgety-v5 CYPRESS_baseUrl=http://localhost:3000 cypress run"
+    "cy:run": "cross-env GCLOUD_PROJECT=budgety-v5 CYPRESS_baseUrl=http://localhost:3000 cypress run",
+    "seed":"ts-node ./src/seed_two.ts"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -84,7 +85,7 @@
     "cypress-skip-and-only-ui": "^1.2.7",
     "cypress-watch-and-reload": "^1.2.18",
     "faker": "^5.1.0",
-    "firebase-admin": "^9.2.0",
+    "firebase-admin": "^9.4.1",
     "react-is": "^16.13.1"
   },
   "jest": {

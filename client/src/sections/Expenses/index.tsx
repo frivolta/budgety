@@ -49,7 +49,6 @@ export const Expenses: FC = () => {
         filterDate.getMonth() + 1,
         0
       );
-      console.log(filterStart, filterEnd);
       setIsLoading(true);
       clearErrors();
       try {

@@ -5,6 +5,7 @@ import { IoIosAddCircle as AddExpenseIcon } from "react-icons/io";
 import { IoIosList as ExpensesList } from "react-icons/io";
 import { IoIosColorFilter as BudgetManagement } from "react-icons/io";
 import { IoIosCodeWorking as CategoriesManagement } from "react-icons/io";
+import { IoIosKeypad as Dashboard } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 const ICONS_SIZE = spaceUnit * 2;
@@ -12,6 +13,11 @@ const ICONS_SIZE = spaceUnit * 2;
 export const FooterMobile = () => {
   return (
     <StyledFooterMobile>
+      <SyledFooterIcon>
+        <Link to="/dashboard">
+          <Dashboard size={ICONS_SIZE} />
+        </Link>
+      </SyledFooterIcon>
       <SyledFooterIcon>
         <Link to="/expenses">
           <ExpensesList size={ICONS_SIZE} />

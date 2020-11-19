@@ -9,6 +9,8 @@
 /coverage
 serviceAccount
 serviceAccount.json
+serviceAccountTwo
+serviceAccountTwo.json
 # production
 /build
 
@@ -38,3 +40,5 @@ amplifyconfiguration.json
 amplify-build-config.json
 amplify-gradle-config.json
 amplifytools.xcconfig
+
+budgety-v5-production-admin
