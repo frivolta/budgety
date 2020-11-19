@@ -28,7 +28,7 @@ import {
   SingleExpenseProvider,
   FilterExpensesProvider,
 } from "./lib/context";
-import SeedFirestore from "./seed/seed";
+//import SeedFirestore from "./seed/seed";
 
 // Toaster configuration
 toast.configure({

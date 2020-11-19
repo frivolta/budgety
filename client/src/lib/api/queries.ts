@@ -93,6 +93,17 @@ export const getExpenses = async (userUid: string, filterStart: Date, filterEnd:
   return expenses;
 };
 
+export const getAllExpenses = async (userUid: string) => {
+  const snapshot = await firestore
+    .collection("users")
+    .doc(userUid)
+    .collection("expenses").orderBy('date', 'desc').get();
+  const expenses = snapshot.docs.map((doc) => {
+    return {id: doc.id, ...doc.data()}
+  });
+  return expenses;
+};
+
 export const deleteExpense = async (userUid: string, expenseId: string) => {
   await firestore
     .collection("users")

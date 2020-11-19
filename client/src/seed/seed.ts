@@ -81,9 +81,12 @@ class SeedFirestore {
     const yearToBeFilled = 3;
     for (let year = 0; year < yearToBeFilled; year++){
       for (let month = 0; month < monthsToBeFilled; month++){
-        const startEndDaysNumber = [1, new Date(2019 + year, month, 1).getDate()];
+        const startEndDaysNumber = [1, new Date(2019 + year, month+1, 0).getDate()];
+        debugger;
         const randomDay = this.getRandomInt(startEndDaysNumber[0], startEndDaysNumber[1])
+        debugger;
         const randomDateInMonth = new Date(2019 + year, month, randomDay);
+        debugger;
         const incomesForDb = incomes.map((income) => {
           income.date = randomDateInMonth;
           return income;
@@ -99,7 +102,7 @@ class SeedFirestore {
     const yearToBeFilled = 3;
     for (let year = 0; year < yearToBeFilled; year++){
       for (let month = 0; month < monthsToBeFilled; month++){
-        const startEndDaysNumber = [1, new Date(2019 + year, month, 1).getDate()];
+        const startEndDaysNumber = [1, new Date(2019 + year, month+1, 0).getDate()];
         const randomDay = this.getRandomInt(startEndDaysNumber[0], startEndDaysNumber[1])
         const randomDateInMonth = new Date(2019 + year, month, randomDay);
         const expensesForDb = expenses.map((income) => {
