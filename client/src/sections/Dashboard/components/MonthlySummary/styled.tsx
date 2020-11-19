@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
-export const StyledAccountSummaryInfoWrapper = styled.div`
-  padding-top: ${(props) => props.theme.space.xl};
+export const StyledMonthlySummaryInfoWrapper = styled.div`
+  margin-top: ${(props) => props.theme.space.xl};
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
 `;
-export const StyledAccountSummaryInformation = styled.div`
+export const StyledMonthlySummaryInformation = styled.div`
   padding-top: ${(props) => props.theme.space.s};
   padding-bottom: ${(props) => props.theme.space.xl};
+  margin: ${(props) => props.theme.space.s};
   border-top: 1px solid ${(props) => props.theme.colors.border};
   :first-child {
     border-top: none;
@@ -15,12 +19,4 @@ export const StyledAccountSummaryInformation = styled.div`
     padding-bottom: 0;
   }
   text-align: center;
-`;
-
-export const StyledAccountSummaryTagWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
 `;

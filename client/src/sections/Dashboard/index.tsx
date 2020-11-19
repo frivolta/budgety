@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+import { useTheme } from "styled-components/macro";
 import { auth } from "../../lib/api/firebase";
 import { getAllExpenses, getCategories } from "../../lib/api/queries";
 import useAuthContext from "../../lib/auth/useAuthContext";
-import { LoadingScreen } from "../../lib/components";
+import { LoadingScreen, MonthSelector } from "../../lib/components";
 import { GridPageLayout } from "../../lib/components/GridPageLayout";
 import { PageWrapper } from "../../lib/components/PageWrapper";
 import { useFilterExpenses } from "../../lib/context";
 import { useUserProfile } from "../../lib/hooks/useUserProfile";
+import { Theme } from "../../styles/types";
 import { Category, Expense } from "../../types";
-import { AccountSummary } from "./components";
+import { AccountSummary, MonthlySummary } from "./components";
 
 interface Error {
   hasErrors: boolean;
@@ -27,6 +29,8 @@ export const Dashboard = () => {
     hasErrors: false,
     errorMessage: undefined,
   });
+
+  const theme = useTheme() as Theme;
 
   React.useEffect(() => {
     if (currentUser?.uid && userProfile) {
@@ -62,11 +66,25 @@ export const Dashboard = () => {
       <AccountSummary expenses={expenses} userProfile={userProfile} />
     ) : null;
 
+  const monthSelectorElement = (
+    <MonthSelector
+      margin={theme.space.xxl}
+      currentDate={filterDate}
+      handleChangeDate={setFilterDate}
+    />
+  );
+
+  const monthlySummaryElement = expenses ? (
+    <MonthlySummary expenses={expenses} />
+  ) : null;
+
   const dashboardElement =
     currentUser && !isLoadingCurrentUser ? (
       <PageWrapper>
         <GridPageLayout user={currentUser} sectionName="Dashboard">
           {accountSummaryElement}
+          {monthSelectorElement}
+          {monthlySummaryElement}
         </GridPageLayout>
       </PageWrapper>
     ) : null;

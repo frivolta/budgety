@@ -5,13 +5,18 @@ interface MonthsTagProps {
   isActive?: boolean;
 }
 
-export const MonthSelectorWrapper = styled.div`
+interface MonthSelectorWrapperProps {
+  margin?: string;
+}
+
+export const MonthSelectorWrapper = styled.div<MonthSelectorWrapperProps>`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: ${(props) => props.theme.space.xxl};
   flex-direction: column;
+  margin-top: ${(props) => (props.margin ? props.margin : 0)};
 `;
 
 export const MonthSelectorMonthsContainer = styled.div`

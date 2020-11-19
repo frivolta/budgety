@@ -10,6 +10,7 @@ import {
 interface Props {
   currentDate: Date;
   handleChangeDate: (date: Date) => void;
+  margin?: string;
 }
 
 const MONTHS = [
@@ -27,7 +28,11 @@ const MONTHS = [
   "Dec",
 ];
 
-export const MonthSelector = ({ currentDate, handleChangeDate }: Props) => {
+export const MonthSelector = ({
+  currentDate,
+  handleChangeDate,
+  margin,
+}: Props) => {
   /**
    * Get month number, if it is above December start from January
    * @param date - current date
@@ -57,7 +62,7 @@ export const MonthSelector = ({ currentDate, handleChangeDate }: Props) => {
   };
 
   return (
-    <MonthSelectorWrapper>
+    <MonthSelectorWrapper margin={margin}>
       {/*Years*/}
       <MonthSelectorMonthsContainer>
         <MonthSelectorMonthsTag
