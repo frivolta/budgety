@@ -42,6 +42,7 @@ toast.configure({
 /* const seeder = new SeedFirestore("LXfIpNboMRR7XOxwEys5qZi32bx2");
 seeder.generateBudget();
 seeder.generateUserProfile();
+seeder.generateCategories();
 seeder.initGenerateIncomes();
 seeder.initGenerateExpenses(); */
 //Seed Data - END

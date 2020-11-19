@@ -16,6 +16,10 @@ class SeedFirestore {
     }
   }
 
+  getRandomInt=(min:number, max:number)=>{
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
   generateUserProfile = async () => {
     const uid = this.userUid
     const resettedUserProfile: any = dummyUserProfile;
@@ -73,12 +77,38 @@ class SeedFirestore {
 
   initGenerateIncomes = () => {
     const incomes = dummyIncomes;
-    this.generateExpenses(incomes)
+    const monthsToBeFilled = 11;
+    const yearToBeFilled = 3;
+    for (let year = 0; year < yearToBeFilled; year++){
+      for (let month = 0; month < monthsToBeFilled; month++){
+        const startEndDaysNumber = [1, new Date(2019 + year, month, 1).getDate()];
+        const randomDay = this.getRandomInt(startEndDaysNumber[0], startEndDaysNumber[1])
+        const randomDateInMonth = new Date(2019 + year, month, randomDay);
+        const incomesForDb = incomes.map((income) => {
+          income.date = randomDateInMonth;
+          return income;
+        })
+        this.generateExpenses(incomesForDb)
+      }
+    }
   }
 
   initGenerateExpenses = () => {
     const expenses = dummyExpenses;
-    this.generateExpenses(expenses)
+    const monthsToBeFilled = 11;
+    const yearToBeFilled = 3;
+    for (let year = 0; year < yearToBeFilled; year++){
+      for (let month = 0; month < monthsToBeFilled; month++){
+        const startEndDaysNumber = [1, new Date(2019 + year, month, 1).getDate()];
+        const randomDay = this.getRandomInt(startEndDaysNumber[0], startEndDaysNumber[1])
+        const randomDateInMonth = new Date(2019 + year, month, randomDay);
+        const expensesForDb = expenses.map((income) => {
+          income.date = randomDateInMonth;
+          return income;
+        })
+        this.generateExpenses(expensesForDb)
+      }
+    }
   }
   
 }
