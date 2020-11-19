@@ -28,6 +28,7 @@ import {
   SingleExpenseProvider,
   FilterExpensesProvider,
 } from "./lib/context";
+import SeedFirestore from "./seed/seed";
 
 // Toaster configuration
 toast.configure({
@@ -36,6 +37,14 @@ toast.configure({
   draggablePercent: 60,
   autoClose: 2000,
 });
+
+//Seed Data - START
+/* const seeder = new SeedFirestore("LXfIpNboMRR7XOxwEys5qZi32bx2");
+seeder.generateBudget();
+seeder.generateUserProfile();
+seeder.initGenerateIncomes();
+seeder.initGenerateExpenses(); */
+//Seed Data - END
 
 export const App: FC = () => {
   return (

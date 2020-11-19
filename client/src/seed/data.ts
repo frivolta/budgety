@@ -1,7 +1,7 @@
 import { Expense, UserBudget, UserProfile } from "../types"
 
 // Remove id from budgetProfile
-export const dummyBudgetProfile: UserProfile = {
+export const dummyUserProfile: UserProfile = {
   id: "",
   accountName: "My Bank Ltd.",
   isActive: true,
