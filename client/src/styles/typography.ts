@@ -4,6 +4,7 @@ export type TypographyProps = {
   color?: string;
   size?: string;
   weight?: string;
+  margin?: string;
 };
 
 export const typeScale = {
@@ -38,7 +39,7 @@ export const H3 = styled.h3<TypographyProps>`
   font-size: ${typeScale.header3};
   font-weight: ${(props) => (props.weight ? props.weight : "bold")};
   color: ${(props) =>
-    props.color ? props.color : props.theme.colors.lightText};
+  props.color ? props.color : props.theme.colors.lightText};
 `;
 
 export const H4 = styled.h4<TypographyProps>`

@@ -35,6 +35,11 @@ export type Expense = {
   category: string;
 };
 
+export type MonthlyExpense = {
+  incomes: number;
+  expenses: number;
+}
+
 // Category
 export interface Category {
   id: number;
@@ -63,3 +68,5 @@ export interface UserBudget {
   wants: number;
   savings: number;
 }
+
+

@@ -7,11 +7,22 @@ interface Props {
   margin?: string;
   size?: "small" | "regular";
   handleCLick?: () => void;
+  backgroundColor?: string;
 }
 
-export const Card: FC<Props> = ({ children, height, margin, size }: Props) => {
+export const Card: FC<Props> = ({
+  children,
+  height,
+  margin,
+  size,
+  backgroundColor,
+}: Props) => {
   return (
-    <StyledCard height={height} margin={margin}>
+    <StyledCard
+      height={height}
+      margin={margin}
+      backgroundColor={backgroundColor}
+    >
       <StyledCardContent size={size}>{children}</StyledCardContent>
     </StyledCard>
   );

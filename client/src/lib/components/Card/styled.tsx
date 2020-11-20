@@ -4,6 +4,7 @@ import { mediaQueries, spaceUnit } from "../../../styles";
 interface StyledCardProps {
   height?: string;
   margin?: string;
+  backgroundColor?: string;
 }
 
 interface StyledCardContentProps {
@@ -16,7 +17,10 @@ export const StyledCard = styled.div<StyledCardProps>`
   justify-content: center;
   align-items: center;
   margin: ${(props) => (props.margin ? props.margin : "0")};
-  background-color: ${(props) => props.theme.colors.componentBackground};
+  background-color: ${(props) =>
+    props.backgroundColor
+      ? props.backgroundColor
+      : props.theme.colors.componentBackground};
   box-shadow: ${(props) => props.theme.shadows.default};
   border-radius: ${(props) => props.theme.borderRadius.base};
   width: 100%;
