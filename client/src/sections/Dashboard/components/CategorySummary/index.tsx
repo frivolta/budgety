@@ -21,18 +21,25 @@ interface Props {
   categories: Category[];
 }
 
-interface RechartFormat {
+interface CategoryReadableFormat {
   name: string;
   value: number;
   color: string;
 }
 
 export const CategorySummary = ({ filteredExpenses, categories }: Props) => {
+  const [readableExpenses, setReadableExpenses] = React.useState<
+    CategoryReadableFormat[]
+  >([]);
+  React.useEffect(() => {
+    const categoriesItems = getCategoriesItems();
+  }, [filteredExpenses]);
+
   // Expenses by category in readable format
-  const mapCategoriesToRechartFormat = (
+  const mapCategoriesToReadableFormat = (
     expenses: Expense[],
     categories: Category[]
-  ) => {
+  ): CategoryReadableFormat[] => {
     const readableAmountCategories = expenses.map((expense) => {
       const category = getCategoryByCategoryValue(categories, expense.category);
       const readableExpense = {
@@ -47,16 +54,60 @@ export const CategorySummary = ({ filteredExpenses, categories }: Props) => {
   };
 
   // Remove amount 0 categories
+  const removeNoAmountCategories = (categories: CategoryReadableFormat[]) => {
+    const filteredCategories = categories.filter(
+      (category) => category.value === 0
+    );
+    return filteredCategories;
+  };
 
   // Sum same categories into one
+  const sumExpenses = (expenses: CategoryReadableFormat[]) => {
+    const summedExpenses = expenses.reduce<CategoryReadableFormat[]>(
+      (acc, expense) => {
+        const filterExpensesByName = expenses.filter(
+          (filteredExpense) => filteredExpense.name === expense.name
+        );
+        if (filterExpensesByName.length) {
+          const summedExpense = filterExpensesByName.reduce(
+            (reducedAcc, reducedExpense) => {
+              return reducedAcc + reducedExpense.value;
+            },
+            0.0
+          );
+          return [...acc, { ...expense, value: summedExpense }];
+        }
+        return [...acc, { ...expense }];
+      },
+      []
+    );
+    return summedExpenses;
+  };
 
+  // Sort categories
   // Controller
+  const getCategoriesItems = () => {
+    const readableExpenses = mapCategoriesToReadableFormat(
+      filteredExpenses,
+      categories
+    );
+    const summedExpenses = sumExpenses(readableExpenses);
+    setReadableExpenses(summedExpenses);
+    console.log(summedExpenses);
+  };
 
   return (
     <CategorySummaryWrapper>
       <H3>Categories</H3>
       <Card height="auto">
-        <CategoryItem categoryName="name" color="white" amount={150.0} />
+        {readableExpenses.map((exp, index) => (
+          <CategoryItem
+            key={index}
+            categoryName={exp.name}
+            color={exp.color}
+            amount={exp.value}
+          />
+        ))}
       </Card>
     </CategorySummaryWrapper>
   );
