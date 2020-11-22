@@ -1,20 +1,10 @@
 import React from "react";
-import { useTheme } from "styled-components/macro";
-import { Card, ProgressBar } from "../../../../lib/components";
-import { formatPrice } from "../../../../lib/utils/format";
-import { H5, H1, H2, H3, H4 } from "../../../../styles";
-import { Theme } from "../../../../styles/types";
-import { Category, Expense, UserBudget, UserProfile } from "../../../../types";
+import { Card } from "../../../../lib/components";
+import { H3 } from "../../../../styles";
+import { Category, Expense } from "../../../../types";
 import { CategorySummaryWrapper } from "./styled";
-import { ResponsiveContainer, PieChart, Pie, Legend } from "recharts";
 import { getCategoryByCategoryValue } from "../../../../lib/utils/categories";
 import { CategoryItem } from "./components";
-const data = [
-  { name: "Group A", value: 400, color: "red" },
-  { name: "Group B", value: 300, color: "green" },
-  { name: "Group C", value: 300, color: "blue" },
-  { name: "Group D", value: 200, color: "yellow" },
-];
 
 interface Props {
   filteredExpenses: Expense[];
@@ -25,6 +15,7 @@ interface CategoryReadableFormat {
   name: string;
   value: number;
   color: string;
+  isIncome: boolean;
 }
 
 export const CategorySummary = ({ filteredExpenses, categories }: Props) => {
@@ -32,7 +23,7 @@ export const CategorySummary = ({ filteredExpenses, categories }: Props) => {
     CategoryReadableFormat[]
   >([]);
   React.useEffect(() => {
-    const categoriesItems = getCategoriesItems();
+    getCategoriesItems();
   }, [filteredExpenses]);
 
   // Expenses by category in readable format
@@ -46,19 +37,12 @@ export const CategorySummary = ({ filteredExpenses, categories }: Props) => {
         name: category.caption,
         value: parseFloat(expense.amount),
         color: category.color,
+        isIncome: expense.expenseType === 2,
       };
       return readableExpense;
     });
 
     return readableAmountCategories;
-  };
-
-  // Remove amount 0 categories
-  const removeNoAmountCategories = (categories: CategoryReadableFormat[]) => {
-    const filteredCategories = categories.filter(
-      (category) => category.value === 0
-    );
-    return filteredCategories;
   };
 
   // Sum same categories into one
@@ -81,10 +65,25 @@ export const CategorySummary = ({ filteredExpenses, categories }: Props) => {
       },
       []
     );
-    return summedExpenses;
+
+    const noDuplicatesSummedExpenses = summedExpenses.reduce<
+      CategoryReadableFormat[]
+    >((acc, expense) => {
+      if (!acc.some((acc) => acc.name === expense.name)) {
+        return [...acc, expense];
+      }
+      return acc;
+    }, []);
+    return noDuplicatesSummedExpenses;
   };
 
   // Sort categories
+  const sortExpenses = (expenses: CategoryReadableFormat[]) => {
+    const sortedExpenses = expenses.sort((a, b) =>
+      a.value > b.value ? -1 : 1
+    );
+    return sortedExpenses;
+  };
   // Controller
   const getCategoriesItems = () => {
     const readableExpenses = mapCategoriesToReadableFormat(
@@ -92,8 +91,8 @@ export const CategorySummary = ({ filteredExpenses, categories }: Props) => {
       categories
     );
     const summedExpenses = sumExpenses(readableExpenses);
-    setReadableExpenses(summedExpenses);
-    console.log(summedExpenses);
+    const sortedExpenses = sortExpenses(summedExpenses);
+    setReadableExpenses(sortedExpenses);
   };
 
   return (
@@ -106,6 +105,7 @@ export const CategorySummary = ({ filteredExpenses, categories }: Props) => {
             categoryName={exp.name}
             color={exp.color}
             amount={exp.value}
+            isIncome={exp.isIncome}
           />
         ))}
       </Card>

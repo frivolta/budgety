@@ -9,6 +9,8 @@ export const CategoryItemWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: ${(props) => props.theme.space.l};
+  margin-bottom: ${(props) => props.theme.space.l};
 `;
 
 export const CategoryItemColor = styled.div<CategoryItemColor>`

@@ -12,16 +12,25 @@ interface Props {
   categoryName: string;
   color: string;
   amount: number;
+  isIncome: boolean;
 }
 
-export const CategoryItem = ({ categoryName, color, amount }: Props) => {
+export const CategoryItem = ({
+  categoryName,
+  color,
+  amount,
+  isIncome,
+}: Props) => {
   return (
     <CategoryItemWrapper>
       <CategoryColorWrapper>
         <CategoryItemColor color={color} />
         <CategoryItemName>{categoryName}:</CategoryItemName>
       </CategoryColorWrapper>
-      <CategoryItemAmount>{formatPrice(amount.toString())}</CategoryItemAmount>
+      <CategoryItemAmount>
+        {isIncome ? "+" : "-"}
+        {formatPrice(amount.toString())}
+      </CategoryItemAmount>
     </CategoryItemWrapper>
   );
 };
