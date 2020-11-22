@@ -19,7 +19,7 @@ import { useUserBudget } from "../../lib/hooks/useUserBudget";
 import { useUserProfile } from "../../lib/hooks/useUserProfile";
 import { Theme } from "../../styles/types";
 import { Category, Expense } from "../../types";
-import { AccountSummary, MonthlySummary } from "./components";
+import { AccountSummary, CategorySummary, MonthlySummary } from "./components";
 import { BudgetSummary } from "./components/BudgetSummary";
 
 interface Error {
@@ -139,6 +139,14 @@ export const Dashboard = () => {
       />
     ) : null;
 
+  const categorySummaryElement =
+    filteredMonthExpenses && categories ? (
+      <CategorySummary
+        categories={categories}
+        filteredExpenses={filteredMonthExpenses}
+      />
+    ) : null;
+
   const dashboardElement =
     currentUser && !isLoadingCurrentUser ? (
       <PageWrapper>
@@ -147,6 +155,7 @@ export const Dashboard = () => {
           {monthSelectorElement}
           {monthlySummaryElement}
           {budgetSummaryElement}
+          {categorySummaryElement}
         </GridPageLayout>
       </PageWrapper>
     ) : null;

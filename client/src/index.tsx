@@ -53,7 +53,7 @@ export const App: FC = () => {
       <Switch>
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={LogIn} />
-        <PrivateRoute exact path="/" component={Expenses} />
+        <PrivateRoute exact path="/" component={Dashboard} />
         <PrivateRoute exact path="/settings" component={Settings} />
         <PrivateRoute exact path="/categories" component={Categories} />
         <PrivateRoute exact path="/budget" component={Budget} />
