@@ -1,6 +1,7 @@
 import React from "react";
 import { useTheme } from "styled-components/macro";
 import { Card, ProgressBar } from "../../../../lib/components";
+import { formatPrice } from "../../../../lib/utils/format";
 import { H5, H1, H2, H3, H4 } from "../../../../styles";
 import { Theme } from "../../../../styles/types";
 import { Expense, UserBudget, UserProfile } from "../../../../types";
@@ -12,7 +13,19 @@ interface Props {
   userProfile: UserProfile;
 }
 
-const inititalExpensesByBudgetState = {
+interface ExpenseByBudget {
+  total: number;
+  used: number;
+  perc: number;
+}
+
+interface ExpensesByBudget {
+  needs: ExpenseByBudget;
+  wants: ExpenseByBudget;
+  savings: ExpenseByBudget;
+}
+
+const inititalExpensesByBudgetState: ExpensesByBudget = {
   needs: {
     total: 0,
     used: 0,
@@ -35,6 +48,10 @@ export const BudgetSummary = ({
   budget,
   userProfile,
 }: Props) => {
+  const [
+    expensesByBudgetState,
+    setExpensesByBudgetState,
+  ] = React.useState<ExpensesByBudget>(inititalExpensesByBudgetState);
   const theme = useTheme() as Theme;
   const {
     needs,
@@ -68,9 +85,9 @@ export const BudgetSummary = ({
     const { wants, needs, savings } = budget;
 
     return {
-      wantsAmount: wants * parseFloat(monthlyBudget),
-      needsAmount: needs * parseFloat(monthlyBudget),
-      savingsAmount: savings * parseFloat(monthlyBudget),
+      wantsAmount: (wants * parseFloat(monthlyBudget)) / 100,
+      needsAmount: (needs * parseFloat(monthlyBudget)) / 100,
+      savingsAmount: (savings * parseFloat(monthlyBudget)) / 100,
     };
   };
 
@@ -87,14 +104,14 @@ export const BudgetSummary = ({
   ) => {
     const expensesByBudgetAmounts = expenses.reduce<TotalExpensesByBudgetAmount>(
       (acc, expense) => {
-        if (expense.categoryType === 1) {
+        if (expense.categoryType === 2) {
           return {
             ...acc,
             totalExpenses: acc.totalExpenses + parseFloat(expense.amount),
             wantsByBudget: acc.wantsByBudget + parseFloat(expense.amount),
           };
         }
-        if (expense.categoryType === 2) {
+        if (expense.categoryType === 1) {
           return {
             ...acc,
             totalExpenses: acc.totalExpenses + parseFloat(expense.amount),
@@ -103,7 +120,7 @@ export const BudgetSummary = ({
         }
         return {
           ...acc,
-          totalExpenses: acc.totalExpenses + parseFloat(expense.amount),
+          totalExpenses: acc.totalExpenses,
         };
       },
       {
@@ -142,7 +159,25 @@ export const BudgetSummary = ({
       totalBudgetAmounts,
       expensesByBudget
     );
-    console.log(percentageCompletion);
+    const newExpensesByBudget: ExpensesByBudget = {
+      needs: {
+        total: totalBudgetAmounts.needsAmount,
+        used: expensesByBudget.needsByBudget,
+        perc: percentageCompletion.needsCompleted,
+      },
+      wants: {
+        total: totalBudgetAmounts.wantsAmount,
+        used: expensesByBudget.wantsByBudget,
+        perc: percentageCompletion.wantsCompleted,
+      },
+      savings: {
+        total: totalBudgetAmounts.savingsAmount,
+        used: expensesByBudget.savingsByBudget,
+        perc: percentageCompletion.savingsCompleted,
+      },
+    };
+
+    setExpensesByBudgetState(newExpensesByBudget);
   };
 
   return (
@@ -152,20 +187,38 @@ export const BudgetSummary = ({
         <ProgressBar
           background={needsBackground}
           color={needs}
-          completed={30}
-          label="Completed"
+          completed={
+            expensesByBudgetState.needs.perc <= 100
+              ? expensesByBudgetState.needs.perc
+              : 100
+          }
+          label={`Needs: ${formatPrice(
+            expensesByBudgetState.needs.used.toString()
+          )}`}
         />
         <ProgressBar
           background={wantsBackground}
           color={wants}
-          completed={30}
-          label="Completed"
+          completed={
+            expensesByBudgetState.wants.perc <= 100
+              ? expensesByBudgetState.wants.perc
+              : 100
+          }
+          label={`Wants: ${formatPrice(
+            expensesByBudgetState.wants.used.toString()
+          )}`}
         />
         <ProgressBar
           background={incomesBackground}
           color={incomes}
-          completed={30}
-          label="Completed"
+          completed={
+            expensesByBudgetState.savings.perc <= 100
+              ? expensesByBudgetState.savings.perc
+              : 100
+          }
+          label={`Savings: ${formatPrice(
+            expensesByBudgetState.savings.used.toString()
+          )}`}
         />
       </Card>
     </MonthlyBudgetWrapper>

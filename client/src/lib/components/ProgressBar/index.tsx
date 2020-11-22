@@ -16,7 +16,7 @@ interface Props {
 export const ProgressBar = ({ background, color, completed, label }: Props) => {
   return (
     <ProgressBarWrapper>
-      <ProgressBarLabel>{`${label}%`}</ProgressBarLabel>
+      <ProgressBarLabel>{`${label}`}</ProgressBarLabel>
       <ProgressBarContainer background={background}>
         <ProgressBarFiller
           background={color}
