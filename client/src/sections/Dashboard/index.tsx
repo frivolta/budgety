@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useTheme } from "styled-components/macro";
-import { auth } from "../../lib/api/firebase";
 import {
   getAllExpenses,
   getCategories,
   getExpenses,
 } from "../../lib/api/queries";
 import useAuthContext from "../../lib/auth/useAuthContext";
-import { LoadingScreen, MonthSelector } from "../../lib/components";
+import {
+  LoadingScreen,
+  MonthSelector,
+  ProgressBar,
+} from "../../lib/components";
 import { GridPageLayout } from "../../lib/components/GridPageLayout";
 import { PageWrapper } from "../../lib/components/PageWrapper";
 import { useFilterExpenses } from "../../lib/context";
+import { useUserBudget } from "../../lib/hooks/useUserBudget";
 import { useUserProfile } from "../../lib/hooks/useUserProfile";
 import { Theme } from "../../styles/types";
-import { Category, Expense, MonthlyExpense } from "../../types";
+import { Category, Expense } from "../../types";
 import { AccountSummary, MonthlySummary } from "./components";
+import { BudgetSummary } from "./components/BudgetSummary";
 
 interface Error {
   hasErrors: boolean;
@@ -25,6 +30,7 @@ interface Error {
 export const Dashboard = () => {
   const [currentUser, isLoadingCurrentUser] = useAuthContext();
   const { userProfile, loading: userProfileIsLoading } = useUserProfile();
+  const { userBudget } = useUserBudget();
   const [expenses, setExpenses] = useState<Expense[] | null>(null);
   const [filteredMonthExpenses, setFilteredMonthExpenses] = useState<
     Expense[] | null
@@ -124,6 +130,15 @@ export const Dashboard = () => {
     <MonthlySummary expenses={filteredMonthExpenses} />
   ) : null;
 
+  const budgetSummaryElement =
+    filteredMonthExpenses && userBudget && userProfile ? (
+      <BudgetSummary
+        budget={userBudget}
+        filteredExpenses={filteredMonthExpenses}
+        userProfile={userProfile}
+      />
+    ) : null;
+
   const dashboardElement =
     currentUser && !isLoadingCurrentUser ? (
       <PageWrapper>
@@ -131,6 +146,7 @@ export const Dashboard = () => {
           {accountSummaryElement}
           {monthSelectorElement}
           {monthlySummaryElement}
+          {budgetSummaryElement}
         </GridPageLayout>
       </PageWrapper>
     ) : null;

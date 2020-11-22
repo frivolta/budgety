@@ -19,11 +19,13 @@ export const MonthlySummary = ({ expenses }: Props) => {
     incomes: 0.0,
     expenses: 0.0,
   });
+  const [isIncomesGreater, setIsIncomesGreater] = useState<boolean>(true);
 
   const theme = useTheme() as Theme;
 
   React.useEffect(() => {
     const reducedExpenses = reduceExpensesByType(expenses);
+    setIsIncomesGreater(reducedExpenses.incomes > reducedExpenses.expenses);
     setMonthlyExpenses(reducedExpenses);
   }, [expenses]);
 
@@ -48,7 +50,11 @@ export const MonthlySummary = ({ expenses }: Props) => {
       <Card
         height="auto"
         margin={theme.space.s}
-        backgroundColor={theme.colors.primary}
+        backgroundColor={
+          isIncomesGreater
+            ? theme.colors.primary
+            : theme.colors.componentBackground
+        }
       >
         <StyledMonthlySummaryInformation>
           <H5>Incomes</H5>
@@ -57,7 +63,15 @@ export const MonthlySummary = ({ expenses }: Props) => {
           </H3>
         </StyledMonthlySummaryInformation>
       </Card>
-      <Card height="auto" margin={theme.space.s}>
+      <Card
+        height="auto"
+        margin={theme.space.s}
+        backgroundColor={
+          !isIncomesGreater
+            ? theme.colors.primary
+            : theme.colors.componentBackground
+        }
+      >
         <StyledMonthlySummaryInformation>
           <H5>Expenses</H5>
           <H3 weight="500">
