@@ -2,7 +2,7 @@ import React from "react";
 import { useTheme } from "styled-components/macro";
 import { Card, ProgressBar } from "../../../../lib/components";
 import { formatPrice } from "../../../../lib/utils/format";
-import { H5, H1, H2, H3, H4 } from "../../../../styles";
+import { H3 } from "../../../../styles";
 import { Theme } from "../../../../styles/types";
 import { Expense, UserBudget, UserProfile } from "../../../../types";
 import { MonthlyBudgetWrapper } from "./styled";
@@ -69,6 +69,7 @@ export const BudgetSummary = ({
 
   React.useEffect(() => {
     getBudgetPercentage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredExpenses]);
 
   interface TotalBudgetAmounts {

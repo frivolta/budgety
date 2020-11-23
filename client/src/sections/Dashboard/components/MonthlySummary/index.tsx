@@ -4,7 +4,7 @@ import { Card } from "../../../../lib/components";
 import { formatPrice } from "../../../../lib/utils/format";
 import { H3, H5 } from "../../../../styles";
 import { Theme } from "../../../../styles/types";
-import { Expense, MonthlyExpense, UserProfile } from "../../../../types";
+import { Expense, MonthlyExpense } from "../../../../types";
 import {
   StyledMonthlySummaryInformation,
   StyledMonthlySummaryInfoWrapper,

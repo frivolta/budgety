@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import { useTheme } from "styled-components/macro";
 import {
   getAllExpenses,
@@ -7,11 +6,7 @@ import {
   getExpenses,
 } from "../../lib/api/queries";
 import useAuthContext from "../../lib/auth/useAuthContext";
-import {
-  LoadingScreen,
-  MonthSelector,
-  ProgressBar,
-} from "../../lib/components";
+import { LoadingScreen, MonthSelector } from "../../lib/components";
 import { GridPageLayout } from "../../lib/components/GridPageLayout";
 import { PageWrapper } from "../../lib/components/PageWrapper";
 import { useFilterExpenses } from "../../lib/context";
@@ -38,7 +33,7 @@ export const Dashboard = () => {
   const [categories, setCategories] = useState<Category[] | null>(null);
   const { filterDate, setFilterDate } = useFilterExpenses();
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setError] = useState<Error>({
+  const [, setError] = useState<Error>({
     hasErrors: false,
     errorMessage: undefined,
   });
@@ -49,13 +44,15 @@ export const Dashboard = () => {
     if (currentUser?.uid && userProfile) {
       getInitialData(currentUser.uid);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, userProfile]);
 
   React.useEffect(() => {
     if (currentUser?.uid && userProfile) {
       getFilteredExpenses(currentUser.uid);
     }
-  }, [filterDate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterDate, currentUser]);
 
   const getFilteredStartEndDate = () => {
     const filterStart = new Date(
@@ -106,8 +103,6 @@ export const Dashboard = () => {
       setIsLoading(false);
     }
   };
-
-  const history = useHistory();
 
   if (isLoading || userProfileIsLoading) {
     return <LoadingScreen loadingText="Loading initial data..." />;

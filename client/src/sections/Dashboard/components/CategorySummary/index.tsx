@@ -22,9 +22,20 @@ export const CategorySummary = ({ filteredExpenses, categories }: Props) => {
   const [readableExpenses, setReadableExpenses] = React.useState<
     CategoryReadableFormat[]
   >([]);
+  // Controller
+  const getCategoriesItems = React.useCallback(() => {
+    const readableExpenses = mapCategoriesToReadableFormat(
+      filteredExpenses,
+      categories
+    );
+    const summedExpenses = sumExpenses(readableExpenses);
+    const sortedExpenses = sortExpenses(summedExpenses);
+    setReadableExpenses(sortedExpenses);
+  }, [categories, filteredExpenses]);
+
   React.useEffect(() => {
     getCategoriesItems();
-  }, [filteredExpenses]);
+  }, [filteredExpenses, getCategoriesItems]);
 
   // Expenses by category in readable format
   const mapCategoriesToReadableFormat = (
@@ -83,16 +94,6 @@ export const CategorySummary = ({ filteredExpenses, categories }: Props) => {
       a.value > b.value ? -1 : 1
     );
     return sortedExpenses;
-  };
-  // Controller
-  const getCategoriesItems = () => {
-    const readableExpenses = mapCategoriesToReadableFormat(
-      filteredExpenses,
-      categories
-    );
-    const summedExpenses = sumExpenses(readableExpenses);
-    const sortedExpenses = sortExpenses(summedExpenses);
-    setReadableExpenses(sortedExpenses);
   };
 
   return (
