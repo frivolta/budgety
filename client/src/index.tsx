@@ -28,6 +28,7 @@ import {
   SingleExpenseProvider,
   FilterExpensesProvider,
 } from "./lib/context";
+import { NotMobile } from "./sections/NotMobile";
 //import SeedFirestore from "./seed/seed";
 
 // Toaster configuration
@@ -48,6 +49,19 @@ seeder.initGenerateExpenses(); */
 //Seed Data - END
 
 export const App: FC = () => {
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useLayoutEffect(() => {
+    function updateSize() {
+      setIsMobile(window.innerWidth < 768);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  if (!isMobile) {
+    return <NotMobile />;
+  }
   return (
     <Router>
       <Switch>
